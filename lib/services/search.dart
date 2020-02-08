@@ -1,151 +1,110 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:mobilyft/crud1.dart';
-import 'ride_page.dart';
-
-enum FormType { login, register }
 
 class search extends StatefulWidget {
+  final String email;
+  search({Key key, this.email}) : super(key: key);
   @override
   _searchState createState() => _searchState();
 }
 
 class _searchState extends State<search> {
-  final formKey = GlobalKey<FormState>();
+  var queryResultSet = [];
+  var tempSearchStore = [];
 
-  DateTime _time;
-  DateTime _date = DateTime.now();
-  String _src, _dest;
-  CRUD1 crudobj = new CRUD1();
+  initiateSearch(value) {
+    if (value.length == 0) {
+      setState(() {
+        queryResultSet = [];
+        tempSearchStore = [];
+      });
+    }
 
-  void insert(BuildContext context) {
-    print(_src);
-    print(_dest);
-    print(_time);
-    print(_date);
-    Map<String, dynamic> data = {
-      'source': _src,
-      'destination': _dest,
-      'time': _time,
-      'date': _date
-    };
+    var capitalizedValue =
+        value.substring(0, 1).toUpperCase() + value.substring(1);
 
-    crudobj.addDetail(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
-  }
-
-  void submit() async {
-    print(_src);
-    print(_dest);
-    insert(context);
-    Navigator.pop(context);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) => Ride_Page()));
+    if (queryResultSet.length == 0 && value.length == 1) {
+      SearchService().searchByName(value).then((QuerySnapshot docs) {
+        for (int i = 0; i < docs.documents.length; ++i) {
+          queryResultSet.add(docs.documents[i].data);
+        }
+      });
+    } else {
+      tempSearchStore = [];
+      queryResultSet.forEach((element) {
+        if (element['businessName'].startsWith(capitalizedValue)) {
+          setState(() {
+            tempSearchStore.add(element);
+          });
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-      children: <Widget>[
-        SizedBox(
-          height: 80.0,
+        appBar: new AppBar(
+          title: Text('Firestore search'),
         ),
-        Center(
-            child: Column(
-          children: <Widget>[
-            Icon(Icons.transfer_within_a_station,
-                size: 80.0, color: Colors.green),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Search Ride ",
-                  style: TextStyle(fontSize: 30.0),
-                ),
-                Text(
-                  "Detail ",
-                  style: TextStyle(fontSize: 30.0, color: Colors.teal),
-                ),
-              ],
-            )
-          ],
-        )),
-        SizedBox(
-          height: 10.0,
-        ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: ' PickUp',
-            focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-            labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-            prefixIcon: const Icon(
-              Icons.location_searching,
-              size: 40.0,
-              color: Colors.orange,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: new BorderSide(
-                color: Colors.teal,
-              ),
-            ),
-          ),
-          validator: (value) => value.isEmpty ? "PickUp can't be empty" : null,
-          onChanged: (value) => _src = value,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: ' Destination',
-            focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-            labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-            prefixIcon: const Icon(
-              Icons.location_on,
-              size: 40.0,
-              color: Colors.orange,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: new BorderSide(
-                color: Colors.teal,
-              ),
-            ),
-          ),
-          validator: (value) =>
-              value.isEmpty ? "Destination can't be empty" : null,
-          onChanged: (value) => _dest = value,
-        ),
-        SizedBox(
-          height: 45.0,
-        ),
-        Container(
-          height: 50.0,
-          width: 250.0,
-          color: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.teal[300],
-                borderRadius: BorderRadius.circular(50.0)),
-            child: InkWell(
-              onTap: () {
-                submit();
+        body: ListView(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              onChanged: (val) {
+                initiateSearch(val);
               },
-              child: Center(
-                child: Text('search',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat')),
-              ),
+              decoration: InputDecoration(
+                  prefixIcon: IconButton(
+                    color: Colors.black,
+                    icon: Icon(Icons.arrow_back),
+                    iconSize: 20.0,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  contentPadding: EdgeInsets.only(left: 25.0),
+                  hintText: 'Search by name',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4.0))),
             ),
           ),
+          SizedBox(height: 10.0),
+          GridView.count(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+              crossAxisCount: 2,
+              crossAxisSpacing: 4.0,
+              mainAxisSpacing: 4.0,
+              primary: false,
+              shrinkWrap: true,
+              children: tempSearchStore.map((element) {
+                return buildResultCard(element);
+              }).toList())
+        ]));
+  }
+}
+
+Widget buildResultCard(data) {
+  return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      elevation: 2.0,
+      child: Container(
+          child: Center(
+              child: Text(
+        data['source'],
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
         ),
-      ],
-    ));
+      ))));
+}
+
+class SearchService {
+  searchByName(String searchField) {
+    return Firestore.instance
+        .collection('detail')
+        .where('source', isEqualTo: searchField.substring(0, 1).toUpperCase())
+        .getDocuments();
   }
 }

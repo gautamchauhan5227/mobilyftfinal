@@ -1,15 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:mobilyft/crud1.dart';
-import 'ride_page.dart';
+import 'package:mobilyft/home_page.dart';
 
 enum FormType { login, register }
 
 class Create extends StatefulWidget {
-  final String e;
-  Create({Key key, this.e}) : super(key: key);
+  final String email;
+  Create({Key key, this.email}) : super(key: key);
 
   @override
   _CreateState createState() => _CreateState();
@@ -17,19 +17,34 @@ class Create extends StatefulWidget {
 
 class _CreateState extends State<Create> {
   final formKey = GlobalKey<FormState>();
+  TimeOfDay _tod = TimeOfDay.now();
+  TimeOfDay picked;
+  String _time = "Not set";
 
-  DateTime _time;
-  DateTime _date = DateTime.now();
   String _src, _dest;
   CRUD1 crudobj = new CRUD1();
 
+  Future<Null> selectTime(BuildContext context) async {
+    picked = await showTimePicker(
+      context: context,
+      initialTime: _tod,
+    );
+
+    setState(() {
+      print(picked);
+    });
+  }
+
   void insert(BuildContext context) {
+    print(_src);
+    print(_dest);
+    print(_time);
+    print(e);
     Map<String, dynamic> data = {
+      'email': widget.email,
       'source': _src,
-      'destination': _dest,
-      // 'time': "",
-      // 'date': " _date.toString()",
-      'email': widget.e
+      'dest': _dest,
+      'time': _time,
     };
 
     crudobj.addDetail(data, context).then((result) {}).catchError((e) {
@@ -37,161 +52,208 @@ class _CreateState extends State<Create> {
     });
   }
 
+  bool validateAndSave() {
+    final form = formKey.currentState;
+    form.save();
+    if (form.validate()) {
+      form.save();
+      return true;
+    } else
+      return false;
+  }
+
   void submit() async {
     print(_src);
     print(_dest);
+
     insert(context);
     Navigator.pop(context);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) => Ride_Page()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => Home_page(email: widget.email)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: ListView(
-      children: <Widget>[
-        SizedBox(
-          height: 80.0,
-        ),
-        Center(
-            child: Column(
           children: <Widget>[
-            Icon(Icons.transfer_within_a_station,
-                size: 80.0, color: Colors.green),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            SizedBox(
+              height: 80.0,
+            ),
+            Center(
+                child: Column(
               children: <Widget>[
-                Text(
-                  "Add Ride ",
-                  style: TextStyle(fontSize: 30.0),
-                ),
-                Text(
-                  "Detail ",
-                  style: TextStyle(fontSize: 30.0, color: Colors.teal),
-                ),
+                Icon(Icons.transfer_within_a_station,
+                    size: 80.0, color: Colors.green),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Add Ride ",
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                    Text(
+                      "Detail ",
+                      style: TextStyle(fontSize: 30.0, color: Colors.green),
+                    ),
+                  ],
+                )
               ],
+            )),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 10.0),
+              child: Card(
+                color: Colors.lightGreen[50],
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: ' PickUp',
+                    focusColor: Color.fromRGBO(100, 50, 100, 0.8),
+                    border: InputBorder.none,
+                    labelStyle:
+                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                    prefixIcon: const Icon(
+                      Icons.location_searching,
+                      size: 40.0,
+                      color: Colors.green,
+                    ),
+                  ),
+                  validator: (value) =>
+                      value.isEmpty ? "PickUp can't be empty" : null,
+                  onChanged: (value) => _src = value,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 10.0),
+              child: Card(
+                color: Colors.lightGreen[50],
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: ' Destination',
+                    focusColor: Color.fromRGBO(100, 50, 100, 0.8),
+                    border: InputBorder.none,
+                    labelStyle:
+                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                    prefixIcon: const Icon(
+                      Icons.location_on,
+                      size: 40.0,
+                      color: Colors.green,
+                    ),
+                  ),
+                  validator: (value) =>
+                      value.isEmpty ? "Destination can't be empty" : null,
+                  onChanged: (value) => _dest = value,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 10.0),
+              child: Card(
+                color: Colors.lightGreen[50],
+                child: RaisedButton(
+                  highlightColor: Colors.lightGreen[50],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)),
+                  onPressed: () {
+                    DatePicker.showTimePicker(context,
+                        theme: DatePickerTheme(
+                          containerHeight: 210.0,
+                        ),
+                        showTitleActions: true, onConfirm: (time) {
+                      print('confirm $time');
+                      _time = '${time.hour} : ${time.minute} ';
+                      setState(() {});
+                      print('selected $_time');
+                    }, currentTime: DateTime.now(), locale: LocaleType.en);
+                    setState(() {});
+                  },
+                  child: Container(
+                    color: Colors.lightGreen[50],
+                    alignment: Alignment.center,
+                    height: 50.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Container(
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.access_time,
+                                    size: 18.0,
+                                    color: Colors.green,
+                                  ),
+                                  Text(
+                                    " $_time",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Text(
+                          "  Change",
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 30.0, left: 100.0, right: 100.0),
+              child: Card(
+                color: Colors.lightGreen[50],
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(150.0)),
+                child: Container(
+                  height: 50.0,
+                  width: 250.0,
+                  color: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(50.0)),
+                    child: InkWell(
+                      onTap: () {
+                        submit();
+                      },
+                      child: Center(
+                        child: Text('Add',
+                            style: TextStyle(
+                                fontSize: 25.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat')),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
-        )),
-        SizedBox(
-          height: 10.0,
-        ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: ' Car Number',
-            focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-            labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-            prefixIcon: const Icon(
-              Icons.motorcycle,
-              size: 40.0,
-              color: Colors.orange,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: new BorderSide(
-                color: Colors.teal,
-              ),
-            ),
-          ),
-          validator: (value) =>
-              value.isEmpty ? "Car Number can't be empty" : null,
-          onChanged: (value) => _dest = value,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: ' PickUp',
-            focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-            labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-            prefixIcon: const Icon(
-              Icons.location_searching,
-              size: 40.0,
-              color: Colors.orange,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: new BorderSide(
-                color: Colors.teal,
-              ),
-            ),
-          ),
-          validator: (value) => value.isEmpty ? "PickUp can't be empty" : null,
-          onChanged: (value) => _src = value,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: ' Destination',
-            focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-            labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-            prefixIcon: const Icon(
-              Icons.location_on,
-              size: 40.0,
-              color: Colors.orange,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: new BorderSide(
-                color: Colors.teal,
-              ),
-            ),
-          ),
-          validator: (value) =>
-              value.isEmpty ? "Destination can't be empty" : null,
-          onChanged: (value) => _dest = value,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        // DateTimePickerFormField(
-        //   inputType: InputType.time,
-        //   format: DateFormat("HH:mm"),
-        //   initialTime: TimeOfDay(hour: 10, minute: 10),
-        //   editable: false,
-        //   keyboardType: null,
-        //   decoration: InputDecoration(
-        //       icon: Icon(
-        //         Icons.timer,
-        //         size: 40.0,
-        //         color: Colors.orange,
-        //       ),
-        //       hasFloatingPlaceholder: false),
-        //   onChanged: (dt) {
-        //     setState(() => _time = dt);
-        //     print('Selected date: $_time');
-        //     print('Hour: $_time.hour');
-        //     print('Minute: $_time.minute');
-        //   },
-        // ),
-        SizedBox(
-          height: 45.0,
-        ),
-        Container(
-          height: 50.0,
-          width: 250.0,
-          color: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.teal[300],
-                borderRadius: BorderRadius.circular(50.0)),
-            child: InkWell(
-              onTap: () {
-                submit();
-              },
-              child: Center(
-                child: Text('Add',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat')),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ));
+        ));
   }
 }

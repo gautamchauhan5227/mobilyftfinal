@@ -4,9 +4,8 @@ import 'package:mobilyft/services/search.dart';
 import 'create.dart';
 
 class Ride_Page extends StatefulWidget {
-  Ride_Page({Key key, this.emaill, String email}) : super(key: key);
-
-  final String emaill;
+  final String email;
+  Ride_Page({Key key, this.email}) : super(key: key);
 
   @override
   _Ride_PageState createState() => _Ride_PageState();
@@ -16,98 +15,68 @@ class _Ride_PageState extends State<Ride_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlue[50],
+        backgroundColor: Colors.white,
         resizeToAvoidBottomPadding: false,
-        body: Stack(fit: StackFit.expand, children: <Widget>[
-          Image.asset(
-            'asets/r5.jpg',
-            fit: BoxFit.cover,
-            color: Colors.black54,
-            colorBlendMode: BlendMode.darken,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 50.0),
-            child: Stack(
-              children: <Widget>[
-                Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 145, left: 15, right: 15),
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
                       height: 100.0,
-                      width: 100.0,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        child: Container(
-                            width: 300.0,
-                            height: 150.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
-                              color: Colors.black,
-                              image: DecorationImage(
-                                  image: AssetImage("asets/r3.jpg"),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Add Ride',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 40.0),
-                              ),
-                            )),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Create(e: widget.emaill)));
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 100.0,
-                      width: 100.0,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        child: Container(
-                            width: 300.0,
-                            height: 150.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
-                              color: Colors.black,
-                              image: DecorationImage(
-                                  image: AssetImage("asets/r3.jpg"),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Add Ride',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 40.0),
-                              ),
-                            )),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Create(e: widget.emaill)));
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                      width: 310.0,
+                      child: RaisedButton(
+                          color: Colors.white,
+                          child: Image.asset('asets/car.png'),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Create(email: widget.email)));
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(50.0)))),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    "Add Ride",
+                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: SizedBox(
+                        height: 100.0,
+                        width: 310.0,
+                        child: RaisedButton(
+                            color: Colors.white,
+                            child: Image.asset('asets/people.png'),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Create()));
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(50.0)))),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    "Search Ride",
+                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
+                  ),
+                ],
+              ),
             ),
-          )
-        ]));
+          ],
+        ));
   }
 }

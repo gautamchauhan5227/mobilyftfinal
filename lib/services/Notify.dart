@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class notify extends StatefulWidget {
-  notify({Key key}) : super(key: key);
+  final String email;
+  notify({Key key, this.email}) : super(key: key);
 
   @override
   _notifyState createState() => _notifyState();
@@ -11,6 +12,7 @@ class _notifyState extends State<notify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
           Card(

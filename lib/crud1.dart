@@ -3,52 +3,57 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class CRUD1{
-
-  bool checksignin(){
-    if(FirebaseAuth.instance.currentUser()!=null)
+class CRUD1 {
+  bool checksignin() {
+    if (FirebaseAuth.instance.currentUser() != null)
       return true;
     else
       return false;
   }
-  Future<void> addData(signupdata,BuildContext context) async{
-    if(checksignin()){
-      
-        Firestore.instance.collection('user').add(signupdata).catchError((e){
+
+  Future<void> addData(signupdata, BuildContext context) async {
+    if (checksignin()) {
+      Firestore.instance.collection('user').add(signupdata).catchError((e) {
         print(e);
-        });
-    }
-    else{
+      });
+    } else {
       final snackBar = SnackBar(content: Text('Please Do Login'));
       Scaffold.of(context).showSnackBar(snackBar);
-    } 
+    }
   }
 
-Future<void> addDetail(data,BuildContext context) async{
-    
-        Firestore.instance.collection('ride').add(data).catchError((e){
-        print(e);
-        });
-}
-
-Future<void> register(data,BuildContext context) async{
-    
-        Firestore.instance.collection('register').add(data).catchError((e){
-        print(e);
-        });
-}
-
-  getData(String table) async{
-    return await Firestore.instance.collection(table).getDocuments();
-  }
-  
-  updateData(selectedDoc,newValue){
-    Firestore.instance.collection("testcrud").document(selectedDoc).updateData(newValue).catchError((e){
+  Future<void> addDetail(data, BuildContext context) async {
+    Firestore.instance.collection('detail').add(data).catchError((e) {
       print(e);
     });
   }
-  void deleteData(docId){
-    Firestore.instance.collection("testcrud").document(docId).delete().catchError((e){
+
+  Future<void> register(data, BuildContext context) async {
+    Firestore.instance.collection('register').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+  getData(String table) async {
+    return await Firestore.instance.collection(table).getDocuments();
+  }
+
+  updateData(selectedDoc, newValue) {
+    Firestore.instance
+        .collection("testcrud")
+        .document('dest')
+        .updateData(newValue)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  void deleteData(docId) {
+    Firestore.instance
+        .collection("testcrud")
+        .document(docId)
+        .delete()
+        .catchError((e) {
       print(e);
     });
   }

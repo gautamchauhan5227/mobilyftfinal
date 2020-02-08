@@ -1,70 +1,70 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:mobilyft/crud1.dart';
-import 'package:mobilyft/services/request_page.dart';
-import 'package:mobilyft/services/ride_request.dart';
 
-class ride_details extends StatefulWidget {
+class Ride_Details extends StatefulWidget {
   final String email;
-  ride_details({Key key, this.email}) : super(key: key);
-
+  Ride_Details({Key key, this.email}) : super(key: key);
   @override
-  _ride_detailsState createState() => _ride_detailsState();
+  _Ride_DetailsState createState() => _Ride_DetailsState();
 }
 
-class _ride_detailsState extends State<ride_details> {
-  QuerySnapshot data;
+class _Ride_DetailsState extends State<Ride_Details> {
   CRUD1 crudobj = new CRUD1();
+  QuerySnapshot ride;
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    crudobj.getData('ride').then((result) {
+    crudobj.getData('detail').then((result) {
       setState(() {
-        data = result;
+        ride = result;
       });
     });
   }
 
+  int l = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          Container(
-            child: ListView(
+          for (int i = 0; i < ride.documents.length; i++)
+            Column(
               children: <Widget>[
-                get_ride_info(widget.email),
+                returnride(i),
               ],
             ),
-          ),
         ],
       ),
     );
   }
 
-  Widget get_ride_info(String email) {
-    int t = 0;
-    String date, des, source;
-    print(email);
-    for (int i = 00; i < data.documents.length; i++) {
-      if (email == data.documents[i].data["email"]) {
-        // date = data.documents[i].data["date"];
-        des = data.documents[i].data["destination"];
-        source = data.documents[i].data["source"];
-        t = 1;
-        print(des);
-      }
-      if (t == 1) break;
+  Widget returnride(int i) {
+    if (ride != null) {
+      if (widget.email == ride.documents[i].data["email"]) {
+        return Padding(
+            padding: EdgeInsets.only(top: 10.0),
+            child: Card(
+                color: Colors.lightGreen[50],
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(150.0)),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.account_circle,
+                    size: 40.0,
+                  ),
+                  title: Text(
+                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
+                  subtitle: Text("${ride.documents[i].data["time"]}"),
+                  trailing:
+                      IconButton(icon: Icon(Icons.edit), onPressed: () {}),
+                )));
+      } else
+        return Container();
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
-    return Container(
-      child: Column(
-        children: <Widget>[
-          // Text(date),
-          //Text(des),
-          //Text(source),
-        ],
-      ),
-    );
   }
 }
