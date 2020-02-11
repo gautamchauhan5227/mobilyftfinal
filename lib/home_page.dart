@@ -1,5 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:fab_circular_menu/fab_circular_menu.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mobilyft/services/Notify.dart';
@@ -7,7 +7,8 @@ import 'package:mobilyft/services/Notify.dart';
 import 'package:mobilyft/services/create.dart';
 
 import 'package:mobilyft/services/dashboard.dart';
-import 'package:mobilyft/services/profilepage.dart';
+import 'package:mobilyft/services/profile.dart';
+
 import 'package:mobilyft/services/request_page.dart';
 import 'package:mobilyft/services/search.dart';
 //import 'package:mobilyft/services/ride_page.dart';
@@ -40,7 +41,7 @@ class _Home_pageState extends State<Home_page> {
         return notify(email: widget.email);
 
       case 3:
-        return ProfilePage();
+        return profile(email: widget.email);
     }
   }
 
@@ -50,7 +51,7 @@ class _Home_pageState extends State<Home_page> {
       resizeToAvoidBottomPadding: false,
       body: callPage(_currentIndex),
       bottomNavigationBar: CurvedNavigationBar(
-        color: Colors.lightGreen[100],
+        color: Colors.lightBlue[100],
         backgroundColor: Colors.white,
         buttonBackgroundColor: Colors.white,
 
@@ -60,19 +61,15 @@ class _Home_pageState extends State<Home_page> {
           Icon(
             Icons.dashboard,
             size: 25,
-            color: Colors.orange,
+            color: Colors.blue,
           ),
-          Icon(
-            Icons.person_add,
-            size: 25,
-            color: Colors.orange,
-          ),
+          Icon(Icons.person_add, size: 25, color: Colors.blue),
           Icon(
             Icons.notifications,
             size: 25,
-            color: Colors.orange,
+            color: Colors.blue,
           ),
-          Icon(Icons.person, size: 25, color: Colors.orange),
+          Icon(Icons.person, size: 25, color: Colors.blue),
         ],
         animationDuration: Duration(milliseconds: 300),
         animationCurve: Curves.easeOutCubic,
@@ -83,19 +80,19 @@ class _Home_pageState extends State<Home_page> {
         },
       ),
       floatingActionButton: SpeedDial(
-        backgroundColor: Colors.lightGreen[100],
-        foregroundColor: Colors.green,
+        backgroundColor: Colors.lightBlue[100],
+        foregroundColor: Colors.blue,
         animatedIcon: AnimatedIcons.menu_close,
         children: [
           SpeedDialChild(
-              backgroundColor: Colors.lightGreen[100],
-              foregroundColor: Colors.green,
+              backgroundColor: Colors.lightBlue[100],
+              foregroundColor: Colors.blue,
               child: Icon(
                 Icons.add,
-                size: 20.0,
+                size: 35.0,
               ),
               label: "Add Ride",
-              labelStyle: TextStyle(fontSize: 20.0),
+              labelStyle: TextStyle(fontSize: 15.0),
               onTap: () {
                 Navigator.push(
                     context,
@@ -104,14 +101,14 @@ class _Home_pageState extends State<Home_page> {
                             Create(email: widget.email)));
               }),
           SpeedDialChild(
-              backgroundColor: Colors.lightGreen[100],
-              foregroundColor: Colors.green,
+              backgroundColor: Colors.lightBlue[100],
+              foregroundColor: Colors.blue,
               child: Icon(
                 Icons.search,
-                size: 20.0,
+                size: 30.0,
               ),
               label: "Search Ride",
-              labelStyle: TextStyle(fontSize: 20.0),
+              labelStyle: TextStyle(fontSize: 15.0),
               onTap: () {
                 Navigator.push(
                     context,

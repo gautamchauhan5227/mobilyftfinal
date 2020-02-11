@@ -26,14 +26,16 @@ class _Ride_DetailsState extends State<Ride_Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
-          for (int i = 0; i < ride.documents.length; i++)
-            Column(
-              children: <Widget>[
-                returnride(i),
-              ],
-            ),
+          if (ride != null)
+            for (int i = 0; i < ride.documents.length; i++)
+              Column(
+                children: <Widget>[
+                  returnride(i),
+                ],
+              ),
         ],
       ),
     );
@@ -43,9 +45,9 @@ class _Ride_DetailsState extends State<Ride_Details> {
     if (ride != null) {
       if (widget.email == ride.documents[i].data["email"]) {
         return Padding(
-            padding: EdgeInsets.only(top: 10.0),
+            padding: EdgeInsets.only(),
             child: Card(
-                color: Colors.lightGreen[50],
+                color: Colors.lightBlue[50],
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(150.0)),
                 child: ListTile(
@@ -56,8 +58,12 @@ class _Ride_DetailsState extends State<Ride_Details> {
                   title: Text(
                       "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
                   subtitle: Text("${ride.documents[i].data["time"]}"),
-                  trailing:
-                      IconButton(icon: Icon(Icons.edit), onPressed: () {}),
+                  trailing: IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.blue,
+                      ),
+                      onPressed: () {}),
                 )));
       } else
         return Container();

@@ -31,8 +31,8 @@ class _DashboardState extends State<Dashboard> {
                       height: 100.0,
                       width: 310.0,
                       child: RaisedButton(
-                          color: Colors.white,
-                          child: Image.asset('asets/car.png'),
+                          color: Colors.lightBlue[50],
+                          child: Icon(Icons.directions_car,size: 70.0,color: Colors.black,),
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -57,8 +57,8 @@ class _DashboardState extends State<Dashboard> {
                         height: 100.0,
                         width: 310.0,
                         child: RaisedButton(
-                            color: Colors.white,
-                            child: Image.asset('asets/people.png'),
+                            color: Colors.lightBlue[50],
+                            child: Icon(Icons.dehaze,size: 70.0,color:Colors.black,),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -74,7 +74,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 10.0,
                   ),
                   Text(
-                    "Ride Request",
+                    "Vehical Details",
                     style: TextStyle(color: Colors.black54, fontSize: 30.0),
                   ),
                   Padding(
@@ -83,8 +83,8 @@ class _DashboardState extends State<Dashboard> {
                         height: 100.0,
                         width: 310.0,
                         child: RaisedButton(
-                            color: Colors.white,
-                            child: Image.asset('asets/details.png'),
+                            color: Colors.lightBlue[50],
+                            child: Icon(Icons.feedback,size: 70.0,color: Colors.black,),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -100,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 10.0,
                   ),
                   Text(
-                    "Vehical Details",
+                    "Feedback Box",
                     style: TextStyle(color: Colors.black54, fontSize: 30.0),
                   ),
                 ],

@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 30.0),
-            Icon(Icons.contact_mail, size: 80.0, color: Colors.green),
+            Icon(Icons.contact_mail, size: 80.0, color: Colors.blue),
           ],
         ),
       ),
@@ -181,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               'Lyft',
-              style: TextStyle(fontSize: 40.0, color: Colors.green[600]),
+              style: TextStyle(fontSize: 40.0, color: Colors.blue[600]),
             )
           ],
         ),
@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
       Padding(
         padding: EdgeInsets.only(right: 25.0, left: 15.0),
         child: Card(
-          color: Colors.lightGreen[50],
+          color: Colors.lightBlue[50],
           shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(150.0)),
           child: TextFormField(
@@ -213,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Icon(
                   Icons.mail,
                   size: 40.0,
-                  color: Colors.green,
+                  color: Colors.blue,
                 ),
                 padding: EdgeInsets.only(left: 30, right: 10),
               ),
@@ -226,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
       Padding(
         padding: EdgeInsets.only(top: 10.0, right: 25.0, left: 15.0),
         child: Card(
-          color: Colors.lightGreen[50],
+          color: Colors.lightBlue[50],
           shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(150.0)),
           child: TextFormField(
@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Icon(
                   Icons.lock,
                   size: 40.0,
-                  color: Colors.green,
+                  color: Colors.blue,
                 ),
               ),
               suffixIcon: Padding(
@@ -294,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: Colors.blue[500],
                   borderRadius: BorderRadius.circular(50.0)),
               child: InkWell(
                 onTap: () {
@@ -352,7 +352,7 @@ class _LoginPageState extends State<LoginPage> {
         Padding(
           padding: EdgeInsets.only(right: 25.0, left: 15.0, top: 10.0),
           child: Card(
-            color: Colors.lightGreen[50],
+            color: Colors.lightBlue[50],
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
             child: TextFormField(
@@ -369,7 +369,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Icon(
                     Icons.person,
                     size: 40.0,
-                    color: Colors.green,
+                    color: Colors.blue,
                   ),
                 ),
               ),
@@ -384,7 +384,7 @@ class _LoginPageState extends State<LoginPage> {
         Padding(
           padding: EdgeInsets.only(right: 25.0, left: 15.0, top: 10.0),
           child: Card(
-            color: Colors.lightGreen[50],
+            color: Colors.lightBlue[50],
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
             child: TextFormField(
@@ -402,7 +402,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Icon(
                     Icons.phone_iphone,
                     size: 40.0,
-                    color: Colors.green,
+                    color: Colors.blue,
                   ),
                 ),
               ),
@@ -416,7 +416,7 @@ class _LoginPageState extends State<LoginPage> {
         Padding(
           padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25),
           child: Card(
-            color: Colors.lightGreen[50],
+            color: Colors.lightBlue[50],
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
             child: TextFormField(
@@ -433,7 +433,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Icon(
                     Icons.person_pin_circle,
                     size: 40.0,
-                    color: Colors.green,
+                    color: Colors.blue,
                   ),
                 ),
               ),
@@ -453,7 +453,7 @@ class _LoginPageState extends State<LoginPage> {
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: Colors.blue,
                   borderRadius: BorderRadius.circular(50.0)),
               child: InkWell(
                 onTap: () {
