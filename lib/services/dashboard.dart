@@ -31,8 +31,11 @@ class _DashboardState extends State<Dashboard> {
                       height: 100.0,
                       width: 310.0,
                       child: RaisedButton(
-                          color: Colors.lightBlue[50],
-                          child: Icon(Icons.directions_car,size: 70.0,color: Colors.black,),
+                          color: Colors.lightBlue[100],
+                          child: Icon(
+                            Icons.view_list,
+                            size: 100.0,
+                          ),
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -57,8 +60,8 @@ class _DashboardState extends State<Dashboard> {
                         height: 100.0,
                         width: 310.0,
                         child: RaisedButton(
-                            color: Colors.lightBlue[50],
-                            child: Icon(Icons.dehaze,size: 70.0,color:Colors.black,),
+                            color: Colors.lightBlue[100],
+                            child: Icon(Icons.directions_car, size: 100.0),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -74,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 10.0,
                   ),
                   Text(
-                    "Vehical Details",
+                    "Vehicle Details",
                     style: TextStyle(color: Colors.black54, fontSize: 30.0),
                   ),
                   Padding(
@@ -83,8 +86,8 @@ class _DashboardState extends State<Dashboard> {
                         height: 100.0,
                         width: 310.0,
                         child: RaisedButton(
-                            color: Colors.lightBlue[50],
-                            child: Icon(Icons.feedback,size: 70.0,color: Colors.black,),
+                            color: Colors.lightBlue[100],
+                            child: Icon(Icons.feedback, size: 100.0),
                             onPressed: () {
                               Navigator.push(
                                   context,

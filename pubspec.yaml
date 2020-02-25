@@ -14,16 +14,21 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.5.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_datetime_picker: 1.2.5
+  firebase_storage:
   curved_navigation_bar: ^0.3.2
   fab_circular_menu: ^0.1.4
   flutter_speed_dial: ^1.2.5
   algolia: ^0.1.7
+  slide_popup_dialog: ^0.0.2
+  
+  
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -53,16 +58,6 @@ flutter:
     - asets/as.png
     - asets/logo.jpg
     - asets/m1.PNG
-    - asets/car.png
-    - asets/people.png
-    - asets/update.png
-    - asets/details.png
-    - asets/r1.jpg
-    - asets/r2.jpeg
-    - asets/r3.jpg
-    - asets/r4.jpg
-    - asets/r5.jpg
-    - asets/r6.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

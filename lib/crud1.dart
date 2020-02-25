@@ -38,19 +38,29 @@ class CRUD1 {
     return await Firestore.instance.collection(table).getDocuments();
   }
 
-  updateData(selectedDoc, newValue) {
+  updateRideData(selectedDoc, newValue) {
     Firestore.instance
-        .collection("testcrud")
-        .document('dest')
+        .collection("detail")
+        .document(selectedDoc)
         .updateData(newValue)
         .catchError((e) {
       print(e);
     });
   }
 
-  void deleteData(docId) {
+  updateProfileData(selectedDoc, newValue) {
     Firestore.instance
-        .collection("testcrud")
+        .collection("user")
+        .document(selectedDoc)
+        .updateData(newValue)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  deleteData(docId) {
+    Firestore.instance
+        .collection("detail")
         .document(docId)
         .delete()
         .catchError((e) {

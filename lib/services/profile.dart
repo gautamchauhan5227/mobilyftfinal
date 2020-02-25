@@ -13,6 +13,12 @@ class profile extends StatefulWidget {
 
 class _profileState extends State<profile> {
   CRUD1 crudobj = new CRUD1();
+  String _email;
+  String _password;
+  String _phone;
+  String _name;
+  String _pin;
+
   QuerySnapshot pro;
   @override
   void initState() {
@@ -35,7 +41,13 @@ class _profileState extends State<profile> {
               Container(
                 child: profilepage(i),
               ),
-          if (pro == null) CircularProgressIndicator()
+          Padding(padding: EdgeInsets.only(top: 250.0)),
+          if (pro == null)
+            Column(
+              children: <Widget>[
+                Center(child: CircularProgressIndicator()),
+              ],
+            )
         ],
       ),
     );
@@ -262,7 +274,9 @@ class _profileState extends State<profile> {
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    updateDialog(context, pro.documents[i].documentID);
+                  },
                   child: Center(
                     child: Text('Edit In Profile Information',
                         style: TextStyle(
@@ -282,5 +296,89 @@ class _profileState extends State<profile> {
         child: CircularProgressIndicator(),
       );
     }
+  }
+
+  Future<bool> updateDialog(BuildContext context, selectedDoc) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Center(
+              child: Text("Update Personal Details"),
+            ),
+            content: ListView(children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: ' Name',
+                  labelStyle:
+                      TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                  prefixIcon: const Icon(
+                    Icons.person,
+                    size: 40.0,
+                    color: Colors.blue,
+                  ),
+                ),
+                validator: (value) =>
+                    value.isEmpty ? "Name can't be empty" : null,
+                onChanged: (value) {
+                  this._name = value;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: ' Phone',
+                  labelStyle:
+                      TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                  prefixIcon: const Icon(
+                    Icons.phone_iphone,
+                    size: 40.0,
+                    color: Colors.blue,
+                  ),
+                ),
+                validator: (value) =>
+                    value.isEmpty ? "Phone Number can't be empty" : null,
+                onChanged: (value) {
+                  this._phone = value;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: ' Pin',
+                  labelStyle:
+                      TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                  prefixIcon: const Icon(
+                    Icons.person_pin_circle,
+                    size: 40.0,
+                    color: Colors.blue,
+                  ),
+                ),
+                validator: (value) =>
+                    value.isEmpty ? "Pincode can't be empty" : null,
+                onChanged: (value) {
+                  this._pin = value;
+                },
+              ),
+            ]),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Update"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  crudobj
+                      .updateProfileData(selectedDoc, {
+                        'name': this._name,
+                        'phone': this._phone,
+                        'pincode': this._pin
+                      })
+                      .then((result) {})
+                      .catchError((e) {
+                        print(e);
+                      });
+                },
+              )
+            ],
+          );
+        });
   }
 }

@@ -15,7 +15,7 @@ import 'package:mobilyft/services/search.dart';
 //import 'package:mobilyft/services/search.dart';
 
 // import 'package:mobilyft/profile_page.dart';
-// import 'package:mobilyft/ride_page.dart';
+// import 'package:mobilyft/ride_page.dart'
 // import 'package:mobilyft/update_ride_page.dart';
 
 // import 'notify_page.dart';
