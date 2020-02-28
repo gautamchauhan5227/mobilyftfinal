@@ -1,23 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:mobilyft/crud1.dart';
+import '../crud1.dart';
 
-class notify extends StatefulWidget {
+class allride extends StatefulWidget {
   final String email;
-  notify({Key key, this.email}) : super(key: key);
-
+  allride({Key key, this.email}) : super(key: key);
   @override
-  _notifyState createState() => _notifyState();
+  _allrideState createState() => _allrideState();
 }
 
-class _notifyState extends State<notify> {
+class _allrideState extends State<allride> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride;
-  String _src, _dest, _seat;
   @override
   void initState() {
-    crudobj.getData('notify').then((result) {
+    crudobj.getData('all ride').then((result) {
       setState(() {
         ride = result;
       });
@@ -28,7 +26,7 @@ class _notifyState extends State<notify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(),
       body: ListView(
         children: <Widget>[
           if (ride != null)
@@ -60,24 +58,15 @@ class _notifyState extends State<notify> {
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
                 child: ListTile(
-                    leading: Icon(
-                      Icons.account_circle,
-                      size: 40.0,
-                    ),
-                    title: Text("Your Ride "
-                        "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"
-                        " Successfully Uploaded"),
-                    subtitle: Text("Get Ready For Ride"),
-                    trailing: IconButton(
-                      icon: Icon(Icons.cancel, color: Colors.blue),
-                      onPressed: () {
-                        crudobj.deletenoty(ride.documents[i].documentID);
-                        Navigator.pop(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => notify()));
-                      },
-                    ))));
+                  leading: Icon(
+                    Icons.account_circle,
+                    size: 40.0,
+                  ),
+                  title: Text(
+                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
+                  subtitle: Text("Time : "
+                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
+                )));
       } else
         return Container();
     } else {

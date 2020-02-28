@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mobilyft/services/create.dart';
+import 'package:mobilyft/services/cardetails.dart';
+
+import 'package:mobilyft/services/feedback.dart';
+import 'package:mobilyft/services/full_ride.dart';
 import 'package:mobilyft/services/ride_details.dart';
 import 'package:mobilyft/services/ride_details.dart';
 
 //import 'package:mobilyft/services/ride_details.dart';
-import 'package:mobilyft/services/ride_request.dart';
 
 class Dashboard extends StatefulWidget {
   final String email;
@@ -40,8 +42,7 @@ class _DashboardState extends State<Dashboard> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Ride_Details(
+                                    builder: (BuildContext context) => fullride(
                                           email: widget.email,
                                         )));
                           },
@@ -67,7 +68,9 @@ class _DashboardState extends State<Dashboard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          ride_request()));
+                                          car_details(
+                                            email: widget.email,
+                                          )));
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
@@ -93,7 +96,9 @@ class _DashboardState extends State<Dashboard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          Create()));
+                                          feedback(
+                                            email: widget.email,
+                                          )));
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:

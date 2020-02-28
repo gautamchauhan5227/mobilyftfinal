@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   String _password;
   String _phone;
   String _name;
-  String _pin;
+  String _pin, lic, rc, model;
   bool _toggleVisibility = true;
   FormType _formType = FormType.login;
   CRUD1 crudobj = new CRUD1();
@@ -50,6 +50,15 @@ class _LoginPageState extends State<LoginPage> {
       'pincode': _pin
     };
     crudobj.addData(signupdata, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+    Map<String, dynamic> data = {
+      'car': model,
+      'email': _email,
+      'RC book': rc,
+      'Lic': lic,
+    };
+    crudobj.cardetail(data, context).then((result) {}).catchError((e) {
       print(e);
     });
   }
@@ -440,6 +449,88 @@ class _LoginPageState extends State<LoginPage> {
               validator: (value) =>
                   value.isEmpty ? "Pincode can't be empty" : null,
               onChanged: (value) => _pin = value,
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25.0),
+          child: Card(
+            color: Colors.blue[50],
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(150.0)),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: ' Car Model',
+                focusColor: Color.fromRGBO(100, 50, 100, 0.8),
+                border: InputBorder.none,
+                labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: 30, right: 10),
+                  child: const Icon(
+                    Icons.directions_car,
+                    size: 40.0,
+                    color: Colors.teal,
+                  ),
+                ),
+              ),
+              validator: (value) =>
+                  value.isEmpty ? "Model can't be empty" : null,
+              onChanged: (value) => model = value,
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25.0),
+          child: Card(
+            color: Colors.blue[50],
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(150.0)),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: ' RC book number',
+                focusColor: Color.fromRGBO(100, 50, 100, 0.8),
+                border: InputBorder.none,
+                labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: 30, right: 10),
+                  child: const Icon(
+                    Icons.confirmation_number,
+                    size: 40.0,
+                    color: Colors.teal,
+                  ),
+                ),
+              ),
+              validator: (value) => value.isEmpty ? " Can't be empty" : null,
+              onChanged: (value) => rc = value,
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25.0),
+          child: Card(
+            color: Colors.blue[50],
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(150.0)),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: ' License Number',
+                focusColor: Color.fromRGBO(100, 50, 100, 0.8),
+                border: InputBorder.none,
+                labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: 30, right: 10),
+                  child: const Icon(
+                    Icons.verified_user,
+                    size: 40.0,
+                    color: Colors.teal,
+                  ),
+                ),
+              ),
+              validator: (value) => value.isEmpty ? "Can't be empty" : null,
+              onChanged: (value) => lic = value,
             ),
           ),
         ),

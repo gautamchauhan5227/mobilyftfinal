@@ -1,32 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:mobilyft/crud1.dart';
-import 'package:mobilyft/home_page.dart';
-import 'package:mobilyft/loginpage.dart';
 
 import 'package:nice_button/NiceButton.dart';
 
-class profile extends StatefulWidget {
+class car_details extends StatefulWidget {
   final String email;
-  profile({Key key, this.email}) : super(key: key);
+  car_details({Key key, this.email}) : super(key: key);
   @override
-  _profileState createState() => _profileState();
+  _car_detailsState createState() => _car_detailsState();
 }
 
-class _profileState extends State<profile> {
+class _car_detailsState extends State<car_details> {
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   String _email;
-  String _password;
-  String _phone;
-  String _name;
-  String _pin;
+  String _model;
+  String _rc;
+  String _lic;
 
   QuerySnapshot pro;
   @override
   void initState() {
-    crudobj.getData('user').then((result) {
+    crudobj.getData('car_detail').then((result) {
       setState(() {
         pro = result;
       });
@@ -37,13 +35,14 @@ class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
           if (pro != null)
             for (int i = 0; i < pro.documents.length; i++)
               Container(
-                child: profilepage(i),
+                child: cardetails(i),
               ),
           Padding(padding: EdgeInsets.only(top: 250.0)),
           if (pro == null)
@@ -57,91 +56,36 @@ class _profileState extends State<profile> {
     );
   }
 
-  Widget profilepage(int i) {
+  Widget cardetails(int i) {
     if (pro != null) {
       if (widget.email == pro.documents[i].data["email"]) {
         return Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 40.0, top: 20.0),
+              padding: EdgeInsets.only(),
+            ),
+            Center(
+              child:
+                  Icon(Icons.directions_car, size: 150.0, color: Colors.black),
+            ),
+            Padding(
+              padding: EdgeInsets.only(),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: Text(
-                        "Welcome," "${pro.documents[i].data["name"]}",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 25.0),
-                      ),
-                    ),
-                    flex: 5,
-                  ),
-                  Expanded(
-                    child: Container(
-                        child: InkWell(
-                            onTap: () {
-                              FirebaseAuth.instance.signOut().then((value) {
-                                Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            LoginPage()));
-                              }).catchError((e) {
-                                print(e);
-                              });
-                            },
-                            child: Icon(
-                              Icons.power_settings_new,
-                              size: 30.0,
-                              color: Colors.red,
-                            ))),
-                    flex: 1,
-                  ),
+                  Text('Vehicle',
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  Text(
+                    '  Details',
+                    style: TextStyle(fontSize: 40.0, color: Colors.blueAccent),
+                  )
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 15.0),
-              child: new Stack(fit: StackFit.loose, children: <Widget>[
-                new Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Container(
-                      child: Icon(Icons.account_circle, size: 125),
-                    ),
-                  ],
-                ),
-              ]),
-            ),
-            Padding(
-                padding: EdgeInsets.only(left: 55.0),
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                        padding:
-                            EdgeInsets.only(left: 25.0, right: 25.0, top: 1.0),
-                        child: new Row(
-                          children: <Widget>[
-                            new Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                new Text(
-                                  'Personal Information',
-                                  style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )),
-                  ],
-                )),
             Padding(
                 padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
                 child: new Row(
@@ -152,7 +96,7 @@ class _profileState extends State<profile> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
-                          'Name',
+                          'Car Model',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
@@ -167,7 +111,7 @@ class _profileState extends State<profile> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["name"]}",
+                      "${pro.documents[i].data["car"]}",
                       style: TextStyle(
                           fontSize: 18.0, fontFamily: 'sans-serif-light'),
                     )),
@@ -183,7 +127,7 @@ class _profileState extends State<profile> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
-                          'Email ID',
+                          'RC book number',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
@@ -198,7 +142,7 @@ class _profileState extends State<profile> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["email"]}",
+                      "${pro.documents[i].data["RC book"]}",
                       style: TextStyle(
                           fontSize: 18.0, fontFamily: 'sans-serif-light'),
                     )),
@@ -214,7 +158,7 @@ class _profileState extends State<profile> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
-                          'Mobile',
+                          'License Number',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
@@ -229,49 +173,17 @@ class _profileState extends State<profile> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["phone"]}",
+                      "${pro.documents[i].data["Lic"]}",
                       style: TextStyle(
                           fontSize: 18.0, fontFamily: 'sans-serif-light'),
                     )),
                   ],
                 )),
-            Padding(
-                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
-                child: new Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      child: new Text(
-                        'Pin Code',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                )),
-            Padding(
-                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
-                child: new Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Flexible(
-                      child: Padding(
-                          padding: EdgeInsets.only(right: 10.0),
-                          child: Text(
-                            "${pro.documents[i].data["pincode"]}",
-                            style: TextStyle(
-                                fontSize: 18.0, fontFamily: 'sans-serif-light'),
-                          )),
-                    ),
-                  ],
-                )),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 30.0)),
             NiceButton(
               radius: 40,
               padding: const EdgeInsets.all(15),
-              text: "Edit In Personal Details",
+              text: "Edit In Vehicle Details",
               gradientColors: [secondColor, firstColor],
               onPressed: () {
                 updateDialog(context, pro.documents[i].documentID);
@@ -297,9 +209,9 @@ class _profileState extends State<profile> {
           return AlertDialog(
             title: Center(
               child: Text(
-                "Update Personal Details",
+                "Update Vehicle Details",
                 style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize: 26.0,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -311,7 +223,7 @@ class _profileState extends State<profile> {
               child: ListView(children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: ' Name',
+                    labelText: 'Car Model',
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
@@ -321,14 +233,14 @@ class _profileState extends State<profile> {
                     ),
                   ),
                   validator: (value) =>
-                      value.isEmpty ? "Name can't be empty" : null,
+                      value.isEmpty ? "Car Model can't be empty" : null,
                   onChanged: (value) {
-                    this._name = value;
+                    this._model = value;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: ' Phone',
+                    labelText: 'RC book number',
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
@@ -340,12 +252,12 @@ class _profileState extends State<profile> {
                   validator: (value) =>
                       value.isEmpty ? "Phone Number can't be empty" : null,
                   onChanged: (value) {
-                    this._phone = value;
+                    this._rc = value;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: ' Pin',
+                    labelText: 'License Number',
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
@@ -355,9 +267,9 @@ class _profileState extends State<profile> {
                     ),
                   ),
                   validator: (value) =>
-                      value.isEmpty ? "Pincode can't be empty" : null,
+                      value.isEmpty ? "License Number can't be empty" : null,
                   onChanged: (value) {
-                    this._pin = value;
+                    this._lic = value;
                   },
                 ),
               ]),
@@ -369,12 +281,13 @@ class _profileState extends State<profile> {
                   style: TextStyle(fontSize: 25.0),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context, true);
+                  Navigator.pop(context, true);
                   crudobj
-                      .updateProfileData(selectedDoc, {
-                        'name': this._name,
-                        'phone': this._phone,
-                        'pincode': this._pin
+                      .updateVehicleData(selectedDoc, {
+                        'car': this._model,
+                        'RC book': this._rc,
+                        'Lic': this._lic
                       })
                       .then((result) {})
                       .catchError((e) {

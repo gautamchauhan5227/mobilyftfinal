@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/crud1.dart';
+import 'package:mobilyft/services/ride_details.dart';
 
-class Ride_Details extends StatefulWidget {
+class ridesearch extends StatefulWidget {
   final String email;
-  Ride_Details({Key key, this.email}) : super(key: key);
+  ridesearch({Key key, this.email}) : super(key: key);
   @override
-  _Ride_DetailsState createState() => _Ride_DetailsState();
+  ridesearchState createState() => ridesearchState();
 }
 
-class _Ride_DetailsState extends State<Ride_Details> {
+class ridesearchState extends State<ridesearch> {
   CRUD1 crudobj = new CRUD1();
-  QuerySnapshot ride;
+  QuerySnapshot ride, user;
   String _src, _dest, _seat;
   @override
   void initState() {
@@ -23,6 +24,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
   }
 
   int l = 0;
+  String city = "baroda";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +33,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
         children: <Widget>[
           if (ride != null)
             for (int i = 0; i < ride.documents.length; i++)
+              // if (city == ride.documents[i].data["source"])
               Column(
                 children: <Widget>[
                   returnride(i),
@@ -48,104 +51,9 @@ class _Ride_DetailsState extends State<Ride_Details> {
     );
   }
 
-  Future<bool> updateDialog(BuildContext context, selectedDoc) async {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Center(
-              child: Text("Update Ride Details"),
-            ),
-            content: Container(
-              height: 180.0,
-              width: 270.0,
-              child: ListView(children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: ' PickUp',
-                    labelStyle:
-                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                    prefixIcon: const Icon(
-                      Icons.location_searching,
-                      size: 40.0,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    this._src = value;
-                  },
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: ' Destination',
-                    labelStyle:
-                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                    prefixIcon: const Icon(
-                      Icons.location_searching,
-                      size: 40.0,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    this._dest = value;
-                  },
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: ' Seat',
-                    labelStyle:
-                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                    prefixIcon: const Icon(
-                      Icons.airline_seat_recline_normal,
-                      size: 40.0,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    this._seat = value;
-                  },
-                ),
-              ]),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(
-                  "Update      ",
-                  style: TextStyle(fontSize: 25.0),
-                ),
-                onPressed: () {
-                  crudobj
-                      .updateRideData(selectedDoc, {
-                        'source': this._src,
-                        'dest': this._dest,
-                        'Seat': this._seat
-                      })
-                      .then((result) {})
-                      .catchError((e) {
-                        print(e);
-                      });
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                },
-              ),
-              FlatButton(
-                child: Text(
-                  "Cancel      ",
-                  style: TextStyle(fontSize: 25.0),
-                ),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              )
-            ],
-          );
-        });
-  }
-
   Widget returnride(int i) {
     if (ride != null) {
-      if (widget.email == ride.documents[i].data["email"]) {
+      if (widget.email != ride.documents[i].data["email"]) {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
@@ -321,33 +229,25 @@ class _Ride_DetailsState extends State<Ride_Details> {
                               ),
                               actions: <Widget>[
                                 FlatButton(
-                                  child: Text(
-                                    'Update',
-                                    style: TextStyle(fontSize: 20.0),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    updateDialog(
-                                        context, ride.documents[i].documentID);
-                                  },
-                                ),
-                                FlatButton(
                                   child: Text('    Delete    ',
                                       style: TextStyle(fontSize: 20.0)),
                                   onPressed: () {
-                                    //Navigator.of(context).pop();
-
+                                    Navigator.of(context).pop();
                                     crudobj.deleteData(
                                         ride.documents[i].documentID);
-                                    Navigator.pop(context, true);
-                                    Navigator.pop(context, true);
                                   },
                                 ),
                                 FlatButton(
                                   child: Text('Ok',
                                       style: TextStyle(fontSize: 20.0)),
                                   onPressed: () {
-                                    Navigator.pop(context, true);
+                                    Navigator.pop(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Ride_Details(
+                                                  email: widget.email,
+                                                )));
                                   },
                                 ),
                               ],

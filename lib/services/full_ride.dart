@@ -1,76 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:mobilyft/home_page.dart';
+import 'package:flutter/material.dart';
+import 'package:mobilyft/services/allride.dart';
 
-import 'create.dart';
+import 'package:mobilyft/services/ride_details.dart';
+import 'package:mobilyft/services/ride_details.dart';
 
-class Ride_Page extends StatefulWidget {
+//import 'package:mobilyft/services/ride_details.dart';
+
+class fullride extends StatefulWidget {
   final String email;
-  Ride_Page({Key key, this.email}) : super(key: key);
+  fullride({Key key, this.email}) : super(key: key);
 
   @override
-  _Ride_PageState createState() => _Ride_PageState();
+  _fullrideState createState() => _fullrideState();
 }
 
-class _Ride_PageState extends State<Ride_Page> {
+class _fullrideState extends State<fullride> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         backgroundColor: Colors.white,
-        resizeToAvoidBottomPadding: false,
         body: ListView(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 145, left: 15, right: 15),
+              padding: EdgeInsets.only(top: 55, left: 15, right: 15),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                      height: 100.0,
+                      height: 150.0,
                       width: 310.0,
                       child: RaisedButton(
-                          color: Colors.white,
-                          child: Image.asset('asets/car.png'),
+                          color: Colors.lightBlue[100],
+                          child: Icon(
+                            Icons.view_list,
+                            size: 150.0,
+                          ),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        Create(email: widget.email)));
+                                        Ride_Details(
+                                          email: widget.email,
+                                        )));
                           },
                           shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(50.0)))),
+                              borderRadius: new BorderRadius.circular(20.0)))),
                   SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    "Add Ride",
+                    "Current Ride",
                     style: TextStyle(color: Colors.black54, fontSize: 30.0),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.0),
+                    padding: EdgeInsets.only(top: 50.0),
                     child: SizedBox(
-                        height: 100.0,
+                        height: 150.0,
                         width: 310.0,
                         child: RaisedButton(
-                            color: Colors.white,
-                            child: Image.asset('asets/people.png'),
+                            color: Colors.lightBlue[100],
+                            child: Icon(Icons.history, size: 150.0),
                             onPressed: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          Create()));
+                                          allride(
+                                            email: widget.email,
+                                          )));
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    new BorderRadius.circular(50.0)))),
+                                    new BorderRadius.circular(20.0)))),
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    "Search Ride",
+                    "Add Ride Histroy ",
                     style: TextStyle(color: Colors.black54, fontSize: 30.0),
                   ),
                 ],

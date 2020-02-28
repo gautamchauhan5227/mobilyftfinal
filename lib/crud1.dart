@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobilyft/services/feedback.dart';
 
 class CRUD1 {
   bool checksignin() {
@@ -24,6 +25,30 @@ class CRUD1 {
 
   Future<void> addDetail(data, BuildContext context) async {
     Firestore.instance.collection('detail').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> notify(data, BuildContext context) async {
+    Firestore.instance.collection('notify').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> history(data, BuildContext context) async {
+    Firestore.instance.collection('all ride').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> cardetail(data, BuildContext context) async {
+    Firestore.instance.collection('car_detail').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> feedback(data, BuildContext context) async {
+    Firestore.instance.collection('feedback').add(data).catchError((e) {
       print(e);
     });
   }
@@ -58,9 +83,29 @@ class CRUD1 {
     });
   }
 
+  updateVehicleData(selectedDoc, newValue) {
+    Firestore.instance
+        .collection("car_detail")
+        .document(selectedDoc)
+        .updateData(newValue)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
   deleteData(docId) {
     Firestore.instance
         .collection("detail")
+        .document(docId)
+        .delete()
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  deletenoty(docId) {
+    Firestore.instance
+        .collection("notify")
         .document(docId)
         .delete()
         .catchError((e) {

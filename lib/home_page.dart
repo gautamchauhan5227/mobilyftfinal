@@ -10,7 +10,8 @@ import 'package:mobilyft/services/dashboard.dart';
 import 'package:mobilyft/services/profile.dart';
 
 import 'package:mobilyft/services/request_page.dart';
-import 'package:mobilyft/services/search.dart';
+import 'package:mobilyft/services/ridesearch.dart';
+
 //import 'package:mobilyft/services/ride_page.dart';
 //import 'package:mobilyft/services/search.dart';
 
@@ -114,7 +115,7 @@ class _Home_pageState extends State<Home_page> {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            search(email: widget.email)));
+                            ridesearch(email: widget.email)));
               })
         ],
       ),

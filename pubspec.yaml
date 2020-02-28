@@ -26,6 +26,12 @@ dependencies:
   flutter_speed_dial: ^1.2.5
   algolia: ^0.1.7
   slide_popup_dialog: ^0.0.2
+  neuomorphic_container: ^1.0.1
+  nice_button: ^0.1.7
+  loading_animations: ^2.1.0
+  loading_card: ^0.0.5
+  flutter_feather_icons: ^1.0.3
+  #flutter_launcher_icons: "^0.7.3"
   
   
 
@@ -36,10 +42,19 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   datetime_picker_formfield: ^0.1.8
+  
+  flutter_slidable: "^0.5.4"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+#flutter_icons:
+ # android: true
+  #image_path_android: "assets/icon.png"
+  #adaptive_icon_background: "assets/r4.jpg"
+  #adaptive_icon_foreground: "assets/car.png"
+  
 
 
 # For information on the generic Dart part of this file, see the
