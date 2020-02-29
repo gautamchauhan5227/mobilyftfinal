@@ -5,6 +5,7 @@ import 'package:mobilyft/crud1.dart';
 class Ride_Details extends StatefulWidget {
   final String email;
   Ride_Details({Key key, this.email}) : super(key: key);
+
   @override
   _Ride_DetailsState createState() => _Ride_DetailsState();
 }
@@ -55,7 +56,14 @@ class _Ride_DetailsState extends State<Ride_Details> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Center(
-              child: Text("Update Ride Details"),
+              child: Text(
+                "Update Ride Details",
+                style: TextStyle(
+                  fontSize: 22.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             content: Container(
               height: 180.0,
@@ -82,7 +90,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
-                      Icons.location_searching,
+                      Icons.location_on,
                       size: 40.0,
                       color: Colors.blue,
                     ),
@@ -115,16 +123,12 @@ class _Ride_DetailsState extends State<Ride_Details> {
                   style: TextStyle(fontSize: 25.0),
                 ),
                 onPressed: () {
-                  crudobj
-                      .updateRideData(selectedDoc, {
-                        'source': this._src,
-                        'dest': this._dest,
-                        'Seat': this._seat
-                      })
-                      .then((result) {})
-                      .catchError((e) {
-                        print(e);
-                      });
+                  crudobj.updateRideData(selectedDoc, {
+                    'source': this._src,
+                    'dest': this._dest,
+                    'Seat': this._seat
+                  });
+                  Navigator.pop(context, true);
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
                 },
@@ -184,138 +188,134 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                   children: <Widget>[
                                     Padding(
                                         padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            new Row(
-                                              children: <Widget>[
-                                                Icon(Icons.location_searching),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
+                                        child: new Column(children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.location_searching,
+                                                size: 40.0,
+                                              ),
+                                              Expanded(
+                                                child: Text(
                                                   'Pick-Up',
+                                                  textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                      fontSize: 22.0,
+                                                      fontSize: 20.0,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 30.0)),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 0.0),
-                                                ),
-                                                Text(
+                                              ),
+                                              Icon(Icons.chevron_right),
+                                              Expanded(
+                                                child: Text(
                                                   "${ride.documents[i].data["source"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )),
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 18.0),
+                                                ),
+                                                flex: 1,
+                                              )
+                                            ],
+                                          )
+                                        ])),
                                     Padding(
                                         padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(Icons.location_on),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
+                                        child: new Column(children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.location_on,
+                                                size: 40.0,
+                                              ),
+                                              Expanded(
+                                                child: Text(
                                                   'Destination',
+                                                  textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                      fontSize: 22.0,
+                                                      fontSize: 20.0,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Text(
+                                                flex: 0,
+                                              ),
+                                              Icon(Icons.chevron_right),
+                                              Expanded(
+                                                child: Text(
                                                   "${ride.documents[i].data["dest"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )),
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 18.0),
+                                                ),
+                                                flex: 1,
+                                              )
+                                            ],
+                                          )
+                                        ])),
                                     Padding(
                                         padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(Icons.access_time),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
+                                        child: new Column(children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.access_time,
+                                                size: 40.0,
+                                              ),
+                                              Expanded(
+                                                child: Text(
                                                   'Time',
+                                                  textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                      fontSize: 22.0,
+                                                      fontSize: 20.0,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 52.0)),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Text(
+                                              ),
+                                              Icon(Icons.chevron_right),
+                                              Expanded(
+                                                child: Text(
                                                   "${ride.documents[i].data["time"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )),
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 18.0),
+                                                ),
+                                                flex: 1,
+                                              )
+                                            ],
+                                          )
+                                        ])),
                                     Padding(
                                         padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(Icons
-                                                    .airline_seat_recline_normal),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
+                                        child: new Column(children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons
+                                                    .airline_seat_recline_normal,
+                                                size: 40.0,
+                                              ),
+                                              Expanded(
+                                                child: Text(
                                                   'Seat',
+                                                  textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                      fontSize: 22.0,
+                                                      fontSize: 20.0,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 55.0)),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Text(
+                                              ),
+                                              Icon(Icons.chevron_right),
+                                              Expanded(
+                                                child: Text(
                                                   "${ride.documents[i].data["Seat"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )),
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 18.0),
+                                                ),
+                                                flex: 1,
+                                              )
+                                            ],
+                                          )
+                                        ])),
                                   ],
                                 ),
                               ),
@@ -326,7 +326,6 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                     style: TextStyle(fontSize: 20.0),
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pop();
                                     updateDialog(
                                         context, ride.documents[i].documentID);
                                   },

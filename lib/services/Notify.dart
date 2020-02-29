@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mobilyft/crud1.dart';
+import 'package:mobilyft/home_page.dart';
 
 class notify extends StatefulWidget {
   final String email;
@@ -28,6 +29,7 @@ class _notifyState extends State<notify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appBar: AppBar(),
       backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
@@ -72,10 +74,11 @@ class _notifyState extends State<notify> {
                       icon: Icon(Icons.cancel, color: Colors.blue),
                       onPressed: () {
                         crudobj.deletenoty(ride.documents[i].documentID);
-                        Navigator.pop(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => notify()));
+                                builder: (BuildContext context) =>
+                                    Home_page()));
                       },
                     ))));
       } else

@@ -370,16 +370,17 @@ class _profileState extends State<profile> {
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  crudobj
-                      .updateProfileData(selectedDoc, {
-                        'name': this._name,
-                        'phone': this._phone,
-                        'pincode': this._pin
-                      })
-                      .then((result) {})
-                      .catchError((e) {
-                        print(e);
-                      });
+                  crudobj.updateProfileData(selectedDoc, {
+                    'name': this._name,
+                    'phone': this._phone,
+                    'pincode': this._pin
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Home_page(
+                                email: widget.email,
+                              )));
                 },
               ),
               FlatButton(

@@ -32,6 +32,7 @@ dependencies:
   loading_card: ^0.0.5
   flutter_feather_icons: ^1.0.3
   #flutter_launcher_icons: "^0.7.3"
+  giffy_dialog:
   
   
 
@@ -73,6 +74,7 @@ flutter:
     - asets/as.png
     - asets/logo.jpg
     - asets/m1.PNG
+    - asets/space_demo.flr
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

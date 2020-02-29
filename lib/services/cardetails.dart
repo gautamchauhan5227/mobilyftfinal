@@ -283,16 +283,11 @@ class _car_detailsState extends State<car_details> {
                 onPressed: () {
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
-                  crudobj
-                      .updateVehicleData(selectedDoc, {
-                        'car': this._model,
-                        'RC book': this._rc,
-                        'Lic': this._lic
-                      })
-                      .then((result) {})
-                      .catchError((e) {
-                        print(e);
-                      });
+                  crudobj.updateVehicleData(selectedDoc, {
+                    'car': this._model,
+                    'RC book': this._rc,
+                    'Lic': this._lic
+                  });
                 },
               ),
               FlatButton(

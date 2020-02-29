@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/crud1.dart';
+import 'package:mobilyft/home_page.dart';
 import 'package:mobilyft/services/ride_details.dart';
 
 class ridesearch extends StatefulWidget {
@@ -12,7 +13,7 @@ class ridesearch extends StatefulWidget {
 
 class ridesearchState extends State<ridesearch> {
   CRUD1 crudobj = new CRUD1();
-  QuerySnapshot ride, user;
+  QuerySnapshot ride, user, car;
   String _src, _dest, _seat;
   @override
   void initState() {
@@ -21,24 +22,64 @@ class ridesearchState extends State<ridesearch> {
         ride = result;
       });
     });
+    crudobj.getData('user').then((result) {
+      setState(() {
+        user = result;
+      });
+    });
+
+    crudobj.getData('car_detail').then((result) {
+      setState(() {
+        car = result;
+      });
+    });
+  }
+
+  void insert(BuildContext context) {
+    Map<String, dynamic> data = {
+      'e': widget.email,
+    };
+
+    crudobj.request(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+  }
+
+  void submit() async {
+    insert(context);
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => Home_page(email: widget.email)));
+  }
+
+  void initiateSearch(String val) {
+    setState(() {
+      city = val.trim();
+    });
   }
 
   int l = 0;
-  String city = "baroda";
+  String city = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: TextField(
+          onChanged: (val) => initiateSearch(val),
+        ),
+      ),
       body: ListView(
         children: <Widget>[
           if (ride != null)
             for (int i = 0; i < ride.documents.length; i++)
-              // if (city == ride.documents[i].data["source"])
-              Column(
-                children: <Widget>[
-                  returnride(i),
-                ],
-              ),
+              if (city == ride.documents[i].data["source"])
+                Column(
+                  children: <Widget>[
+                    returnride(i),
+                  ],
+                ),
           Padding(padding: EdgeInsets.only(top: 250.0)),
           if (ride == null)
             Column(
@@ -69,192 +110,265 @@ class ridesearchState extends State<ridesearch> {
                       "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
                   subtitle: Text("Time : "
                       "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
-                  trailing: IconButton(
-                      icon: Icon(Icons.help, color: Colors.blue),
-                      onPressed: () {
-                        showDialog<void>(
-                          context: context,
-                          barrierDismissible: false, // user must tap button!
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Center(
-                                child: Text(
-                                  'Ride Details',
-                                  style: TextStyle(
-                                    fontFamily: 'helvetica_neue_light',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30.0,
-                                  ),
-                                ),
+                  onTap: () {
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Center(
+                            child: Text(
+                              'Ride Details',
+                              style: TextStyle(
+                                fontFamily: 'helvetica_neue_light',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30.0,
                               ),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: <Widget>[
-                                    Padding(
-                                        padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            new Row(
-                                              children: <Widget>[
-                                                Icon(Icons.location_searching),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
-                                                  'Pick-Up',
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 30.0)),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 0.0),
-                                                ),
-                                                Text(
-                                                  "${ride.documents[i].data["source"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.person,
+                                            // location_on
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              "Name",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(Icons.location_on),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
-                                                  'Destination',
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Text(
-                                                  "${ride.documents[i].data["dest"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${user.documents[i].data["name"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
                                             ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(Icons.access_time),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
-                                                  'Time',
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 52.0)),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Text(
-                                                  "${ride.documents[i].data["time"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.directions_car,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Car Number',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(top: 15.0),
-                                        child: new Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Icon(Icons
-                                                    .airline_seat_recline_normal),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.0)),
-                                                new Text(
-                                                  'Seat',
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 55.0)),
-                                                Icon(
-                                                    Icons.keyboard_arrow_right),
-                                                Text(
-                                                  "${ride.documents[i].data["Seat"]}",
-                                                  style: TextStyle(
-                                                      fontSize: 22.0,
-                                                      fontFamily:
-                                                          'sans-serif-light'),
-                                                )
-                                              ],
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${car.documents[i].data["Lic"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
                                             ),
-                                          ],
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text('    Delete    ',
-                                      style: TextStyle(fontSize: 20.0)),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    crudobj.deleteData(
-                                        ride.documents[i].documentID);
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text('Ok',
-                                      style: TextStyle(fontSize: 20.0)),
-                                  onPressed: () {
-                                    Navigator.pop(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                Ride_Details(
-                                                  email: widget.email,
-                                                )));
-                                  },
-                                ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_searching,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Email',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${ride.documents[i].data["email"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_searching,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Pick-Up',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${ride.documents[i].data["source"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_on,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Destination',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            flex: 0,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${ride.documents[i].data["dest"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.access_time,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Time',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${ride.documents[i].data["time"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.airline_seat_recline_normal,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Seat',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${ride.documents[i].data["Seat"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
                               ],
-                            );
-                          },
+                            ),
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text(
+                                "Request     ",
+                                style: TextStyle(fontSize: 25.0),
+                              ),
+                              onPressed: () {
+                                submit();
+                              },
+                            ),
+                            FlatButton(
+                              child: Text(
+                                "Cancel      ",
+                                style: TextStyle(fontSize: 25.0),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          ],
                         );
-                      }),
+                      },
+                    );
+                  },
                 )));
       } else
         return Container();
