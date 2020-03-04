@@ -10,9 +10,12 @@ import 'package:mobilyft/services/Notify.dart';
 import 'package:mobilyft/services/create.dart';
 
 import 'package:mobilyft/services/dashboard.dart';
+
+
+import 'package:mobilyft/services/map.dart';
 import 'package:mobilyft/services/profile.dart';
 
-import 'package:mobilyft/services/request_page.dart';
+
 import 'package:mobilyft/services/ridesearch.dart';
 
 //import 'package:mobilyft/services/ride_page.dart';
@@ -40,7 +43,7 @@ class _Home_pageState extends State<Home_page> {
       case 0:
         return Dashboard(email: widget.email);
       case 1:
-        return request_page(email: widget.email);
+        return maps();
       case 2:
         return notify(email: widget.email);
 

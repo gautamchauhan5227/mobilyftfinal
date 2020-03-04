@@ -14,7 +14,7 @@ class ridesearch extends StatefulWidget {
 class ridesearchState extends State<ridesearch> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride, user, car;
-  String _src, _dest, _seat;
+  String _src, _dest, _seat, emailcr;
   @override
   void initState() {
     crudobj.getData('detail').then((result) {
@@ -60,6 +60,14 @@ class ridesearchState extends State<ridesearch> {
     });
   }
 
+  TextEditingController _textFieldController = TextEditingController();
+
+  _onClear() {
+    setState(() {
+      _textFieldController.text = "";
+    });
+  }
+
   int l = 0;
   String city = "";
   @override
@@ -68,6 +76,16 @@ class ridesearchState extends State<ridesearch> {
       appBar: AppBar(
         title: TextField(
           onChanged: (val) => initiateSearch(val),
+          style: TextStyle(),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Search...",
+            prefixIcon: Icon(Icons.search),
+            suffix: IconButton(
+              icon: Icon(Icons.cancel),
+              onPressed: _onClear,
+            ),
+          ),
         ),
       ),
       body: ListView(
@@ -111,6 +129,8 @@ class ridesearchState extends State<ridesearch> {
                   subtitle: Text("Time : "
                       "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
                   onTap: () {
+                    // emailcr = ride.documents[i].data["email"];
+                    // print(emailcr);
                     showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!

@@ -58,7 +58,8 @@ class _notifyState extends State<notify> {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
-                color: Colors.lightBlue[50],
+                color: Colors.transparent,
+                
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
                 child: ListTile(
