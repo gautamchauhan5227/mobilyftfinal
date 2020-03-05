@@ -1,24 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobilyft/crud1.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Home_Page/home_page.dart';
 
-class request_page extends StatefulWidget {
+
+class ridesearch extends StatefulWidget {
   final String email;
-  request_page({Key key, this.email}) : super(key: key);
-
+  ridesearch({Key key, this.email}) : super(key: key);
   @override
-  _request_pageState createState() => _request_pageState();
+  ridesearchState createState() => ridesearchState();
 }
 
-class _request_pageState extends State<request_page> {
+class ridesearchState extends State<ridesearch> {
   CRUD1 crudobj = new CRUD1();
-  QuerySnapshot req, user;
-
+  QuerySnapshot ride, user, car;
+  String _src, _dest, _seat, emailcr;
   @override
   void initState() {
-    crudobj.getData('ride request ').then((result) {
+    crudobj.getData('detail').then((result) {
       setState(() {
-        req = result;
+        ride = result;
       });
     });
     crudobj.getData('user').then((result) {
@@ -26,25 +27,79 @@ class _request_pageState extends State<request_page> {
         user = result;
       });
     });
+
+    crudobj.getData('car_detail').then((result) {
+      setState(() {
+        car = result;
+      });
+    });
+  }
+
+  void insert(BuildContext context) {
+    Map<String, dynamic> data = {
+      'e': widget.email,
+    };
+
+    crudobj.request(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+  }
+
+  void submit() async {
+    insert(context);
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => Home_page(email: widget.email)));
+  }
+
+  void initiateSearch(String val) {
+    setState(() {
+      city = val.trim();
+    });
+  }
+
+  TextEditingController _textFieldController = TextEditingController();
+
+  _onClear() {
+    setState(() {
+      _textFieldController.text = "";
+    });
   }
 
   int l = 0;
+  String city = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: TextField(
+          onChanged: (val) => initiateSearch(val),
+          style: TextStyle(),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Search...",
+            prefixIcon: Icon(Icons.search),
+            suffix: IconButton(
+              icon: Icon(Icons.cancel),
+              onPressed: _onClear,
+            ),
+          ),
+        ),
+      ),
       body: ListView(
         children: <Widget>[
-          if (req != null)
-            for (int i = 0; i < req.documents.length; i++)
-              // if (city == ride.documents[i].data["source"])
-              Column(
-                children: <Widget>[
-                  returnride(i),
-                ],
-              ),
+          if (ride != null)
+            for (int i = 0; i < ride.documents.length; i++)
+              if (city == ride.documents[i].data["source"])
+                Column(
+                  children: <Widget>[
+                    returnride(i),
+                  ],
+                ),
           Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (req == null)
+          if (ride == null)
             Column(
               children: <Widget>[
                 Center(child: CircularProgressIndicator()),
@@ -56,8 +111,8 @@ class _request_pageState extends State<request_page> {
   }
 
   Widget returnride(int i) {
-    if (req != null) {
-      if (widget.email == req.documents[i].data["email"]) {
+    if (ride != null) {
+      if (widget.email != ride.documents[i].data["email"]) {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
@@ -70,10 +125,12 @@ class _request_pageState extends State<request_page> {
                     size: 40.0,
                   ),
                   title: Text(
-                      "${req.documents[i].data["source"]}\tto\t${req.documents[i].data["dest"]}"),
+                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
                   subtitle: Text("Time : "
-                      "${req.documents[i].data["time"]}\nSeat : ${req.documents[i].data["Seat"]}"),
+                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
                   onTap: () {
+                    // emailcr = ride.documents[i].data["email"];
+                    // print(emailcr);
                     showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!
@@ -130,6 +187,36 @@ class _request_pageState extends State<request_page> {
                                       Row(
                                         children: <Widget>[
                                           Icon(
+                                            Icons.directions_car,
+                                            size: 40.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              'Car Number',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${car.documents[i].data["Lic"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 18.0),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
                                             Icons.location_searching,
                                             size: 40.0,
                                           ),
@@ -145,7 +232,7 @@ class _request_pageState extends State<request_page> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["e"]}",
+                                              "${ride.documents[i].data["email"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -175,7 +262,7 @@ class _request_pageState extends State<request_page> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["source"]}",
+                                              "${ride.documents[i].data["source"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -206,7 +293,7 @@ class _request_pageState extends State<request_page> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["dest"]}",
+                                              "${ride.documents[i].data["dest"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -236,7 +323,7 @@ class _request_pageState extends State<request_page> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["time"]}",
+                                              "${ride.documents[i].data["time"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -266,7 +353,7 @@ class _request_pageState extends State<request_page> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["Seat"]}",
+                                              "${ride.documents[i].data["Seat"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -279,6 +366,15 @@ class _request_pageState extends State<request_page> {
                             ),
                           ),
                           actions: <Widget>[
+                            FlatButton(
+                              child: Text(
+                                "Request     ",
+                                style: TextStyle(fontSize: 25.0),
+                              ),
+                              onPressed: () {
+                                submit();
+                              },
+                            ),
                             FlatButton(
                               child: Text(
                                 "Cancel      ",

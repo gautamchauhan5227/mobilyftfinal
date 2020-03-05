@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:mobilyft/crud1.dart';
-import 'package:mobilyft/home_page.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Home_Page/home_page.dart';
 
 enum FormType { login, register }
 

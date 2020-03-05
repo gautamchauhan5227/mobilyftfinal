@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobilyft/crud1.dart';
-import 'package:mobilyft/home_page.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Home_Page/home_page.dart';
+
+
 
 void main() {
   runApp(LoginPage());
@@ -72,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
               .then((user) {
             Navigator.pop(context);
             var route = new MaterialPageRoute(
-              builder: (BuildContext context) => Home_page(
+              builder: (BuildContext context) =>Home_page(
                 email: _email,
               ),
             );

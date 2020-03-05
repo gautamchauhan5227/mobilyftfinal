@@ -1,30 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Home_Page/home_page.dart';
+import 'package:mobilyft/Login_Page/loginpage.dart';
 
-import 'package:mobilyft/crud1.dart';
 
 import 'package:nice_button/NiceButton.dart';
 
-class car_details extends StatefulWidget {
+class profile extends StatefulWidget {
   final String email;
-  car_details({Key key, this.email}) : super(key: key);
+  profile({Key key, this.email}) : super(key: key);
   @override
-  _car_detailsState createState() => _car_detailsState();
+  _profileState createState() => _profileState();
 }
 
-class _car_detailsState extends State<car_details> {
+class _profileState extends State<profile> {
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   String _email;
-  String _model;
-  String _rc;
-  String _lic;
+  String _password;
+  String _phone;
+  String _name;
+  String _pin;
 
   QuerySnapshot pro;
   @override
   void initState() {
-    crudobj.getData('car_detail').then((result) {
+    crudobj.getData('user').then((result) {
       setState(() {
         pro = result;
       });
@@ -35,14 +38,13 @@ class _car_detailsState extends State<car_details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
           if (pro != null)
             for (int i = 0; i < pro.documents.length; i++)
               Container(
-                child: cardetails(i),
+                child: profilepage(i),
               ),
           Padding(padding: EdgeInsets.only(top: 250.0)),
           if (pro == null)
@@ -56,36 +58,91 @@ class _car_detailsState extends State<car_details> {
     );
   }
 
-  Widget cardetails(int i) {
+  Widget profilepage(int i) {
     if (pro != null) {
       if (widget.email == pro.documents[i].data["email"]) {
         return Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(),
-            ),
-            Center(
-              child:
-                  Icon(Icons.directions_car, size: 150.0, color: Colors.black),
-            ),
-            Padding(
-              padding: EdgeInsets.only(),
+              padding: EdgeInsets.only(left: 40.0, top: 20.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Vehicle',
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  Text(
-                    '  Details',
-                    style: TextStyle(fontSize: 40.0, color: Colors.blueAccent),
-                  )
+                  Expanded(
+                    child: Container(
+                      child: Text(
+                        "Welcome," "${pro.documents[i].data["name"]}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 25.0),
+                      ),
+                    ),
+                    flex: 5,
+                  ),
+                  Expanded(
+                    child: Container(
+                        child: InkWell(
+                            onTap: () {
+                              FirebaseAuth.instance.signOut().then((value) {
+                                Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            LoginPage()));
+                              }).catchError((e) {
+                                print(e);
+                              });
+                            },
+                            child: Icon(
+                              Icons.power_settings_new,
+                              size: 30.0,
+                              color: Colors.red,
+                            ))),
+                    flex: 1,
+                  ),
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 15.0),
+              child: new Stack(fit: StackFit.loose, children: <Widget>[
+                new Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      child: Icon(Icons.account_circle, size: 125),
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+            Padding(
+                padding: EdgeInsets.only(left: 55.0),
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 1.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                new Text(
+                                  'Personal Information',
+                                  style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )),
+                  ],
+                )),
             Padding(
                 padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
                 child: new Row(
@@ -96,7 +153,7 @@ class _car_detailsState extends State<car_details> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
-                          'Car Model',
+                          'Name',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
@@ -111,7 +168,7 @@ class _car_detailsState extends State<car_details> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["car"]}",
+                      "${pro.documents[i].data["name"]}",
                       style: TextStyle(
                           fontSize: 18.0, fontFamily: 'sans-serif-light'),
                     )),
@@ -127,7 +184,7 @@ class _car_detailsState extends State<car_details> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
-                          'RC book number',
+                          'Email ID',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
@@ -142,7 +199,7 @@ class _car_detailsState extends State<car_details> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["RC book"]}",
+                      "${pro.documents[i].data["email"]}",
                       style: TextStyle(
                           fontSize: 18.0, fontFamily: 'sans-serif-light'),
                     )),
@@ -158,7 +215,7 @@ class _car_detailsState extends State<car_details> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
-                          'License Number',
+                          'Mobile',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
@@ -173,17 +230,49 @@ class _car_detailsState extends State<car_details> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["Lic"]}",
+                      "${pro.documents[i].data["phone"]}",
                       style: TextStyle(
                           fontSize: 18.0, fontFamily: 'sans-serif-light'),
                     )),
                   ],
                 )),
-            Padding(padding: EdgeInsets.only(top: 30.0)),
+            Padding(
+                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: new Text(
+                        'Pin Code',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                )),
+            Padding(
+                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Flexible(
+                      child: Padding(
+                          padding: EdgeInsets.only(right: 10.0),
+                          child: Text(
+                            "${pro.documents[i].data["pincode"]}",
+                            style: TextStyle(
+                                fontSize: 18.0, fontFamily: 'sans-serif-light'),
+                          )),
+                    ),
+                  ],
+                )),
+            Padding(padding: EdgeInsets.only(top: 20)),
             NiceButton(
               radius: 40,
               padding: const EdgeInsets.all(15),
-              text: "Edit In Vehicle Details",
+              text: "Edit In Personal Details",
               gradientColors: [secondColor, firstColor],
               onPressed: () {
                 updateDialog(context, pro.documents[i].documentID);
@@ -209,9 +298,9 @@ class _car_detailsState extends State<car_details> {
           return AlertDialog(
             title: Center(
               child: Text(
-                "Update Vehicle Details",
+                "Update Personal Details",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize: 22.0,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -223,7 +312,7 @@ class _car_detailsState extends State<car_details> {
               child: ListView(children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Car Model',
+                    labelText: ' Name',
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
@@ -233,14 +322,14 @@ class _car_detailsState extends State<car_details> {
                     ),
                   ),
                   validator: (value) =>
-                      value.isEmpty ? "Car Model can't be empty" : null,
+                      value.isEmpty ? "Name can't be empty" : null,
                   onChanged: (value) {
-                    this._model = value;
+                    this._name = value;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'RC book number',
+                    labelText: ' Phone',
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
@@ -252,12 +341,12 @@ class _car_detailsState extends State<car_details> {
                   validator: (value) =>
                       value.isEmpty ? "Phone Number can't be empty" : null,
                   onChanged: (value) {
-                    this._rc = value;
+                    this._phone = value;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'License Number',
+                    labelText: ' Pin',
                     labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
                     prefixIcon: const Icon(
@@ -267,9 +356,9 @@ class _car_detailsState extends State<car_details> {
                     ),
                   ),
                   validator: (value) =>
-                      value.isEmpty ? "License Number can't be empty" : null,
+                      value.isEmpty ? "Pincode can't be empty" : null,
                   onChanged: (value) {
-                    this._lic = value;
+                    this._pin = value;
                   },
                 ),
               ]),
@@ -281,13 +370,18 @@ class _car_detailsState extends State<car_details> {
                   style: TextStyle(fontSize: 25.0),
                 ),
                 onPressed: () {
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                  crudobj.updateVehicleData(selectedDoc, {
-                    'car': this._model,
-                    'RC book': this._rc,
-                    'Lic': this._lic
+                  Navigator.of(context).pop();
+                  crudobj.updateProfileData(selectedDoc, {
+                    'name': this._name,
+                    'phone': this._phone,
+                    'pincode': this._pin
                   });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Home_page(
+                                email: widget.email,
+                              )));
                 },
               ),
               FlatButton(

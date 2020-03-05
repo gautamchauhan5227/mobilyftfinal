@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mobilyft/services/feedback.dart';
-
 class CRUD1 {
   bool checksignin() {
     if (FirebaseAuth.instance.currentUser() != null)
@@ -11,7 +9,7 @@ class CRUD1 {
     else
       return false;
   }
-
+  
   Future<void> addData(signupdata, BuildContext context) async {
     if (checksignin()) {
       Firestore.instance.collection('user').add(signupdata).catchError((e) {

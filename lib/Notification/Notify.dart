@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Home_Page/home_page.dart';
 
-import 'package:mobilyft/crud1.dart';
-import 'package:mobilyft/home_page.dart';
 
 class notify extends StatefulWidget {
   final String email;
@@ -58,10 +58,10 @@ class _notifyState extends State<notify> {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
-                color: Colors.transparent,
+                color: Colors.blue.withOpacity(0.1),
                 
                 shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
+                    borderRadius: new BorderRadius.circular(5.0)),
                 child: ListTile(
                     leading: Icon(
                       Icons.account_circle,
@@ -71,17 +71,21 @@ class _notifyState extends State<notify> {
                         "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"
                         " Successfully Uploaded"),
                     subtitle: Text("Get Ready For Ride"),
+                  
                     trailing: IconButton(
                       icon: Icon(Icons.cancel, color: Colors.blue),
+
                       onPressed: () {
                         crudobj.deletenoty(ride.documents[i].documentID);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    Home_page()));
+                                    Home_page(email: widget.email,)));
                       },
-                    ))));
+                    ))),
+                    
+                    );
       } else
         return Container();
     } else {

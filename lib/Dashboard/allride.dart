@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../crud1.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
 
 class allride extends StatefulWidget {
   final String email;

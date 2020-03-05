@@ -1,25 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobilyft/crud1.dart';
-import 'package:mobilyft/home_page.dart';
-import 'package:mobilyft/services/ride_details.dart';
+import 'package:mobilyft/Crud_File/crud1.dart';
 
-class ridesearch extends StatefulWidget {
+
+class request_page extends StatefulWidget {
   final String email;
-  ridesearch({Key key, this.email}) : super(key: key);
+  request_page({Key key, this.email}) : super(key: key);
+
   @override
-  ridesearchState createState() => ridesearchState();
+  _request_pageState createState() => _request_pageState();
 }
 
-class ridesearchState extends State<ridesearch> {
+class _request_pageState extends State<request_page> {
   CRUD1 crudobj = new CRUD1();
-  QuerySnapshot ride, user, car;
-  String _src, _dest, _seat, emailcr;
+  QuerySnapshot req, user;
+
   @override
   void initState() {
-    crudobj.getData('detail').then((result) {
+    crudobj.getData('ride request ').then((result) {
       setState(() {
-        ride = result;
+        req = result;
       });
     });
     crudobj.getData('user').then((result) {
@@ -27,79 +27,25 @@ class ridesearchState extends State<ridesearch> {
         user = result;
       });
     });
-
-    crudobj.getData('car_detail').then((result) {
-      setState(() {
-        car = result;
-      });
-    });
-  }
-
-  void insert(BuildContext context) {
-    Map<String, dynamic> data = {
-      'e': widget.email,
-    };
-
-    crudobj.request(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
-  }
-
-  void submit() async {
-    insert(context);
-    Navigator.pop(context);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => Home_page(email: widget.email)));
-  }
-
-  void initiateSearch(String val) {
-    setState(() {
-      city = val.trim();
-    });
-  }
-
-  TextEditingController _textFieldController = TextEditingController();
-
-  _onClear() {
-    setState(() {
-      _textFieldController.text = "";
-    });
   }
 
   int l = 0;
-  String city = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          onChanged: (val) => initiateSearch(val),
-          style: TextStyle(),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Search...",
-            prefixIcon: Icon(Icons.search),
-            suffix: IconButton(
-              icon: Icon(Icons.cancel),
-              onPressed: _onClear,
-            ),
-          ),
-        ),
-      ),
+      backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
-          if (ride != null)
-            for (int i = 0; i < ride.documents.length; i++)
-              if (city == ride.documents[i].data["source"])
-                Column(
-                  children: <Widget>[
-                    returnride(i),
-                  ],
-                ),
+          if (req != null)
+            for (int i = 0; i < req.documents.length; i++)
+              // if (city == ride.documents[i].data["source"])
+              Column(
+                children: <Widget>[
+                  returnride(i),
+                ],
+              ),
           Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (ride == null)
+          if (req == null)
             Column(
               children: <Widget>[
                 Center(child: CircularProgressIndicator()),
@@ -111,8 +57,8 @@ class ridesearchState extends State<ridesearch> {
   }
 
   Widget returnride(int i) {
-    if (ride != null) {
-      if (widget.email != ride.documents[i].data["email"]) {
+    if (req != null) {
+      if (widget.email == req.documents[i].data["email"]) {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
@@ -125,12 +71,10 @@ class ridesearchState extends State<ridesearch> {
                     size: 40.0,
                   ),
                   title: Text(
-                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
+                      "${req.documents[i].data["source"]}\tto\t${req.documents[i].data["dest"]}"),
                   subtitle: Text("Time : "
-                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
+                      "${req.documents[i].data["time"]}\nSeat : ${req.documents[i].data["Seat"]}"),
                   onTap: () {
-                    // emailcr = ride.documents[i].data["email"];
-                    // print(emailcr);
                     showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!
@@ -187,36 +131,6 @@ class ridesearchState extends State<ridesearch> {
                                       Row(
                                         children: <Widget>[
                                           Icon(
-                                            Icons.directions_car,
-                                            size: 40.0,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'Car Number',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Icon(Icons.chevron_right),
-                                          Expanded(
-                                            child: Text(
-                                              "${car.documents[i].data["Lic"]}",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
-                                            ),
-                                            flex: 1,
-                                          )
-                                        ],
-                                      )
-                                    ])),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 15.0),
-                                    child: new Column(children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
                                             Icons.location_searching,
                                             size: 40.0,
                                           ),
@@ -232,7 +146,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${ride.documents[i].data["email"]}",
+                                              "${req.documents[i].data["e"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -262,7 +176,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${ride.documents[i].data["source"]}",
+                                              "${req.documents[i].data["source"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -293,7 +207,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${ride.documents[i].data["dest"]}",
+                                              "${req.documents[i].data["dest"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -323,7 +237,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${ride.documents[i].data["time"]}",
+                                              "${req.documents[i].data["time"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -353,7 +267,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${ride.documents[i].data["Seat"]}",
+                                              "${req.documents[i].data["Seat"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -366,15 +280,6 @@ class ridesearchState extends State<ridesearch> {
                             ),
                           ),
                           actions: <Widget>[
-                            FlatButton(
-                              child: Text(
-                                "Request     ",
-                                style: TextStyle(fontSize: 25.0),
-                              ),
-                              onPressed: () {
-                                submit();
-                              },
-                            ),
                             FlatButton(
                               child: Text(
                                 "Cancel      ",

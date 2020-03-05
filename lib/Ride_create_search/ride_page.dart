@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobilyft/home_page.dart';
+import 'package:mobilyft/Ride_create_search/ridesearch.dart';
+
 
 import 'create.dart';
 
@@ -30,7 +31,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       width: 310.0,
                       child: RaisedButton(
                           color: Colors.white,
-                          child: Image.asset('asets/car.png'),
+                          child: Icon(Icons.directions_car,size:90.0),
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -54,13 +55,13 @@ class _Ride_PageState extends State<Ride_Page> {
                         width: 310.0,
                         child: RaisedButton(
                             color: Colors.white,
-                            child: Image.asset('asets/people.png'),
+                            child: Icon(Icons.search,size: 90.0,),
                             onPressed: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          Create()));
+                                          ridesearch(email: widget.email)));
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
