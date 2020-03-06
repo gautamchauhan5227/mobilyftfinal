@@ -70,9 +70,11 @@ class _Home_pageState extends State<Home_page> {
         // appBar: AppBar(
         //   backgroundColor: Colors.white,
         // ),
-        
+          
 
-        bottomNavigationBar: ConvexAppBar(
+        
+        
+          bottomNavigationBar: ConvexAppBar(
           backgroundColor: Colors.white,
           activeColor: Colors.blue,
           color: Colors.lightBlue,

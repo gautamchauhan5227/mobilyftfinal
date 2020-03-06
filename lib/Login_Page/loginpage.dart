@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -19,15 +20,17 @@ class LoginPage extends StatefulWidget {
 enum FormType { login, register }
 
 class _LoginPageState extends State<LoginPage> {
+  CRUD1 crudobj = new CRUD1();
   final formKey = GlobalKey<FormState>();
+  String _pin, lic, rc, model;
+
   String _email;
+  FormType _formType = FormType.login;
+  String _name;
   String _password;
   String _phone;
-  String _name;
-  String _pin, lic, rc, model;
   bool _toggleVisibility = true;
-  FormType _formType = FormType.login;
-  CRUD1 crudobj = new CRUD1();
+
   bool validateAndSave() {
     final form = formKey.currentState;
     form.save();
@@ -129,22 +132,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: ListView(
-          children: <Widget>[
-            Form(
-              key: formKey,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: buildInput() + buildSubmitButton()),
-            ),
-          ],
-        ));
-  }
-
   List<Widget> buildInput() {
     String validateName(String value) {
       if (value.length == 0) {
@@ -181,24 +168,74 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+
+       // Text('Mobi',
+            //     style: TextStyle(
+            //       fontSize: 40.0,
+            //       color: Colors.grey,
+            //       fontWeight: FontWeight.bold,
+            //     )),
+            // Text(
+            //   'Lyft',
+            //   style: TextStyle(fontSize: 40.0, color: Colors.amberAccent[700]),
+            // )
+
       Padding(
         padding: EdgeInsets.only(right: 100.0, left: 100.0),
-        child: Row(
+        child:Row( 
+          children: <Widget>[
+             Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Mobi',
-                style: TextStyle(
-                  fontSize: 40.0,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                )),
-            Text(
-              'Lyft',
-              style: TextStyle(fontSize: 40.0, color: Colors.amberAccent[700]),
-            )
+           
+            TyperAnimatedTextKit(
+              
+              text: ["Mobi Lyft"],
+              textStyle:
+              
+              TextStyle(
+                   fontSize: 40.0,
+                   color: Colors.grey,
+                   fontWeight: FontWeight.bold,
+                ),
+              pause: Duration(milliseconds: 100000000), 
+              speed: Duration(milliseconds:950),
+            ),
+            
+            
           ],
         ),
+
+        // Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: <Widget>[
+            
+
+        //     TyperAnimatedTextKit(
+        //       text: [" Lyft"],
+              
+        //       textStyle:
+              
+        //       TextStyle(
+        //            fontSize: 40.0,
+        //            color: Colors.amberAccent[700],
+                  
+        //         ),
+        //          pause: Duration(milliseconds: 100000000), 
+        //       speed: Duration(milliseconds:800),
+        //     ),
+            
+        //   ],
+        // ),
+          ],
+        ),
+        
+        
       ),
+      
+    
+
+
       SizedBox(
         height: 20.0,
       ),
@@ -599,5 +636,21 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ];
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        resizeToAvoidBottomPadding: false,
+        body: ListView(
+          children: <Widget>[
+            Form(
+              key: formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: buildInput() + buildSubmitButton()),
+            ),
+          ],
+        ));
   }
 }

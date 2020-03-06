@@ -2,7 +2,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Login_Page/loginpage.dart';
 class FirstPagee extends StatefulWidget {
-  
   @override
   _FirstPageeState createState() => _FirstPageeState();
 }
@@ -12,7 +11,7 @@ class _FirstPageeState extends State<FirstPagee> {
   void initState() {
     super.initState();
     new Future.delayed(
-        const Duration(seconds: 4),
+        const Duration(seconds: 2),
         () =>
         Navigator.push(
               context,
@@ -34,9 +33,11 @@ class _FirstPageeState extends State<FirstPagee> {
     
     ScaleAnimatedTextKit(
       text: ["MobiLyft"],
-      textStyle: TextStyle(fontSize: 40.0,fontFamily: 'Nosifer',color:Colors.blue,
+      textStyle: TextStyle(fontSize: 45.0,fontFamily: 'Nosifer',color:Colors.blue,fontWeight:FontWeight.bold,
       
         ),
+       
+              
       textAlign: TextAlign.center,
       alignment: AlignmentDirectional.topStart // or Alignment.topLeft
     ),

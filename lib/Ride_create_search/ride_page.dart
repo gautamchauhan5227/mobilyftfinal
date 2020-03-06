@@ -136,7 +136,7 @@ String email;
                             Colors.red,
                           ],
                           textAlign: TextAlign.start,
-                          alignment: AlignmentDirectional.topStart // or Alignment.topLeft
+                          alignment: AlignmentDirectional.topStart ,
                    ),
                 ],
               ),
