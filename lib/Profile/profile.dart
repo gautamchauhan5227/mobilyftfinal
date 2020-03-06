@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
-import 'package:mobilyft/Home_Page/home_page.dart';
+
 import 'package:mobilyft/Login_Page/loginpage.dart';
+import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
+
 
 
 import 'package:nice_button/NiceButton.dart';
@@ -103,7 +105,7 @@ class _profileState extends State<profile> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15.0),
+              padding: EdgeInsets.only(top: 0.0),
               child: new Stack(fit: StackFit.loose, children: <Widget>[
                 new Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

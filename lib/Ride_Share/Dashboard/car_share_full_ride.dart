@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobilyft/Dashboard/allride.dart';
-import 'package:mobilyft/Dashboard/ride_details.dart';
+
+import 'package:mobilyft/Ride_Share/Dashboard/car_share_allride.dart';
+import 'package:mobilyft/Ride_Share/Dashboard/car_share_ride_details.dart';
+
+
 
 class fullride extends StatefulWidget {
   final String email;

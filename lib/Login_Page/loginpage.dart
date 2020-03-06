@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
-import 'package:mobilyft/Home_Page/home_page.dart';
+import 'package:mobilyft/choose_page/selection.dart';
 
 
 
@@ -77,9 +77,8 @@ class _LoginPageState extends State<LoginPage> {
               .then((user) {
             Navigator.pop(context);
             var route = new MaterialPageRoute(
-              builder: (BuildContext context) =>Home_page(
-                email: _email,
-              ),
+              // builder: (BuildContext context) =>Home_page(email: _email, ),
+              builder: (BuildContext context) =>section_page(email: _email, ),
             );
             Navigator.of(context).push(route);
           });
@@ -158,7 +157,9 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
 
-    return [
+    return 
+    
+    [
       Padding(
         padding: EdgeInsets.only(top: 30.0, right: 100.0, left: 100.0),
         child: Column(
@@ -199,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                    fontWeight: FontWeight.bold,
                 ),
               pause: Duration(milliseconds: 100000000), 
-              speed: Duration(milliseconds:950),
+              speed: Duration(milliseconds:50),
             ),
             
             

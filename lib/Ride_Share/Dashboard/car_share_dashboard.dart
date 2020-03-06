@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobilyft/Dashboard/cardetails.dart';
-import 'package:mobilyft/Dashboard/feedback.dart';
-import 'package:mobilyft/Dashboard/full_ride.dart';
+import 'package:mobilyft/Ride_Share/Dashboard/car_share_cardetails.dart';
+import 'package:mobilyft/Ride_Share/Dashboard/car_share_full_ride.dart';
+
+import 'package:mobilyft/Ride_Share/Dashboard/feedback.dart';
+
+
 
 class Dashboard extends StatefulWidget {
   final String email;
@@ -19,7 +22,7 @@ class _DashboardState extends State<Dashboard> {
         body: ListView(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 45, left: 15, right: 15),
+              padding: EdgeInsets.only(top: 25, left: 15, right: 15),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
