@@ -14,7 +14,7 @@ class ridesearch extends StatefulWidget {
 class ridesearchState extends State<ridesearch> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride, user, car;
-  String _src, _dest, _seat, emailcr;
+  String _src, _dest, _seat, emailcr,namecr;
   @override
   void initState() {
     crudobj.getData('detail').then((result) {
@@ -83,7 +83,7 @@ class ridesearchState extends State<ridesearch> {
             prefixIcon: Icon(Icons.search),
             suffix: IconButton(
               icon: Icon(Icons.cancel),
-              onPressed: _onClear,
+              onPressed: _onClear(),
             ),
           ),
         ),
@@ -129,8 +129,13 @@ class ridesearchState extends State<ridesearch> {
                   subtitle: Text("Time : "
                       "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
                   onTap: () {
-                    // emailcr = ride.documents[i].data["email"];
-                    // print(emailcr);
+                     emailcr = ride.documents[i].data["email"];
+                    print(emailcr);
+                     for (int i = 0; i < user.documents.length; i++)
+                      if(emailcr == user.documents[i].data["email"])
+                      {
+                       namecr= user.documents[i].data["name"];
+                      }
                     showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!
@@ -172,7 +177,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${user.documents[i].data["name"]}",
+                                              namecr,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -397,5 +402,8 @@ class ridesearchState extends State<ridesearch> {
         child: CircularProgressIndicator(),
       );
     }
+  }
+  show(i){
+                      
   }
 }

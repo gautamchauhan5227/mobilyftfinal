@@ -42,7 +42,8 @@ dependencies:
   sliding_up_panel: ^1.0.0
   google_map_polyline:
   convex_bottom_bar:
-  kf_drawer:
+  curved_drawer:
+  animated_text_kit:
   
   
   
@@ -99,10 +100,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: TradeWinds
+      fonts:
+        - asset: Font/TradeWinds-Regular.ttf
+          weight: 700
+          style: italic
+    - family: Nosifer
+      fonts:
+        - asset: Font/Nosifer-Regular.ttf
+          weight: 700
+          
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

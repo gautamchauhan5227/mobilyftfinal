@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobilyft/Login_Page/loginpage.dart';
+import 'package:mobilyft/First_Page/firstpage.dart';
+
 
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
         //),
         home: Scaffold(
-          body: LoginPage(),
+          body: FirstPagee(),
         ));
   }
 }
