@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Rent/Car_Rent_Add_Search/car_rent_add.dart';
 class rent_dashboard extends StatefulWidget {
   final String email;
   rent_dashboard({Key key, this.email}) : super(key: key);
@@ -13,6 +14,7 @@ class _rent_dashboardState extends State<rent_dashboard> {
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomPadding: false,
+        
         body: ListView(
           children: <Widget>[
             Padding(
@@ -33,7 +35,7 @@ class _rent_dashboardState extends State<rent_dashboard> {
                     //   context,
                     //   MaterialPageRoute(
                     //       builder: (BuildContext context) =>
-                    //           Create(email: widget.email)));
+                    //           ProfilePage(email: widget.email)));
                 
                 
                           },

@@ -44,6 +44,11 @@ dependencies:
   convex_bottom_bar:
   curved_drawer:
   animated_text_kit:
+  font_awesome_flutter:
+  image_picker:
+  scrollable_bottom_sheet:
+  url_launcher:
+  permission:
   
   
   
@@ -83,19 +88,17 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - asets/as.png
-    - asets/logo.jpg
-    - asets/m1.PNG
-    - asets/space_demo.flr
-    - asets/car_icon.png
-    - asets/car.png
-    - asets/details.png
-    - asets/r1.jpg
-    - asets/r2.jpeg
-    - asets/r3.jpg
-    - asets/r4.jpg
-    - asets/r5.jpg
-    - asets/r6.jpg
+    - asets/bajajallianz.png
+    - asets/Bharti-axa-.png
+    - asets/hdfc.png
+    - asets/icici.PNG
+    - asets/iffco.png
+    - asets/new-india.png
+    - asets/orientalinsurance.png
+    - asets/royalsundaram.png
+    - asets/tata.png
+    - asets/uiic.png
+
 
 
 
@@ -120,6 +123,11 @@ flutter:
       fonts:
         - asset: Font/Nosifer-Regular.ttf
           weight: 700
+    - family: Merriweather
+      fonts:
+        - asset: Font/Merriweather-Bold.ttf
+          
+
           
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

@@ -14,14 +14,16 @@ class request_page extends StatefulWidget {
 class _request_pageState extends State<request_page> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot req, user;
+  String requester,namereq,phonereq;
 
   @override
   void initState() {
-    crudobj.getData('ride request ').then((result) {
+    crudobj.getData('ride request').then((result) {
       setState(() {
         req = result;
       });
     });
+   // print(req.documents[0].data["Emailcr"]);
     crudobj.getData('user').then((result) {
       setState(() {
         user = result;
@@ -38,7 +40,7 @@ class _request_pageState extends State<request_page> {
         children: <Widget>[
           if (req != null)
             for (int i = 0; i < req.documents.length; i++)
-              // if (city == ride.documents[i].data["source"])
+             
               Column(
                 children: <Widget>[
                   returnride(i),
@@ -58,7 +60,14 @@ class _request_pageState extends State<request_page> {
 
   Widget returnride(int i) {
     if (req != null) {
-      if (widget.email == req.documents[i].data["email"]) {
+      if (widget.email == req.documents[i].data["Emailcr"]) {
+        requester = req.documents[i].data["Emailreq"];
+        if(user != null){
+          for(int i=0;i < user.documents.length; i++)
+            if(requester == user.documents[i].data["email"])
+              namereq=user.documents[i].data["name"];
+              phonereq = user.documents[i].data["phone"];
+        }
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
@@ -71,9 +80,11 @@ class _request_pageState extends State<request_page> {
                     size: 40.0,
                   ),
                   title: Text(
-                      "${req.documents[i].data["source"]}\tto\t${req.documents[i].data["dest"]}"),
-                  subtitle: Text("Time : "
-                      "${req.documents[i].data["time"]}\nSeat : ${req.documents[i].data["Seat"]}"),
+                      namereq
+                      ,style: TextStyle(fontSize: 28.0 ,),),
+                  subtitle: Text(
+                      "${req.documents[i].data["PickUp"]}\tto\t${req.documents[i].data["Destination"]}\nSeat : ${req.documents[i].data["Seat"]}",
+                      style: TextStyle(fontSize: 17.0),),
                   onTap: () {
                     showDialog<void>(
                       context: context,
@@ -82,7 +93,7 @@ class _request_pageState extends State<request_page> {
                         return AlertDialog(
                           title: Center(
                             child: Text(
-                              'Ride Details',
+                              'Requester Details',
                               style: TextStyle(
                                 fontFamily: 'helvetica_neue_light',
                                 fontWeight: FontWeight.bold,
@@ -103,20 +114,11 @@ class _request_pageState extends State<request_page> {
                                             // location_on
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              "Name",
-                                              // 'Destination'
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${user.documents[i].data["name"]}",
+                                              namereq,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -131,22 +133,14 @@ class _request_pageState extends State<request_page> {
                                       Row(
                                         children: <Widget>[
                                           Icon(
-                                            Icons.location_searching,
+                                            Icons.email,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Email',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                         
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["e"]}",
+                                              "${req.documents[i].data["Emailreq"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -161,22 +155,14 @@ class _request_pageState extends State<request_page> {
                                       Row(
                                         children: <Widget>[
                                           Icon(
-                                            Icons.location_searching,
+                                            Icons.call,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Pick-Up',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["source"]}",
+                                              phonereq,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
                                             ),
@@ -185,97 +171,7 @@ class _request_pageState extends State<request_page> {
                                         ],
                                       )
                                     ])),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 15.0),
-                                    child: new Column(children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.location_on,
-                                            size: 40.0,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'Destination',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            flex: 0,
-                                          ),
-                                          Icon(Icons.chevron_right),
-                                          Expanded(
-                                            child: Text(
-                                              "${req.documents[i].data["dest"]}",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
-                                            ),
-                                            flex: 1,
-                                          )
-                                        ],
-                                      )
-                                    ])),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 15.0),
-                                    child: new Column(children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.access_time,
-                                            size: 40.0,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'Time',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Icon(Icons.chevron_right),
-                                          Expanded(
-                                            child: Text(
-                                              "${req.documents[i].data["time"]}",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
-                                            ),
-                                            flex: 1,
-                                          )
-                                        ],
-                                      )
-                                    ])),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 15.0),
-                                    child: new Column(children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.airline_seat_recline_normal,
-                                            size: 40.0,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'Seat',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Icon(Icons.chevron_right),
-                                          Expanded(
-                                            child: Text(
-                                              "${req.documents[i].data["Seat"]}",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
-                                            ),
-                                            flex: 1,
-                                          )
-                                        ],
-                                      )
-                                    ])),
+                               
                               ],
                             ),
                           ),

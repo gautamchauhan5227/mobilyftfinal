@@ -5,7 +5,6 @@ import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
 
 
 
-
 class ridesearch extends StatefulWidget {
   final String email;
   ridesearch({Key key, this.email}) : super(key: key);
@@ -16,7 +15,7 @@ class ridesearch extends StatefulWidget {
 class ridesearchState extends State<ridesearch> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride, user, car;
-  String _src, _dest, _seat, emailcr,namecr;
+  String src, dest, seat, emailcr,namecr,lic,email,time;
   @override
   void initState() {
     crudobj.getData('detail').then((result) {
@@ -39,7 +38,13 @@ class ridesearchState extends State<ridesearch> {
 
   void insert(BuildContext context) {
     Map<String, dynamic> data = {
-      'e': widget.email,
+      'Emailreq': widget.email,
+      'Emailcr' : emailcr,
+      'Namecr' : namecr,
+      'PickUp' : src,
+      'Destination' : dest,
+      'Time' : time,
+      'Seat' :seat,
     };
 
     crudobj.request(data, context).then((result) {}).catchError((e) {
@@ -47,8 +52,15 @@ class ridesearchState extends State<ridesearch> {
     });
   }
 
-  void submit() async {
-    insert(context);
+  void submit(int i) async {
+    //
+    lic=car.documents[i].data["Lic"];
+ 
+ src=ride.documents[i].data["source"];
+ dest=ride.documents[i].data["dest"];
+ time=ride.documents[i].data["time"];
+  seat=ride.documents[i].data["Seat"];
+  insert(context);
     Navigator.pop(context);
     Navigator.push(
         context,
@@ -143,6 +155,9 @@ class ridesearchState extends State<ridesearch> {
                       barrierDismissible: false, // user must tap button!
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          
+                          shape: RoundedRectangleBorder(
+                            borderRadius:BorderRadius.all(Radius.circular(10.0))),
                           title: Center(
                             child: Text(
                               'Ride Details',
@@ -164,7 +179,7 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(
                                             Icons.person,
                                             // location_on
-                                            size: 40.0,
+                                            size: 30.0,
                                           ),
                                           Expanded(
                                             child: Text(
@@ -172,7 +187,7 @@ class ridesearchState extends State<ridesearch> {
                                               // 'Destination'
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                  fontSize: 20.0,
+                                                  fontSize: 18.0,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
@@ -207,6 +222,7 @@ class ridesearchState extends State<ridesearch> {
                                             ),
                                           ),
                                           Icon(Icons.chevron_right),
+                                          
                                           Expanded(
                                             child: Text(
                                               "${car.documents[i].data["Lic"]}",
@@ -237,6 +253,7 @@ class ridesearchState extends State<ridesearch> {
                                             ),
                                           ),
                                           Icon(Icons.chevron_right),
+                                         
                                           Expanded(
                                             child: Text(
                                               "${ride.documents[i].data["email"]}",
@@ -267,7 +284,9 @@ class ridesearchState extends State<ridesearch> {
                                             ),
                                           ),
                                           Icon(Icons.chevron_right),
+                                          
                                           Expanded(
+                                            
                                             child: Text(
                                               "${ride.documents[i].data["source"]}",
                                               textAlign: TextAlign.start,
@@ -298,7 +317,9 @@ class ridesearchState extends State<ridesearch> {
                                             flex: 0,
                                           ),
                                           Icon(Icons.chevron_right),
+                                          
                                           Expanded(
+                                            
                                             child: Text(
                                               "${ride.documents[i].data["dest"]}",
                                               textAlign: TextAlign.start,
@@ -328,7 +349,9 @@ class ridesearchState extends State<ridesearch> {
                                             ),
                                           ),
                                           Icon(Icons.chevron_right),
+                                          
                                           Expanded(
+                                            
                                             child: Text(
                                               "${ride.documents[i].data["time"]}",
                                               textAlign: TextAlign.start,
@@ -358,8 +381,9 @@ class ridesearchState extends State<ridesearch> {
                                             ),
                                           ),
                                           Icon(Icons.chevron_right),
+                                         
                                           Expanded(
-                                            child: Text(
+                                              child: Text(
                                               "${ride.documents[i].data["Seat"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 18.0),
@@ -379,7 +403,7 @@ class ridesearchState extends State<ridesearch> {
                                 style: TextStyle(fontSize: 25.0),
                               ),
                               onPressed: () {
-                                submit();
+                                submit(i);
                               },
                             ),
                             FlatButton(
@@ -405,7 +429,5 @@ class ridesearchState extends State<ridesearch> {
       );
     }
   }
-  show(i){
-                      
-  }
+  
 }

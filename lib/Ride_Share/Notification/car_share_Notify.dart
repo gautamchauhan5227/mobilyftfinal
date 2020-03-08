@@ -71,7 +71,7 @@ class _notifyState extends State<notify> {
                     ),
                     title: Text("Your Ride "
                         "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"
-                        " Successfully Uploaded"),
+                        " Successfully Added"),
                     subtitle: Text("Get Ready For Ride"),
                   
                     trailing: IconButton(

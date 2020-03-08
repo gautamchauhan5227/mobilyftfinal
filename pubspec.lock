@@ -247,6 +247,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "8.7.0"
   geolocator:
     dependency: "direct main"
     description:
@@ -317,6 +324,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3+4"
   intl:
     dependency: transitive
     description:
@@ -401,6 +415,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0+1"
+  permission:
+    dependency: "direct main"
+    description:
+      name: permission
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.7"
   petitparser:
     dependency: transitive
     description:
@@ -408,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   quiver:
     dependency: transitive
     description:
@@ -422,6 +450,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.23.1"
+  scrollable_bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: scrollable_bottom_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   search_map_place:
     dependency: "direct main"
     description:
@@ -497,6 +532,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.4.2"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+4"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1+1"
   uuid:
     dependency: transitive
     description:
