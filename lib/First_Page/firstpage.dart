@@ -11,7 +11,7 @@ class _FirstPageeState extends State<FirstPagee> {
   void initState() {
     super.initState();
     new Future.delayed(
-        const Duration(seconds: 6),
+        const Duration(seconds: 5),
         () =>
         Navigator.push(
               context,

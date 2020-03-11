@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:url_launcher/url_launcher.dart';
-class cmp_bajaj extends StatefulWidget {
-   cmp_bajaj({Key key, this.email}) : super(key: key);
+class cmp_icici extends StatefulWidget {
+   cmp_icici({Key key, this.email}) : super(key: key);
 
   final String email;
 
   @override
-  _cmp_bajajState createState() => _cmp_bajajState();
+  _cmp_iciciState createState() => _cmp_iciciState();
 }
 
-class _cmp_bajajState extends State<cmp_bajaj> {
-  
-  
-  
+class _cmp_iciciState extends State<cmp_icici> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-     
       body: ListView(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(top: 20.0),
             child:Center(
               
-              child: Text("Bajaj Allianz General Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
+              child: Text("ICICI Lombard General Insurance ",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
             ),
           ),
           Padding(padding: EdgeInsets.only(top:10.0)),
@@ -41,7 +37,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("Bajaj Allianz continues to be one of the most financially robust general insurance companies in India by maintaining its growth as well as profitability.",
+                    Text("The company issued over 26.5 million policies and settled over 1.6 million claims as on March 31, 2019.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -65,7 +61,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("The company has registered a net profit of Rs 780 crore.",
+                    Text("we provide travel,two wheeler,car,health,NRI service,business insurance,home insurance.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -90,7 +86,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("A revenue of Rs. 11,097 crore, that has grown by 17% compared to the last fiscal year.",
+                    Text("In India with a Gross Written Premium (GWP) of Rs147.89 billion for the year ended March 31, 2019.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -147,8 +143,8 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                 child:Column(
                   children: <Widget>[
                      FlatButton(
-              onPressed: () => launch("tel:1800-209-0144"),
-              child: new Text("1800-209-0144",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
+              onPressed: () => launch("tel:1800 2666"),
+              child: new Text("1800 2666",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
              
                   ],
                 ),
@@ -193,7 +189,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                  }
                
                  _launchURL() async {
-  const url = "https://www.bajajallianz.com"; 
+  const url = "https://www.icicilombard.com"; 
   if (await canLaunch(url)) { 
     await launch(url);
   } else {

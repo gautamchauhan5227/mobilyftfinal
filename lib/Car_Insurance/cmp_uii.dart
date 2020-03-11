@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:url_launcher/url_launcher.dart';
-class cmp_bajaj extends StatefulWidget {
-   cmp_bajaj({Key key, this.email}) : super(key: key);
+class cmp_uii extends StatefulWidget {
+   cmp_uii({Key key, this.email}) : super(key: key);
 
   final String email;
 
   @override
-  _cmp_bajajState createState() => _cmp_bajajState();
+  _cmp_uiiState createState() => _cmp_uiiState();
 }
 
-class _cmp_bajajState extends State<cmp_bajaj> {
-  
-  
-  
+class _cmp_uiiState extends State<cmp_uii> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +22,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
             padding: EdgeInsets.only(top: 20.0),
             child:Center(
               
-              child: Text("Bajaj Allianz General Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
+              child: Text("United India Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
             ),
           ),
           Padding(padding: EdgeInsets.only(top:10.0)),
@@ -41,7 +38,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("Bajaj Allianz continues to be one of the most financially robust general insurance companies in India by maintaining its growth as well as profitability.",
+                    Text("United India Insurance was incorporated as a Company on 18th February 1938. General Insurance Business in India was nationalized in 1972.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -65,7 +62,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("The company has registered a net profit of Rs 780 crore.",
+                    Text("After Nationalization United India has grown by leaps and bounds and has over 14000 work force spread across 2275 offices in india.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -90,7 +87,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("A revenue of Rs. 11,097 crore, that has grown by 17% compared to the last fiscal year.",
+                    Text("We are providing insurance cover to 1.74 Crore policy holders",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -116,7 +113,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("We give upo 70% insurance.",
+                    Text("we give upo 60% insurance in every category.",
                     style: TextStyle(fontSize:20.0,),
                     textAlign: TextAlign.left,
                     
@@ -125,9 +122,6 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                 ),
                 flex: 6,
               ),
-
-              
-              Padding(padding: EdgeInsets.only(right:80.0)),
               
             ],
           ),
@@ -147,8 +141,8 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                 child:Column(
                   children: <Widget>[
                      FlatButton(
-              onPressed: () => launch("tel:1800-209-0144"),
-              child: new Text("1800-209-0144",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
+              onPressed: () => launch("tel:18000 425 333 33"),
+              child: new Text("18000 425 333 33",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
              
                   ],
                 ),
@@ -164,11 +158,10 @@ class _cmp_bajajState extends State<cmp_bajaj> {
 
 
 
-          Padding(padding: EdgeInsets.only(top:40.0,left:20.0,right:20.0)),
+          Padding(padding: EdgeInsets.only(top:40.0,left:20.0,right:20.0,bottom: 40.0)),
           Row(
             children: <Widget>[
-            Padding(padding: EdgeInsets.only(left:40.0)),
-             NiceButton(
+           NiceButton(
                text: "Buy Insurance",
                fontSize: 30.0,
                textColor: Colors.black,
@@ -176,6 +169,8 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                               gradientColors: [Colors.blue,Colors.white],
                               background: null,
                             ),
+            
+                           
 
         
                             
@@ -193,7 +188,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                  }
                
                  _launchURL() async {
-  const url = "https://www.bajajallianz.com"; 
+  const url = "https://uiic.co.in"; 
   if (await canLaunch(url)) { 
     await launch(url);
   } else {

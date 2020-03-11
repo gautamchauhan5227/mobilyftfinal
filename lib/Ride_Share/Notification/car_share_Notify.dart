@@ -60,14 +60,14 @@ class _notifyState extends State<notify> {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: Card(
-                color: Colors.blue.withOpacity(0.1),
+                color: Colors.lightBlue[100],
                 
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)),
                 child: ListTile(
                     leading: Icon(
                       Icons.account_circle,
-                      size: 40.0,
+                      size: 50.0,
                     ),
                     title: Text("Your Ride "
                         "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"

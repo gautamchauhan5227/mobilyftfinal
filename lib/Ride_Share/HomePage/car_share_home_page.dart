@@ -30,7 +30,7 @@ class _Home_pageState extends State<Home_page> {
         return notify(email: widget.email);
 
       case 4:
-        return profile(email: widget.email);
+        return null;
     }
   }
 
@@ -60,7 +60,7 @@ class _Home_pageState extends State<Home_page> {
       TabItem(icon: Icons.person_add, title: 'Request'),
       TabItem(icon: Icons.add, title: 'Add'),
       TabItem(icon: Icons.notifications, title: 'Notification'),
-      TabItem(icon: Icons.person, title: 'Profile'),
+      TabItem(icon: Icons.message, title: 'Message'),
     ],
     
     initialActiveIndex: 2,

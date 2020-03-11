@@ -51,8 +51,8 @@ class _section_pageState extends State<section_page> {
      
       
       drawer: Drawer(
-        elevation:6.0,
       
+
       ),
       
       

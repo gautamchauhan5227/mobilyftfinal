@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 
 
+
 class request_page extends StatefulWidget {
   final String email;
   request_page({Key key, this.email}) : super(key: key);
@@ -77,7 +78,7 @@ class _request_pageState extends State<request_page> {
                 child: ListTile(
                   leading: Icon(
                     Icons.account_circle,
-                    size: 40.0,
+                    size: 60.0,
                   ),
                   title: Text(
                       namereq

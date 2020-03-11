@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Insurance/cmp_bajaj.dart';
+import 'package:mobilyft/Car_Insurance/cmp_icici.dart';
+import 'package:mobilyft/Car_Insurance/cmp_royal.dart';
+import 'package:mobilyft/Car_Insurance/cmp_tata.dart';
+import 'package:mobilyft/Car_Insurance/cmp_uii.dart';
 class insurance_company extends StatefulWidget {
   insurance_company({Key key, this.email}) : super(key: key);
 
@@ -13,9 +18,7 @@ class _insurance_companyState extends State<insurance_company> {
   Widget build(BuildContext context) {
     return Scaffold(
           
-          appBar: AppBar(
-            elevation:6.0,
-          ),
+          
           body: Container(
              decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -34,69 +37,31 @@ class _insurance_companyState extends State<insurance_company> {
                         child: RaisedButton(
                               color: Colors.white,
                               child: Image.asset('asets/bajajallianz.png'),
-                              onPressed: (){}
+                              onPressed: (){
+                                 Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            cmp_bajaj(
+                                              email: widget.email,
+                                            )));
+                              }
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(top:10.0)),
                       SizedBox(
                         height:30.0,
                         child: Text(
-                          "Bajaj Allianz General Insurance co. Ltd.",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
+                          "Bajaj Allianz General Insurance ",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
                   ),
                 ),
 
-              Padding(
-                  padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 110.0,
-                        width: 290.0,
-                        child: RaisedButton(
-                              color: Colors.white,
-                              child: Image.asset('asets/Bharti-axa-.png'),
-                              onPressed: (){},
-                                                    ),
-                                                  ),
-                                                  Padding(padding: EdgeInsets.only(top:10.0)),
-                                                  SizedBox(
-                                                    height:30.0,
-                                                    child: Text(
-                                                      "Bharti AXA General Insurance Co. Ltd.",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-
-                                            Padding(
-                  padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 110.0,
-                        width: 290.0,
-                        child: RaisedButton(
-                              color: Colors.white,
-                              child: Image.asset('asets/hdfc.png',width: 250,),
-                              onPressed: (){},
-                                                    ),
-                                                  ),
-                                                  Padding(padding: EdgeInsets.only(top:10.0)),
-                                                  SizedBox(
-                                                    height:30.0,
-                                                    child: Text(
-                                                      "HDFC ERGO General Insurance Co. Ltd.",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-
-                                            Padding(
+             
+                                           
+                Padding(
                   padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
                   child: Column(
                     children: <Widget>[
@@ -106,37 +71,22 @@ class _insurance_companyState extends State<insurance_company> {
                         child: RaisedButton(
                               color: Colors.white,
                               child: Image.asset('asets/icici.PNG',width: 250,),
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            cmp_icici(
+                                              email: widget.email,
+                                            )));
+                              },
                                                     ),
                                                   ),
                                                   Padding(padding: EdgeInsets.only(top:10.0)),
                                                   SizedBox(
                                                     height:30.0,
                                                     child: Text(
-                                                      "ICICI Lombard General Insurance Ltd",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                       Padding(
-                  padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 110.0,
-                        width: 290.0,
-                        child: RaisedButton(
-                              color: Colors.white,
-                              child: Image.asset('asets/iffco.png',),
-                              onPressed: (){},
-                                                    ),
-                                                  ),
-                                                  Padding(padding: EdgeInsets.only(top:10.0)),
-                                                  SizedBox(
-                                                    height:30.0,
-                                                    child: Text(
-                                                      "IFCCO TOKIO General Insurance Ltd.",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
+                                                      "ICICI Lombard General Insurance ",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
                                                     ),
                                                   ),
                                                 ],
@@ -144,59 +94,7 @@ class _insurance_companyState extends State<insurance_company> {
                                             ),
 
 
-                                             Padding(
-                  padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 110.0,
-                        width: 290.0,
-                        child: RaisedButton(
-                              color: Colors.white,
-                              child: Image.asset('asets/new-india.png',),
-                              onPressed: (){},
-                                                    ),
-                                                  ),
-                                                  Padding(padding: EdgeInsets.only(top:10.0)),
-                                                  SizedBox(
-                                                    height:30.0,
-                                                    child: Text(
-                                                      "New India Assurance Company Ltd. ",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-
-
-
-                                            Padding(
-                  padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 110.0,
-                        width: 290.0,
-                        child: RaisedButton(
-                              color: Colors.white,
-                              child: Image.asset('asets/orientalinsurance.png',),
-                              onPressed: (){},
-                                                    ),
-                                                  ),
-                                                  Padding(padding: EdgeInsets.only(top:10.0)),
-                                                  SizedBox(
-                                                    height:30.0,
-                                                    child: Text(
-                                                      "Oriental Insurance Co. Ltd.",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-
-
-
-                                            Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
                   child: Column(
                     children: <Widget>[
@@ -206,14 +104,22 @@ class _insurance_companyState extends State<insurance_company> {
                         child: RaisedButton(
                               color: Colors.white,
                               child: Image.asset('asets/royalsundaram.png',),
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            cmp_royal(
+                                              email: widget.email,
+                                            )));
+                              },
                                                     ),
                                                   ),
                                                   Padding(padding: EdgeInsets.only(top:10.0)),
                                                   SizedBox(
                                                     height:30.0,
                                                     child: Text(
-                                                      "royal sundaram general insurance",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
+                                                      "Royal Sundaram General Insurance ",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
                                                     ),
                                                   ),
                                                 ],
@@ -222,7 +128,7 @@ class _insurance_companyState extends State<insurance_company> {
 
 
 
-                                            Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 30.0, left: 10, right: 10),
                   child: Column(
                     children: <Widget>[
@@ -232,14 +138,22 @@ class _insurance_companyState extends State<insurance_company> {
                         child: RaisedButton(
                               color: Colors.white,
                               child: Image.asset('asets/tata.png',),
-                              onPressed: (){},
+                              onPressed: (){
+                                 Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            cmp_tata(
+                                              email: widget.email,
+                                            )));
+                              },
                                                     ),
                                                   ),
                                                   Padding(padding: EdgeInsets.only(top:10.0)),
                                                   SizedBox(
                                                     height:30.0,
                                                     child: Text(
-                                                      "Tata AIG General Insurance Co. Ltd",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
+                                                      "Tata AIG General Insurance",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
                                                     ),
                                                   ),
                                                 ],
@@ -257,14 +171,22 @@ class _insurance_companyState extends State<insurance_company> {
                         child: RaisedButton(
                               color: Colors.white,
                               child: Image.asset('asets/uiic.png',),
-                              onPressed: (){},
+                              onPressed: (){
+                                 Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            cmp_uii(
+                                              email: widget.email,
+                                            )));
+                              },
                                                     ),
                                                   ),
                                                   Padding(padding: EdgeInsets.only(top:10.0)),
                                                   SizedBox(
                                                     height:30.0,
                                                     child: Text(
-                                                      "United India Insurance Co Ltd",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
+                                                      "United India Insurance",style: TextStyle(fontSize:22.0,fontWeight: FontWeight.bold),
                                                     ),
                                                   ),
                                                 ],

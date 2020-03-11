@@ -49,7 +49,7 @@ dependencies:
   scrollable_bottom_sheet:
   url_launcher:
   permission:
-  
+  spring_button:
   
   
 
@@ -98,6 +98,10 @@ flutter:
     - asets/royalsundaram.png
     - asets/tata.png
     - asets/uiic.png
+    - asets/cars.png
+    - asets/rentsearch.jpg
+    - asets/searchrent.jpg
+    - asets/caradd.jpg
 
 
 

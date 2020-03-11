@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:url_launcher/url_launcher.dart';
-class cmp_bajaj extends StatefulWidget {
-   cmp_bajaj({Key key, this.email}) : super(key: key);
+class cmp_tata extends StatefulWidget {
+   cmp_tata({Key key, this.email}) : super(key: key);
 
   final String email;
 
   @override
-  _cmp_bajajState createState() => _cmp_bajajState();
+  _cmp_tataState createState() => _cmp_tataState();
 }
 
-class _cmp_bajajState extends State<cmp_bajaj> {
-  
-  
-  
+class _cmp_tataState extends State<cmp_tata> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-     
+      
       body: ListView(
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(top: 20.0),
             child:Center(
               
-              child: Text("Bajaj Allianz General Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
+              child: Text("Tata AIG General Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
             ),
           ),
           Padding(padding: EdgeInsets.only(top:10.0)),
@@ -41,7 +38,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("Bajaj Allianz continues to be one of the most financially robust general insurance companies in India by maintaining its growth as well as profitability.",
+                    Text("Tata AIG General Insurance Company Limited celebrates 18 years of service this year (2019) since it commenced operations in India on January 22, 2001.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -65,7 +62,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("The company has registered a net profit of Rs 780 crore.",
+                    Text("We Provide insurance for Liability, Marine Cargo, Personal Accident, Travel, Rural-Agriculture Insurance, Extended Warranty etc.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -90,7 +87,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("A revenue of Rs. 11,097 crore, that has grown by 17% compared to the last fiscal year.",
+                    Text("With more than 200 offices spread across India, the Company has a robust multi-channel distribution network of 22,000+ licensed agents and 390+ licensed brokers.",
                     style: TextStyle(fontSize:20.0),
                     
                     )
@@ -116,7 +113,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
               Expanded(
                 child:Column(
                   children: <Widget>[
-                    Text("We give upo 70% insurance.",
+                    Text("The Company has a workforce of over 5,000 employees, including 550+ claim experts.",
                     style: TextStyle(fontSize:20.0,),
                     textAlign: TextAlign.left,
                     
@@ -125,9 +122,6 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                 ),
                 flex: 6,
               ),
-
-              
-              Padding(padding: EdgeInsets.only(right:80.0)),
               
             ],
           ),
@@ -147,8 +141,8 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                 child:Column(
                   children: <Widget>[
                      FlatButton(
-              onPressed: () => launch("tel:1800-209-0144"),
-              child: new Text("1800-209-0144",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
+              onPressed: () => launch("tel:1800 266 7780"),
+              child: new Text("1800 266 7780",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
              
                   ],
                 ),
@@ -193,7 +187,7 @@ class _cmp_bajajState extends State<cmp_bajaj> {
                  }
                
                  _launchURL() async {
-  const url = "https://www.bajajallianz.com"; 
+  const url = "https://www.tataaig.com"; 
   if (await canLaunch(url)) { 
     await launch(url);
   } else {

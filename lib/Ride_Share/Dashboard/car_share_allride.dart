@@ -59,12 +59,12 @@ class _allrideState extends State<allride> {
                 child: ListTile(
                   leading: Icon(
                     Icons.account_circle,
-                    size: 40.0,
+                    size: 60.0,
                   ),
                   title: Text(
-                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
+                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",style: TextStyle(fontSize:28.0),),
                   subtitle: Text("Time : "
-                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
+                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:17.0),),
                   onTap: () {
                     showDialog<void>(
                       context: context,
@@ -93,15 +93,15 @@ class _allrideState extends State<allride> {
                                             Icons.location_searching,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Pick-Up',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Pick-Up',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
@@ -123,16 +123,16 @@ class _allrideState extends State<allride> {
                                             Icons.location_on,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Destination',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            flex: 0,
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Destination',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          //   flex: 0,
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
@@ -154,15 +154,15 @@ class _allrideState extends State<allride> {
                                             Icons.access_time,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Time',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Time',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
@@ -184,15 +184,15 @@ class _allrideState extends State<allride> {
                                             Icons.airline_seat_recline_normal,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Seat',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Seat',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
