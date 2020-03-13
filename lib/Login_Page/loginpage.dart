@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   String _password;
   String _phone;
   bool _toggleVisibility = true;
+  bool isLoading = true;
 
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -38,9 +39,15 @@ class _LoginPageState extends State<LoginPage> {
     if (form.validate()) {
       form.save();
       return true;
-    } else
+    } else 
+     {
+      setState(() {
+        isLoading = true;
+      });
       return false;
+    }
   }
+      
 
   void insert1(BuildContext context) {
     print(_email);

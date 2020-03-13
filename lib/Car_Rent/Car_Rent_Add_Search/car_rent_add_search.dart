@@ -23,22 +23,6 @@ class _rent_addsearchState extends State<rent_addsearch> {
                 //mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  // SizedBox(
-                  //     height: 160.0,
-                  //     width: 310.0,
-                  //     child: RaisedButton(
-                  //         color: Colors.white,
-                  //         child: Image.asset("asets/caradd.jpg",height: 140.0,),
-                  //         onPressed: () {
-                            
-                 
-                
-                
-                  //         },
-                        
-                  //         )),
-                 
-
   new GestureDetector(
         onTap: (){  
              Navigator.push(

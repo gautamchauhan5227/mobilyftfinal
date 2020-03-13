@@ -55,14 +55,23 @@ String email;
                             if (car != null)
             for (int i = 0; i < car.documents.length; i++)
              { if (email == car.documents[i].data["email"])
-                 {   print(car.documents[i].data["car"]);
+                 {   
+                  //  print(car.documents[i].data["car"]);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
                               Create(email: widget.email)));
                 
-                }}
+                }
+                // else {
+                //    Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (BuildContext context) =>
+                //               car_details(email: widget.email)));
+                // }
+                }
                           },
                           shape: CircleBorder()
                           )),

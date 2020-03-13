@@ -50,6 +50,12 @@ dependencies:
   url_launcher:
   permission:
   spring_button:
+  shared_preferences:
+  slider_button:
+  flutter_neumorphic:
+  multiselect_formfield:
+  dropdown_formfield:
+  flutter_form_builder:
   
   
 
@@ -102,6 +108,7 @@ flutter:
     - asets/rentsearch.jpg
     - asets/searchrent.jpg
     - asets/caradd.jpg
+    - asets/give_Service.jpg
 
 
 

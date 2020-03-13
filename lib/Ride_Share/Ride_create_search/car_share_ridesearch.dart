@@ -76,11 +76,11 @@ class ridesearchState extends State<ridesearch> {
 
   TextEditingController _textFieldController = TextEditingController();
 
-  _onClear() {
-    setState(() {
-      _textFieldController.text = "";
-    });
-  }
+  // _onClear() {
+  //   setState(() {
+  //     _textFieldController.text = "";
+  //   });
+  // }
 
   int l = 0;
   String city = "";
@@ -88,17 +88,27 @@ class ridesearchState extends State<ridesearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(25),
+      ),
+        ),
+        backgroundColor: Colors.white,
+         iconTheme: IconThemeData(
+    color: Colors.black
+  ),
         title: TextField(
           onChanged: (val) => initiateSearch(val),
-          style: TextStyle(),
+          style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: "Search...",
-            prefixIcon: Icon(Icons.search),
-            suffix: IconButton(
-              icon: Icon(Icons.cancel),
-              onPressed: _onClear(),
-            ),
+            hintStyle: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300)
+            // prefixIcon: Icon(Icons.search),
+            // suffix: IconButton(
+            //   icon: Icon(Icons.cancel),
+            //   onPressed: _onClear(),
+            // ),
           ),
         ),
       ),

@@ -63,6 +63,18 @@ class CRUD1 {
     });
   }
 
+  Future<void> garage(data, BuildContext context) async {
+    Firestore.instance.collection('garage detail').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+   Future<void> selldetail(data, BuildContext context) async {
+    Firestore.instance.collection('sell car').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
   getData(String table) async {
     return await Firestore.instance.collection(table).getDocuments();
   }
