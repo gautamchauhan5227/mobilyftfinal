@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.7"
+  animated_card:
+    dependency: "direct main"
+    description:
+      name: animated_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+8"
   animated_text_kit:
     dependency: "direct main"
     description:

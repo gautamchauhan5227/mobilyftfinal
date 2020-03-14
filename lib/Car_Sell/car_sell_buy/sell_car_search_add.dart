@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Sell/car_sell_buy/car_buy.dart';
 import 'package:mobilyft/Car_Sell/car_sell_buy/sell_car.dart';
 import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 class car_add_search extends StatefulWidget {
@@ -55,11 +56,11 @@ class _car_add_searchState extends State<car_add_search> {
                             color: Colors.white,
                             child: Icon(Icons.search,size: 140.0,),
                             onPressed: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (BuildContext context) =>
-                              //             ridesearch(email: widget.email)));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          buy_car_search(email: widget.email)));
                             },
                             shape: CircleBorder(),)),
                   ),

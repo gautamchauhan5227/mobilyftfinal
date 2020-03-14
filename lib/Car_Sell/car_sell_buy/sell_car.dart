@@ -13,7 +13,7 @@ class car_sell extends StatefulWidget {
 class _car_sellState extends State<car_sell> {
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   final formKey = GlobalKey<FormState>();
-  String _carreg,_carcmp,_cmodel,_cartype,_cnumber,_ckm,_ccolor,_cargear,_cprice,_padd,_pnumer ;
+  String _carreg,_carcmp,_cmodel,_cartype,_cnumber,_ckm,_ccolor,_cargear,_cprice,_padd,_pnumer ,_cseat;
   CRUD1 crudobj = new CRUD1();
   void insert(BuildContext context) {
     print(_carreg);
@@ -35,7 +35,8 @@ class _car_sellState extends State<car_sell> {
       'car gear type':_cargear ,
       'car price':_cprice,
       'Address person':_padd,
-      'Contact number':_pnumer
+      'Contact number':_pnumer,
+      'car seat':_cseat
     };
 
     crudobj.selldetail(data, context).then((result) {}).catchError((e) {
@@ -444,6 +445,53 @@ class _car_sellState extends State<car_sell> {
                     {
                       "display": "Red",
                       "value": "Red",
+                    },
+                  ],
+                  textField: 'display',
+                  valueField: 'value',
+                ),
+              ),
+        ),
+
+        Padding(
+        padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 10.0),
+        child: Card(
+          color: Colors.lightBlue[50],
+          child: DropDownFormField(
+                
+                  titleText: 'Car Color',
+                  
+                  value: _cseat,
+                  onSaved: (value) {
+                    setState(() {
+                      _cseat = value;
+                    });
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      _cseat = value;
+                    });
+                  },
+                  dataSource: [
+                    {
+                      "display": "4",
+                      "value": "4",
+                    },
+                    {
+                      "display": "5",
+                      "value": "5",
+                    },
+                    {
+                      "display": "6",
+                      "value": "6",
+                    },
+                    {
+                      "display": "7",
+                      "value": "7",
+                    },
+                    {
+                      "display": "8",
+                      "value": "8",
                     },
                   ],
                   textField: 'display',

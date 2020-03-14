@@ -1,6 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mobilyft/Car_Sell/car_sell_buy/car_search_add.dart';
+import 'package:mobilyft/Car_Sell/car_sell_buy/sell_car_search_add.dart';
 
 class sell_home extends StatefulWidget {
   sell_home({Key key, this.email}) : super(key: key);
@@ -10,7 +10,7 @@ class sell_home extends StatefulWidget {
 }
 
 class _sell_homeState extends State<sell_home> {
-   int _currentIndex = 2;
+   int _currentIndex = 1;
   GlobalKey _bottomNavigationKey = GlobalKey();
 
   Widget callPage(int currentIndex) {
@@ -18,14 +18,10 @@ class _sell_homeState extends State<sell_home> {
       case 0:
         return null;
       case 1:
-        return null;
-      case 2:
         return car_add_search(email: widget.email);
-      case 3:
+      case 2:
         return null;
-
-      case 4:
-        return null;
+      
     }
   }
   @override
@@ -49,13 +45,13 @@ class _sell_homeState extends State<sell_home> {
           color: Colors.lightBlue,
     items: [
       TabItem(icon: Icons.dashboard, title: 'Dashboard'),
-      TabItem(icon: Icons.person_add, title: 'Request'),
+      // TabItem(icon: Icons.person_add, title: 'Request'),
       TabItem(icon: Icons.add, title: 'Add'),
-      TabItem(icon: Icons.notifications, title: 'Notification'),
+      // TabItem(icon: Icons.notifications, title: 'Notification'),
       TabItem(icon: Icons.message, title: 'Message'),
     ],
     
-    initialActiveIndex: 2,
+    initialActiveIndex: 1,
      onTap: (value) {
             _currentIndex = value;
             setState(() {});
