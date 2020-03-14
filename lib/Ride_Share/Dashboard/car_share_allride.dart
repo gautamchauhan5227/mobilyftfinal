@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
@@ -52,6 +53,10 @@ class _allrideState extends State<allride> {
       if (widget.email == ride.documents[i].data["email"]) {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
+            child: AnimatedCard(
+              direction: AnimatedCardDirection.right, 
+              initDelay: Duration(milliseconds: 0), 
+              duration: Duration(seconds: 2), 
             child: Card(
                 color: Colors.lightBlue[50],
                 shape: RoundedRectangleBorder(
@@ -213,7 +218,7 @@ class _allrideState extends State<allride> {
                       },
                     );
                   },
-                )));
+                ))));
       } else
         return Container();
     } else {

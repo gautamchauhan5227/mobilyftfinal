@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
@@ -153,6 +154,10 @@ class _Ride_DetailsState extends State<Ride_Details> {
       if (widget.email == ride.documents[i].data["email"]) {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
+            child: AnimatedCard(
+              direction: AnimatedCardDirection.right, 
+              initDelay: Duration(milliseconds: 0), 
+              duration: Duration(seconds: 2), 
             child: Card(
                 color: Colors.lightBlue[50],
                 shape: RoundedRectangleBorder(
@@ -332,8 +337,12 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                   },
                                 ),
                                 FlatButton(
+                                  color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                                   child: Text('    Delete    ',
-                                      style: TextStyle(fontSize: 20.0)),
+                                      style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     //Navigator.of(context).pop();
 
@@ -344,8 +353,12 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                   },
                                 ),
                                 FlatButton(
+                                  color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                                   child: Text('Ok',
-                                      style: TextStyle(fontSize: 20.0)),
+                                      style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     Navigator.pop(context, true);
                                   },
@@ -355,7 +368,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                           },
                         );
                       }),
-                )));
+                ))));
       } else
         return Container();
     } else {

@@ -63,6 +63,18 @@ class CRUD1 {
     });
   }
 
+  Future<void> intrestrequest(data, BuildContext context) async {
+    Firestore.instance.collection('intrest request').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> carfav(data, BuildContext context) async {
+    Firestore.instance.collection('car fav').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
   Future<void> garage(data, BuildContext context) async {
     Firestore.instance.collection('garage detail').add(data).catchError((e) {
       print(e);

@@ -1,6 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:url_launcher/url_launcher.dart';
 class buy_car_search extends StatefulWidget {
@@ -15,7 +16,7 @@ class buy_car_search extends StatefulWidget {
 class _buy_car_searchState extends State<buy_car_search> {
   QuerySnapshot  user, cars;
   String comapny = "";
-  String emailcr,namecr;
+  String emailcr,namecr,_ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd;
   CRUD1 crudobj = new CRUD1();
 int l = 0;
 
@@ -41,16 +42,121 @@ int l = 0;
     });
   }
 
+
+  void insert(BuildContext context) {
+    Map<String, dynamic> data = {
+      'Emailreq': widget.email,
+      'Emailcr' : emailcr,
+      'Namecr' : namecr,
+      'Car Company' : _ccomapny,
+      'Car Model' : _cmodel,
+      'car price':_cprice,
+      'car Registration Year':_cyear,
+      'car color':_ccolor,
+      'car gear type':_cgear,
+      'car fuel type':_cfuel,
+      'Address person':_cadd,
+      'Contact number':_cnumber
+      
+    };
+
+    crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+  }
+
+
+void submit(int i) async {
+    //
+    
+ 
+ _ccomapny=cars.documents[i].data["car Manufacturer Company"];
+ _cmodel=cars.documents[i].data["car Model"];
+ _cprice=cars.documents[i].data["car price"];
+ _cyear=cars.documents[i].data["car Registration Year"];
+ _ccolor=cars.documents[i].data["car color"];
+ _cgear=cars.documents[i].data["car gear type"];
+ _cfuel=cars.documents[i].data["car fuel type"];
+ _cadd=cars.documents[i].data["Address person"];
+ _cnumber=cars.documents[i].data["Contact number"];
+ 
+ 
+
+  insert(context);
+    
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => sell_home(email: widget.email)));
+             Navigator.pop(context, true);
+      Navigator.pop(context, true);
+  }
+
+
+void insertfav(BuildContext context) {
+    Map<String, dynamic> data = {
+      'Emailreq': widget.email,
+      'Emailcr' : emailcr,
+      'Namecr' : namecr,
+      'Car Company' : _ccomapny,
+      'Car Model' : _cmodel,
+      'car price':_cprice,
+      'car Registration Year':_cyear,
+      'car color':_ccolor,
+      'car gear type':_cgear,
+      'car fuel type':_cfuel,
+      'Address person':_cadd,
+      'Contact number':_cnumber
+      
+    };
+
+    crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+
+    crudobj.carfav(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+  }
+
+  void submitfav(int i) async {
+    //
+    
+ 
+ _ccomapny=cars.documents[i].data["car Manufacturer Company"];
+ _cmodel=cars.documents[i].data["car Model"];
+ _cprice=cars.documents[i].data["car price"];
+ _cyear=cars.documents[i].data["car Registration Year"];
+ _ccolor=cars.documents[i].data["car color"];
+ _cgear=cars.documents[i].data["car gear type"];
+ _cfuel=cars.documents[i].data["car fuel type"];
+ _cadd=cars.documents[i].data["Address person"];
+ _cnumber=cars.documents[i].data["Contact number"];
+ 
+ 
+
+  insertfav(context);
+    
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => sell_home(email: widget.email)));
+             Navigator.pop(context, true);
+      Navigator.pop(context, true);
+  }
+
+
+
       Widget returncar(int i){
          if (cars != null) {
       if (widget.email != cars.documents[i].data["email"]) {
         return Padding(
           padding: const EdgeInsets.only(top:15.0),
           child: AnimatedCard(
-              direction: AnimatedCardDirection.right, //Initial animation direction
-              initDelay: Duration(milliseconds: 0), //Delay to initial animation
-              duration: Duration(seconds: 2), //Initial animation duration
-               //Implement this action to active dismiss
+              direction: AnimatedCardDirection.right, 
+              initDelay: Duration(milliseconds: 0), 
+              duration: Duration(seconds: 2), 
+               
               
               child: Card(
                  child: ListTile(
@@ -560,11 +666,11 @@ int l = 0;
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                               child: Text(
-                                "Buy",
+                              "Intrest",
                                 style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
-                                
+                                submit(i);
                               },
                             ),
                             FlatButton(
@@ -573,11 +679,11 @@ int l = 0;
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                               child: Text(
-                                "Favourite",
+                                "Fav",
                                 style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
-                                
+                                submitfav(i);
                               },
                             ),
                             FlatButton(

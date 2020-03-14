@@ -57,12 +57,14 @@ class _car_sellState extends State<car_sell> {
   void submit() async {
     if (validateAndSave()) {
       insert(context);
-      Navigator.pop(context);
+      
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) =>
                   sell_home(email: widget.email)));
+      Navigator.pop(context, true);
+      Navigator.pop(context, true);
     }
   }
   @override

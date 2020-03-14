@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
@@ -56,7 +57,11 @@ class _car_detailsState extends State<car_details> {
   Widget cardetails(int i) {
     if (pro != null) {
       if (widget.email == pro.documents[i].data["email"]) {
-        return Column(
+        return  AnimatedCard(
+              direction: AnimatedCardDirection.right, 
+              initDelay: Duration(milliseconds: 0), 
+              duration: Duration(seconds: 2), 
+        child:Column(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(),
@@ -188,6 +193,7 @@ class _car_detailsState extends State<car_details> {
               background: null,
             )
           ],
+        )
         );
       } else
         return Container();
@@ -273,9 +279,13 @@ class _car_detailsState extends State<car_details> {
             ),
             actions: <Widget>[
               FlatButton(
+                color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                 child: Text(
                   "Update      ",
-                  style: TextStyle(fontSize: 25.0),
+                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   Navigator.pop(context, true);
@@ -288,9 +298,13 @@ class _car_detailsState extends State<car_details> {
                 },
               ),
               FlatButton(
+                color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                 child: Text(
                   "Cancel      ",
-                  style: TextStyle(fontSize: 25.0),
+                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   Navigator.pop(context, true);
