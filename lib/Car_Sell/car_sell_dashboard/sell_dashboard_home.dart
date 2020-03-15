@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Sell/car_sell_dashboard/current_ads.dart';
 class sell_dashboard extends StatefulWidget {
   sell_dashboard({Key key, this.email}) : super(key: key);
   final String email;
@@ -20,11 +21,11 @@ class _sell_dashboardState extends State<sell_dashboard> {
                 children: <Widget>[
   new GestureDetector(
         onTap: (){  
-            //  Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (BuildContext context) =>
-            //                   give_home(email: widget.email)));
+             Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              car_ads(email: widget.email)));
         },
         child: new Container(
           width: 310.0,

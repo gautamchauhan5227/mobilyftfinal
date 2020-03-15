@@ -201,16 +201,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                 Icons.location_searching,
                                                 size: 40.0,
                                               ),
-                                              // Expanded(
-                                              //   child: Text(
-                                              //     'Pick-Up',
-                                              //     textAlign: TextAlign.start,
-                                              //     style: TextStyle(
-                                              //         fontSize: 20.0,
-                                              //         fontWeight:
-                                              //             FontWeight.bold),
-                                              //   ),
-                                              // ),
+                                             
                                               Icon(Icons.chevron_right),
                                               Expanded(
                                                 child: Text(
@@ -233,17 +224,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                 Icons.location_on,
                                                 size: 40.0,
                                               ),
-                                              // Expanded(
-                                              //   child: Text(
-                                              //     'Destination',
-                                              //     textAlign: TextAlign.start,
-                                              //     style: TextStyle(
-                                              //         fontSize: 20.0,
-                                              //         fontWeight:
-                                              //             FontWeight.bold),
-                                              //   ),
-                                              //   flex: 0,
-                                              // ),
+                                             
                                               Icon(Icons.chevron_right),
                                               Expanded(
                                                 child: Text(
@@ -266,16 +247,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                 Icons.access_time,
                                                 size: 40.0,
                                               ),
-                                              // Expanded(
-                                              //   child: Text(
-                                              //     'Time',
-                                              //     textAlign: TextAlign.start,
-                                              //     style: TextStyle(
-                                              //         fontSize: 20.0,
-                                              //         fontWeight:
-                                              //             FontWeight.bold),
-                                              //   ),
-                                              // ),
+                                              
                                               Icon(Icons.chevron_right),
                                               Expanded(
                                                 child: Text(
@@ -299,16 +271,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                     .airline_seat_recline_normal,
                                                 size: 40.0,
                                               ),
-                                              // Expanded(
-                                              //   child: Text(
-                                              //     'Seat',
-                                              //     textAlign: TextAlign.start,
-                                              //     style: TextStyle(
-                                              //         fontSize: 20.0,
-                                              //         fontWeight:
-                                              //             FontWeight.bold),
-                                              //   ),
-                                              // ),
+                                              
                                               Icon(Icons.chevron_right),
                                               Expanded(
                                                 child: Text(

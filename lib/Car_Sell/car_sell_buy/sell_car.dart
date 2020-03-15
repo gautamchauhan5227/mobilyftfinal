@@ -321,8 +321,8 @@ class _car_sellState extends State<car_sell> {
                       "value": "Swift",
                     },
                     {
-                      "display": " Datsun",
-                      "value": " Datsun",
+                      "display": "Datsun",
+                      "value": "Datsun",
                     },
                     {
                       "display": "SUV",
@@ -361,8 +361,8 @@ class _car_sellState extends State<car_sell> {
                       "value": "Manual",
                     },
                     {
-                      "display": " Automatic",
-                      "value": " Automatic",
+                      "display": "Automatic",
+                      "value": "Automatic",
                     },
                   ],
                   textField: 'display',
@@ -461,7 +461,7 @@ class _car_sellState extends State<car_sell> {
           color: Colors.lightBlue[50],
           child: DropDownFormField(
                 
-                  titleText: 'Car Color',
+                  titleText: 'Car Seat',
                   
                   value: _cseat,
                   onSaved: (value) {
