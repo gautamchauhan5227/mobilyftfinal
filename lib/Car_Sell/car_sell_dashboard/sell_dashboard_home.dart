@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Car_Sell/car_sell_dashboard/current_ads.dart';
+import 'package:mobilyft/Car_Sell/car_sell_dashboard/fav_car.dart';
 class sell_dashboard extends StatefulWidget {
   sell_dashboard({Key key, this.email}) : super(key: key);
   final String email;
@@ -46,11 +47,11 @@ Padding(padding: EdgeInsets.only(top:30.0)),
   
 new GestureDetector(
         onTap: (){ 
-          // Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //                 builder: (BuildContext context) =>
-          //                     get_services(email: widget.email)));   
+          Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              fav_car(email: widget.email)));   
         },
         child: new Container(
           width: 310.0,

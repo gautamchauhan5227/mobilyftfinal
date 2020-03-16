@@ -290,9 +290,13 @@ class _Ride_DetailsState extends State<Ride_Details> {
                               ),
                               actions: <Widget>[
                                 FlatButton(
+                                  color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                                   child: Text(
                                     'Update',
-                                    style: TextStyle(fontSize: 20.0),
+                                    style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
                                   ),
                                   onPressed: () {
                                     updateDialog(

@@ -108,11 +108,6 @@ void insertfav(BuildContext context) {
       'Contact number':_cnumber
       
     };
-
-    crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
-
     crudobj.carfav(data, context).then((result) {}).catchError((e) {
       print(e);
     });
@@ -167,83 +162,80 @@ void insertfav(BuildContext context) {
                            padding: const EdgeInsets.all(5.0),
                            child: Row(
                              children: <Widget>[
-                              Expanded(
-                                child: Column(
+                              
+                               Column(
                                  children: <Widget>[
-                                   Text(
+                                   Container(
+                                     child:Text(
                                         "Car Company",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
+                                   ),  
                                  ],
                                ),
-                               flex: 0,
-                               ),
-                                Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 25.0),
-                                  child: Column(
-                                   children: <Widget>[
-                                     Text(
-                                          "${cars.documents[i].data["car Manufacturer Company"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                   ],
-                               ),
-                                ),
-                              //  flex: 2,
+                              Padding(padding: EdgeInsets.only(left:40.0)),
+                               Column(
+                                 children: <Widget>[
+                                   Container(
+                                     child:Text(
+                                        "${cars.documents[i].data["car Manufacturer Company"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
+                                   ),  
+                                 ],
                                ),
                              ]
                            ),
                          ),
-                             Padding(
-                               padding: const EdgeInsets.all(5.0),
-                               child: Row(
+
+
+                         Padding(
+                           padding: const EdgeInsets.all(5.0),
+                           child: Row(
+                             children: <Widget>[
+                              
+                               Column(
                                  children: <Widget>[
-                                   Expanded(
-                                child: Column(
-                                 children: <Widget>[
-                                   Text(
-                                        "Car Model",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.start,),
+                                   Container(
+                                     child:Text(
+                                        "Car Model",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
+                                   ),  
                                  ],
                                ),
-                               flex: 0,
-                               ),
-                                Expanded(
-                                child: Column(
+                               Padding(padding: EdgeInsets.only(left:65.0)),
+                               Column(
                                  children: <Widget>[
-                                   Text(
+                                   Container(
+                                     child:Text(
                                         "${cars.documents[i].data["car Model"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
+                                   ),  
                                  ],
                                ),
-                                flex: 4,
-                               ),
-                                 ],
-                               ),
-                             ),
-                             Padding(
-                               padding: const EdgeInsets.all(5.0),
-                               child: Row(
+                             ]
+                           ),
+                         ),
+
+                         Padding(
+                           padding: const EdgeInsets.all(5.0),
+                           child: Row(
+                             children: <Widget>[
+                              
+                               Column(
                                  children: <Widget>[
-                                   Expanded(
-                                child: Column(
+                                   Container(
+                                     child:Text(
+                                        "Car Price",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
+                                   ),  
+                                 ],
+                               ),
+                               Padding(padding: EdgeInsets.only(left:74.0)),
+                               Column(
                                  children: <Widget>[
-                                   Text(
-                                        "Car Price",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.start,),
+                                   Container(
+                                     child:Text(
+                                        "Rs.""${cars.documents[i].data["car price"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
+                                   ),  
                                  ],
                                ),
-                               flex:0,
-                               ),
-                                Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 70.0),
-                                  child: Column(
-                                   children: <Widget>[
-                                     Text(
-                                          "Rs.""${cars.documents[i].data["car price"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                   ],
-                               ),
-                                ),
-                            flex: 2,
-                               ),
-                                 ],
-                               ),
-                             )
+                             ]
+                           ),
+                         ),
                              
                            ],
                          ),
@@ -626,35 +618,35 @@ void insertfav(BuildContext context) {
                                       )
                                     ])),
 
-                                    Padding(
-                                    padding: EdgeInsets.only(top: 15.0),
-                                    child: new Column(children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Text(
-                                              "Contact",
-                                              // 'Destination'
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            flex: 1,
-                                          ),
-                                          Icon(Icons.chevron_right),
+                                    // Padding(
+                                    // padding: EdgeInsets.only(top: 15.0),
+                                    // child: new Column(children: <Widget>[
+                                    //   Row(
+                                    //     children: <Widget>[
+                                    //       Expanded(
+                                    //         child: Text(
+                                    //           "Contact",
+                                    //           // 'Destination'
+                                    //           textAlign: TextAlign.start,
+                                    //           style: TextStyle(
+                                    //               fontSize: 20.0,
+                                    //               fontWeight: FontWeight.w500),
+                                    //         ),
+                                    //         flex: 1,
+                                    //       ),
+                                    //       Icon(Icons.chevron_right),
                                           
-                                          Expanded(
-                                            child: FlatButton(
-                                                onPressed: () => launch("tel:""${cars.documents[i].data["Contact number"]}"),
-                                                child: new Text("${cars.documents[i].data["Contact number"]}",style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.w300),)),
+                                    //       Expanded(
+                                    //         child: FlatButton(
+                                    //             onPressed: () => launch("tel:""${cars.documents[i].data["Contact number"]}"),
+                                    //             child: new Text("${cars.documents[i].data["Contact number"]}",style: TextStyle(
+                                    //               fontSize: 20.0,
+                                    //               fontWeight: FontWeight.w300),)),
                                             
-                                          )
-                                        ],
-                                      )
-                                    ])),
+                                    //       )
+                                    //     ],
+                                    //   )
+                                    // ])),
                               ],
                             ),
                           ),

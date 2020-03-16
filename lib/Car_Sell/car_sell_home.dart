@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Car_Sell/car_sell_buy/sell_car_search_add.dart';
 import 'package:mobilyft/Car_Sell/car_sell_dashboard/sell_dashboard_home.dart';
+import 'package:mobilyft/Car_Sell/car_sell_message/sell_message.dart';
 
 class sell_home extends StatefulWidget {
   sell_home({Key key, this.email}) : super(key: key);
@@ -21,7 +22,7 @@ class _sell_homeState extends State<sell_home> {
       case 1:
         return car_add_search(email: widget.email);
       case 2:
-        return null;
+        return sell_msg(email: widget.email);
       
     }
   }

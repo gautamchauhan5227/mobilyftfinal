@@ -16,7 +16,7 @@ class _car_adsState extends State<car_ads> {
    CRUD1 crudobj = new CRUD1();
   int l = 0;
 
-  String _src, _dest, _seat;
+
 
   @override
   void initState() {
