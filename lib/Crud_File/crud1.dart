@@ -22,7 +22,7 @@ class CRUD1 {
   }
 
   Future<void> addDetail(data, BuildContext context) async {
-    Firestore.instance.collection('detail').add(data).catchError((e) {
+    Firestore.instance.collection('current ride').add(data).catchError((e) {
       print(e);
     });
   }
@@ -87,13 +87,29 @@ class CRUD1 {
     });
   }
 
+  Future<void> riderequestresponse(data, BuildContext context) async {
+    Firestore.instance.collection('ride request response').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
   getData(String table) async {
     return await Firestore.instance.collection(table).getDocuments();
   }
 
   updateRideData(selectedDoc, newValue) {
     Firestore.instance
-        .collection("detail")
+        .collection("current ride")
+        .document(selectedDoc)
+        .updateData(newValue)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  updateAllRideData(selectedDoc, newValue) {
+    Firestore.instance
+        .collection("all ride")
         .document(selectedDoc)
         .updateData(newValue)
         .catchError((e) {
@@ -123,7 +139,17 @@ class CRUD1 {
 
   deleteData(docId) {
     Firestore.instance
-        .collection("detail")
+        .collection("current ride")
+        .document(docId)
+        .delete()
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  deleteallride(docId) {
+    Firestore.instance
+        .collection("all ride")
         .document(docId)
         .delete()
         .catchError((e) {

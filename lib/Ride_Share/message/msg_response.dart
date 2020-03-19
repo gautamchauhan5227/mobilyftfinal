@@ -1,67 +1,28 @@
+import 'dart:math';
+
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
-import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
+import 'package:nice_button/nice_button.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
-
-class request_page extends StatefulWidget {
-  request_page({Key key, this.email}) : super(key: key);
+class msg_ride_response extends StatefulWidget {
+   msg_ride_response({Key key, this.email}) : super(key: key);
 
   final String email;
-
+  
   @override
-  _request_pageState createState() => _request_pageState();
+  _msg_ride_responseState createState() => _msg_ride_responseState();
 }
 
-class _request_pageState extends State<request_page> {
+class _msg_ride_responseState extends State<msg_ride_response> {
+  
+  
+   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   int l = 0;
-  String requester,namereq,phonereq,namereqs,emailreq,emailcr,namecr;
-  QuerySnapshot req, user;
-
-  void insert(BuildContext context) {
-    Map<String, dynamic> data = {
-      'Emailcr': widget.email,
-      'Emailreqs' : emailcr,
-      'Namecr' : namereqs,
-
-      
-      
-    };
-
-    crudobj.riderequestresponse(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
-  }
-
-
-  void submit(int i) async {
-    //
-    
-//  namereqs=req.documents[i].data["name"];
- emailcr=req.documents[i].data["Emailreq"];
- namereqs=req.documents[i].data["Namecr"]; 
- 
- 
-
-  insert(context);
-  Navigator.pop(context, true);
-  Navigator.pop(context, true);
-  Navigator.pop(context, true);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => Home_page(email: widget.email)));
-             
-          
-    
-             
-      
-  }
-
+  String requester,namereq,phonereq;
+  QuerySnapshot req, user,respo;
   @override
   void initState() {
     crudobj.getData('ride request').then((result) {
@@ -75,12 +36,43 @@ class _request_pageState extends State<request_page> {
         user = result;
       });
     });
+
+    crudobj.getData('ride request response').then((result) {
+      setState(() {
+        respo = result;
+      });
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: ListView(
+        children: <Widget>[
+          if (respo != null)
+            for (int i = 0; i < respo.documents.length; i++)
+             
+              Column(
+                children: <Widget>[
+                  returnrespo(i),
+                ],
+              ),
+          Padding(padding: EdgeInsets.only(top: 250.0)),
+          if (req == null)
+            Column(
+              children: <Widget>[
+                Center(child: CircularProgressIndicator()),
+              ],
+            )
+        ],
+      ),
+    );
   }
 
-  Widget returnride(int i) {
+  Widget returnrespo(int i) {
     if (req != null) {
-      if (widget.email == req.documents[i].data["Emailcr"]) {
-        requester = req.documents[i].data["Emailreq"];
+      if (widget.email == respo.documents[i].data["Emailreqs"]) {
+        requester = req.documents[i].data["Emailcr"];
         if(user != null){
           for(int i=0;i < user.documents.length; i++)
             if(requester == user.documents[i].data["email"])
@@ -102,11 +94,74 @@ class _request_pageState extends State<request_page> {
                     size: 60.0,
                   ),
                   title: Text(
-                      namereq
-                      ,style: TextStyle(fontSize: 28.0 ,),),
-                  subtitle: Text(
-                      "${req.documents[i].data["PickUp"]}\tto\t${req.documents[i].data["Destination"]}\nSeat : ${req.documents[i].data["Seat"]}",
-                      style: TextStyle(fontSize: 17.0),),
+                    "$namereq""\t""is Ready For Ride Share With You at from"
+                    "\t"
+                    "${req.documents[i].data["PickUp"]}"
+                    "\t""To""\t"
+                    "${req.documents[i].data["Destination"]}"
+                    "\n"
+                    "Time:""${req.documents[i].data["Time"]}",
+                    style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w300),
+                    ),
+                    subtitle:Padding(
+                             padding: const EdgeInsets.only(top:25.0,bottom:15.0,right: 50.0),
+                             child: NiceButton(
+                               onPressed: (){
+                                 int min = 100000; //min and max values act as your 6 digit range
+                int max = 999999;
+                var randomizer = new Random(); 
+                var rNum = min + randomizer.nextInt(max - min);
+                  // push(context, Invite(randomNum: rNum));
+                   showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: SingleChildScrollView(
+                            child:Container(
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(padding: EdgeInsets.only(top:15.0),
+                                    child: Text("Ride Code",
+                                    style:TextStyle(fontSize: 35.0,fontWeight:FontWeight.w400)),
+                                  ),
+                                  Divider(),
+                                  Padding(padding: EdgeInsets.only(top:10.0),
+                                   child: Text("$rNum",
+                                   style: TextStyle(fontSize:50.0,fontWeight:FontWeight.w700),),
+                                  ),
+                                  
+                                  Padding(padding: EdgeInsets.only(top:10.0),
+                                  child: Text("This Code Share With Only ""$namereq",
+                                  style: TextStyle(fontSize:15.0,fontWeight:FontWeight.w300),)
+                                  ),
+                                  Padding(padding: EdgeInsets.only(top:20.0),
+                                  child:NiceButton(
+                                    text: "Ok",
+                                    gradientColors: [secondColor, firstColor],
+                                    onPressed: (){
+                                      Navigator.pop(context, true);
+                                    },
+                                    background: null,
+                                  )
+                                  ),
+                                ],
+                              ),
+                              
+                             
+                            ),
+                            
+                          ),
+                        );
+                      }
+                   );
+                               },
+                               text: "Get Start",
+                               gradientColors: [secondColor, firstColor],
+                               background: null,
+                             )
+                           ),
+                  
                   onTap: () {
                     showDialog<void>(
                       context: context,
@@ -162,7 +217,7 @@ class _request_pageState extends State<request_page> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["Emailreq"]}",
+                                              "${req.documents[i].data["Emailcr"]}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
@@ -202,68 +257,6 @@ class _request_pageState extends State<request_page> {
                               ],
                             ),
                           ),
-                          actions: <Widget>[
-                            FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                              child: Text(
-                                "      Give Your Response      ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                              ),
-                              onPressed: () {
-                      showDialog<void>(
-                      context: context,
-                      barrierDismissible: false, // user must tap button!
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          content: SingleChildScrollView(
-                            child: Text(
-                              "You Want To Share Ride With ""$namereq""\t""?""\t""Yes/No",
-                              style: TextStyle(
-                                fontSize:20.0,
-                                fontWeight: FontWeight.w300
-                                ),
-                              ),
-                          ),
-                          actions: <Widget>[
-                            FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                              child: Text(
-                                "     Yes     ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                              ),
-                              onPressed: (){
-                                submit(i);
-                              },
-                            ),
-                            Padding(padding: EdgeInsets.only(left:15.0)),
-                             FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                              child: Text(
-                                "     No     ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                              ),
-                              onPressed: (){
-                                 Navigator.pop(context, true);
-                              },
-                            ),
-                            Padding(padding: EdgeInsets.only(left:10.0)),
-                          ]
-                        );
-                      }
-                                );
-                                
-                              },
-                            ),
-                          ],
                         );
                       },
                     );
@@ -276,31 +269,5 @@ class _request_pageState extends State<request_page> {
         child: CircularProgressIndicator(),
       );
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView(
-        children: <Widget>[
-          if (req != null)
-            for (int i = 0; i < req.documents.length; i++)
-             
-              Column(
-                children: <Widget>[
-                  returnride(i),
-                ],
-              ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (req == null)
-            Column(
-              children: <Widget>[
-                Center(child: CircularProgressIndicator()),
-              ],
-            )
-        ],
-      ),
-    );
   }
 }

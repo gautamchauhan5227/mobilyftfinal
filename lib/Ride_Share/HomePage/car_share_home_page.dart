@@ -6,6 +6,7 @@ import 'package:mobilyft/Ride_Share/Notification/car_share_Notify.dart';
 import 'package:mobilyft/Ride_Share/Request/car_share_request_page.dart';
 import 'package:mobilyft/Ride_Share/Ride_create_search/car_share_ride_page.dart';
 import 'package:mobilyft/Ride_Share/maps/map.dart';
+import 'package:mobilyft/Ride_Share/message/msg_response.dart';
 class Home_page extends StatefulWidget {
   final String email;
   Home_page({Key key, this.email}) : super(key: key);
@@ -30,7 +31,7 @@ class _Home_pageState extends State<Home_page> {
         return notify(email: widget.email);
 
       case 4:
-        return null;
+        return msg_ride_response(email: widget.email);
     }
   }
 

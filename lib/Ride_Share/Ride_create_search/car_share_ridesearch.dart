@@ -19,7 +19,7 @@ class ridesearchState extends State<ridesearch> {
   String src, dest, seat, emailcr,namecr,lic,email,time;
   @override
   void initState() {
-    crudobj.getData('detail').then((result) {
+    crudobj.getData('current ride').then((result) {
       setState(() {
         ride = result;
       });
@@ -140,24 +140,24 @@ class ridesearchState extends State<ridesearch> {
     if (ride != null) {
       if (widget.email != ride.documents[i].data["email"]) {
         return Padding(
-            padding: EdgeInsets.only(top: 2.0),
+            padding: EdgeInsets.only(top: 10.0,left: 10.0,right: 10.0,),
             child: AnimatedCard(
               direction: AnimatedCardDirection.right, 
               initDelay: Duration(milliseconds: 0), 
               duration: Duration(seconds: 2), 
             child: Card(
-                color: Colors.lightBlue[50],
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
+                    borderRadius: new BorderRadius.circular(10.0)),
                 child: ListTile(
                   leading: Icon(
                     Icons.account_circle,
                     size: 40.0,
                   ),
                   title: Text(
-                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"),
+                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w400),),
                   subtitle: Text("Time : "
-                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}"),
+                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),),
                   onTap: () {
                      emailcr = ride.documents[i].data["email"];
                     print(emailcr);
@@ -195,24 +195,24 @@ class ridesearchState extends State<ridesearch> {
                                           Icon(
                                             Icons.person,
                                             // location_on
-                                            size: 30.0,
+                                            size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              "Name",
-                                              // 'Destination'
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     "Name",
+                                          //     // 'Destination'
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 18.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
                                               namecr,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
+                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -228,59 +228,59 @@ class ridesearchState extends State<ridesearch> {
                                             Icons.directions_car,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Car Number',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Car Number',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           
                                           Expanded(
                                             child: Text(
                                               "${car.documents[i].data["Lic"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
+                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
                                         ],
                                       )
                                     ])),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 15.0),
-                                    child: new Column(children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.location_searching,
-                                            size: 40.0,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'Email',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Icon(Icons.chevron_right),
+                                // Padding(
+                                //     padding: EdgeInsets.only(top: 15.0),
+                                //     child: new Column(children: <Widget>[
+                                //       Row(
+                                //         children: <Widget>[
+                                //           Icon(
+                                //             Icons.location_searching,
+                                //             size: 40.0,
+                                //           ),
+                                //           Expanded(
+                                //             child: Text(
+                                //               'Email',
+                                //               textAlign: TextAlign.start,
+                                //               style: TextStyle(
+                                //                   fontSize: 20.0,
+                                //                   fontWeight: FontWeight.bold),
+                                //             ),
+                                //           ),
+                                //           Icon(Icons.chevron_right),
                                          
-                                          Expanded(
-                                            child: Text(
-                                              "${ride.documents[i].data["email"]}",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
-                                            ),
-                                            flex: 1,
-                                          )
-                                        ],
-                                      )
-                                    ])),
+                                //           Expanded(
+                                //             child: Text(
+                                //               "${ride.documents[i].data["email"]}",
+                                //               textAlign: TextAlign.start,
+                                //               style: TextStyle(fontSize: 18.0),
+                                //             ),
+                                //             flex: 1,
+                                //           )
+                                //         ],
+                                //       )
+                                //     ])),
                                 Padding(
                                     padding: EdgeInsets.only(top: 15.0),
                                     child: new Column(children: <Widget>[
@@ -290,15 +290,15 @@ class ridesearchState extends State<ridesearch> {
                                             Icons.location_searching,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Pick-Up',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Pick-Up',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           
                                           Expanded(
@@ -306,7 +306,7 @@ class ridesearchState extends State<ridesearch> {
                                             child: Text(
                                               "${ride.documents[i].data["source"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
+                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -322,16 +322,16 @@ class ridesearchState extends State<ridesearch> {
                                             Icons.location_on,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Destination',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            flex: 0,
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Destination',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          //   flex: 0,
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           
                                           Expanded(
@@ -339,7 +339,7 @@ class ridesearchState extends State<ridesearch> {
                                             child: Text(
                                               "${ride.documents[i].data["dest"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
+                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -355,15 +355,15 @@ class ridesearchState extends State<ridesearch> {
                                             Icons.access_time,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Time',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Time',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                           
                                           Expanded(
@@ -371,7 +371,7 @@ class ridesearchState extends State<ridesearch> {
                                             child: Text(
                                               "${ride.documents[i].data["time"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
+                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -387,22 +387,22 @@ class ridesearchState extends State<ridesearch> {
                                             Icons.airline_seat_recline_normal,
                                             size: 40.0,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              'Seat',
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   child: Text(
+                                          //     'Seat',
+                                          //     textAlign: TextAlign.start,
+                                          //     style: TextStyle(
+                                          //         fontSize: 20.0,
+                                          //         fontWeight: FontWeight.bold),
+                                          //   ),
+                                          // ),
                                           Icon(Icons.chevron_right),
                                          
                                           Expanded(
                                               child: Text(
                                               "${ride.documents[i].data["Seat"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 18.0),
+                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -414,18 +414,27 @@ class ridesearchState extends State<ridesearch> {
                           ),
                           actions: <Widget>[
                             FlatButton(
+                              color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                               child: Text(
-                                "Request     ",
-                                style: TextStyle(fontSize: 25.0),
+                                "   Request   ",
+                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                 submit(i);
                               },
                             ),
+                            Padding(padding:EdgeInsets.only(left:10.0) ),
                             FlatButton(
+                              color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                               child: Text(
-                                "Cancel      ",
-                                style: TextStyle(fontSize: 25.0),
+                                "   Cancel   ",
+                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                 Navigator.pop(context, true);

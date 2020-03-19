@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobilyft/Ride_Share/Dashboard/car_share_cardetails.dart';
 import 'package:mobilyft/Ride_Share/Dashboard/car_share_full_ride.dart';
 
-import 'package:mobilyft/Ride_Share/Dashboard/feedback.dart';
-
 
 
 class Dashboard extends StatefulWidget {
@@ -28,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                      height: 100.0,
+                      height: 120.0,
                       width: 310.0,
                       child: RaisedButton(
                           color: Colors.lightBlue[100],
@@ -45,18 +43,18 @@ class _DashboardState extends State<Dashboard> {
                                         )));
                           },
                           shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(50.0)))),
+                              borderRadius: new BorderRadius.circular(15.0)))),
                   SizedBox(
                     height: 10.0,
                   ),
                   Text(
                     "Ride Details",
-                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
+                    style: TextStyle(color: Colors.black, fontSize: 30.0,fontWeight: FontWeight.w300,fontFamily: 'Merriweather'),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: SizedBox(
-                        height: 100.0,
+                        height: 120.0,
                         width: 310.0,
                         child: RaisedButton(
                             color: Colors.lightBlue[100],
@@ -72,42 +70,42 @@ class _DashboardState extends State<Dashboard> {
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    new BorderRadius.circular(50.0)))),
+                                    new BorderRadius.circular(15.0)))),
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
                   Text(
                     "Vehicle Details",
-                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
+                    style: TextStyle(color: Colors.black, fontSize: 30.0,fontWeight: FontWeight.w300,fontFamily: 'Merriweather'),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: SizedBox(
-                        height: 100.0,
+                        height: 120.0,
                         width: 310.0,
                         child: RaisedButton(
                             color: Colors.lightBlue[100],
                             child: Icon(Icons.feedback, size: 100.0),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          feedback(
-                                            email: widget.email,
-                                          )));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (BuildContext context) =>
+                              //             feedback(
+                              //               email: widget.email,
+                              //             )));
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    new BorderRadius.circular(50.0)))),
+                                    new BorderRadius.circular(15.0)))),
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    "Feedback Box",
-                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
+                    "Ride Status",
+                    style: TextStyle(color: Colors.black, fontSize: 30.0,fontWeight: FontWeight.w300,fontFamily: 'Merriweather'),
                   ),
                 ],
               ),

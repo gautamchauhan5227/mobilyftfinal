@@ -33,7 +33,35 @@ class _car_detailsState extends State<car_details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(15),
+      ),
+        ),
+        backgroundColor: Colors.white,
+         iconTheme: IconThemeData(
+          color: Colors.black
+        ),
+         
+        title:Padding(
+          padding: const EdgeInsets.only(left: 50),
+          child: Text(
+              "Vehicle Detail",
+              style: TextStyle(
+                color:Colors.black,
+                fontWeight:FontWeight.w400,
+                fontSize: 30.0
+                ),
+             ),
+        ),
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios), 
+          onPressed:(){
+            Navigator.pop(context, true);
+          }
+          ),
+      ),
       backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
@@ -284,7 +312,7 @@ class _car_detailsState extends State<car_details> {
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "Update      ",
+                  "   Update   ",
                   style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
@@ -303,7 +331,7 @@ class _car_detailsState extends State<car_details> {
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "Cancel      ",
+                  "   Cancel   ",
                   style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {

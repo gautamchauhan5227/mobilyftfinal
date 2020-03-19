@@ -136,6 +136,7 @@ flutter:
     - family: Merriweather
       fonts:
         - asset: Font/Merriweather-Bold.ttf
+          weight: 300
           
 
           

@@ -18,7 +18,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
   String _src, _dest, _seat;
   @override
   void initState() {
-    crudobj.getData('detail').then((result) {
+    crudobj.getData('current ride').then((result) {
       setState(() {
         ride = result;
       });
@@ -29,7 +29,35 @@ class _Ride_DetailsState extends State<Ride_Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(15),
+      ),
+        ),
+        backgroundColor: Colors.white,
+         iconTheme: IconThemeData(
+          color: Colors.black
+        ),
+         
+        title:Padding(
+          padding: const EdgeInsets.only(left: 50),
+          child: Text(
+              "Current Ride",
+              style: TextStyle(
+                color:Colors.black,
+                fontWeight:FontWeight.w400,
+                fontSize: 30.0
+                ),
+             ),
+        ),
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios), 
+          onPressed:(){
+            Navigator.pop(context, true);
+          }
+          ),
+      ),
       body: ListView(
         children: <Widget>[
           if (ride != null)
@@ -71,7 +99,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
               height: 180.0,
               width: 270.0,
               child: ListView(children: <Widget>[
-                TextField(
+                TextFormField(
                   decoration: InputDecoration(
                     labelText: ' PickUp',
                     labelStyle:
@@ -82,11 +110,14 @@ class _Ride_DetailsState extends State<Ride_Details> {
                       color: Colors.blue,
                     ),
                   ),
+                
                   onChanged: (value) {
                     this._src = value;
                   },
+                  validator: (value) =>
+                value.isEmpty ? "PickUp can't be empty" : null,
                 ),
-                TextField(
+                TextFormField(
                   decoration: InputDecoration(
                     labelText: ' Destination',
                     labelStyle:
@@ -97,11 +128,13 @@ class _Ride_DetailsState extends State<Ride_Details> {
                       color: Colors.blue,
                     ),
                   ),
+                  validator: (value) =>
+                value.isEmpty ? "Destination can't be empty" : null,
                   onChanged: (value) {
                     this._dest = value;
                   },
                 ),
-                TextField(
+                TextFormField(
                   decoration: InputDecoration(
                     labelText: ' Seat',
                     labelStyle:
@@ -112,6 +145,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                       color: Colors.blue,
                     ),
                   ),
+                  validator: (value) => value.isEmpty ? "Seat can't be empty" : null,
                   onChanged: (value) {
                     this._seat = value;
                   },
@@ -120,6 +154,10 @@ class _Ride_DetailsState extends State<Ride_Details> {
             ),
             actions: <Widget>[
               FlatButton(
+                color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                 child: Text(
                   "Update      ",
                   style: TextStyle(fontSize: 25.0),
@@ -129,13 +167,21 @@ class _Ride_DetailsState extends State<Ride_Details> {
                     'source': this._src,
                     'dest': this._dest,
                     'Seat': this._seat
-                  });
+                  }
+                  
+                  );
+                   
+                  
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
                 },
               ),
               FlatButton(
+                color: Colors.lightBlue[50],
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    new BorderRadius.circular(20.0)),
                 child: Text(
                   "Cancel      ",
                   style: TextStyle(fontSize: 25.0),
@@ -153,13 +199,13 @@ class _Ride_DetailsState extends State<Ride_Details> {
     if (ride != null) {
       if (widget.email == ride.documents[i].data["email"]) {
         return Padding(
-            padding: EdgeInsets.only(top: 2.0),
+            padding: EdgeInsets.only(left:10.0,right: 10.0,top: 10.0),
             child: AnimatedCard(
               direction: AnimatedCardDirection.right, 
-              initDelay: Duration(milliseconds: 0), 
-              duration: Duration(seconds: 2), 
+              initDelay: Duration(milliseconds: 5), 
+              duration: Duration(seconds: 3), 
             child: Card(
-                color: Colors.lightBlue[50],
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
                 child: ListTile(
@@ -168,12 +214,12 @@ class _Ride_DetailsState extends State<Ride_Details> {
                     size: 60.0,
                   ),
                   title: Text(
-                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",style: TextStyle(fontSize:28.0),),
+                      "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",style: TextStyle(fontSize:30.0,fontWeight: FontWeight.w400),),
                   subtitle: Text("Time : "
-                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:17.0),),
-                  trailing: IconButton(
-                      icon: Icon(Icons.help, color: Colors.blue),
-                      onPressed: () {
+                      "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:20.0),),
+                  // trailing: IconButton(
+                  //     icon: Icon(Icons.help, color: Colors.blue),
+                      onTap: () {
                         showDialog<void>(
                           context: context,
                           barrierDismissible: false, // user must tap button!
@@ -208,7 +254,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                   "${ride.documents[i].data["source"]}",
                                                   textAlign: TextAlign.start,
                                                   style:
-                                                      TextStyle(fontSize: 18.0),
+                                                      TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
                                                 ),
                                                 flex: 1,
                                               )
@@ -231,7 +277,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                   "${ride.documents[i].data["dest"]}",
                                                   textAlign: TextAlign.start,
                                                   style:
-                                                      TextStyle(fontSize: 18.0),
+                                                      TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
                                                 ),
                                                 flex: 1,
                                               )
@@ -254,7 +300,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                   "${ride.documents[i].data["time"]}",
                                                   textAlign: TextAlign.start,
                                                   style:
-                                                      TextStyle(fontSize: 18.0),
+                                                      TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
                                                 ),
                                                 flex: 1,
                                               )
@@ -278,7 +324,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                   "${ride.documents[i].data["Seat"]}",
                                                   textAlign: TextAlign.start,
                                                   style:
-                                                      TextStyle(fontSize: 18.0),
+                                                      TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
                                                 ),
                                                 flex: 1,
                                               )
@@ -296,7 +342,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                     new BorderRadius.circular(20.0)),
                                   child: Text(
                                     'Update',
-                                    style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                    style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300),
                                   ),
                                   onPressed: () {
                                     updateDialog(
@@ -309,7 +355,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                                   child: Text('    Delete    ',
-                                      style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300)),
+                                      style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     //Navigator.of(context).pop();
 
@@ -325,7 +371,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                                   child: Text('Ok',
-                                      style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300)),
+                                      style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     Navigator.pop(context, true);
                                   },
@@ -334,7 +380,8 @@ class _Ride_DetailsState extends State<Ride_Details> {
                             );
                           },
                         );
-                      }),
+                      }
+                      // ),
                 ))));
       } else
         return Container();
