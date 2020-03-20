@@ -100,7 +100,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                     "\t""To""\t"
                     "${req.documents[i].data["Destination"]}"
                     "\n"
-                    "Time:""${req.documents[i].data["Time"]}",
+                    "Time:-""\t""${req.documents[i].data["Time"]}",
                     style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w300),
                     ),
                     subtitle:Padding(

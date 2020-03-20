@@ -38,9 +38,7 @@ class _request_pageState extends State<request_page> {
   }
 
 
-  void submit(int i) async {
-    //
-    
+  void submit(int i) async {   
 //  namereqs=req.documents[i].data["name"];
  emailcr=req.documents[i].data["Emailreq"];
  namereqs=req.documents[i].data["Namecr"]; 
@@ -54,12 +52,7 @@ class _request_pageState extends State<request_page> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => Home_page(email: widget.email)));
-             
-          
-    
-             
-      
+            builder: (BuildContext context) => Home_page(email: widget.email)));   
   }
 
   @override

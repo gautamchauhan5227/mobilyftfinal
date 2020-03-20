@@ -90,7 +90,35 @@ void submit(int i) async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(15),
+      ),
+        ),
+        backgroundColor: Colors.white,
+         iconTheme: IconThemeData(
+          color: Colors.black
+        ),
+         
+        title:Padding(
+          padding: const EdgeInsets.only(left: 50),
+          child: Text(
+              "Fav Car List",
+              style: TextStyle(
+                color:Colors.black,
+                fontWeight:FontWeight.w400,
+                fontSize: 30.0
+                ),
+             ),
+        ),
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios), 
+          onPressed:(){
+            Navigator.pop(context, true);
+          }
+          ),
+      ),
       body: ListView(
         children: <Widget>[
           if (fav != null)
@@ -226,12 +254,403 @@ void submit(int i) async {
                         
                       
                      ),
-            )
+                     onTap: (){
+                       emailcr = cars.documents[i].data["email"];
+                    print(emailcr);
+                     for (int i = 0; i < user.documents.length; i++)
+                      if(emailcr == user.documents[i].data["email"])
+                      {
+                       namecr= user.documents[i].data["name"];
+                      }
+                      showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius:BorderRadius.all(Radius.circular(10.0))),
+                            title: Center(
+                            child: Text(
+                              'Car Details',
+                              style: TextStyle(
+                                fontFamily: 'helvetica_neue_light',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 30.0,
+                              ),
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Name",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              namecr,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                    Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Company",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car Manufacturer Company"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                     Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Model",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car Model"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                     Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Buy",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car Registration Year"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                     Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Fuel Type",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car fuel type"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                    Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Gear Type",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car gear type"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                     Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Color",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car color"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                     Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Seat",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car seat"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                                  
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Car Number",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["car number"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                    Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "KM Of Used",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["km of use"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                    Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Price",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "Rs.""${cars.documents[i].data["car price"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+
+                                    Padding(
+                                    padding: EdgeInsets.only(top: 15.0),
+                                    child: new Column(children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Address",
+                                              // 'Destination'
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${cars.documents[i].data["Address person"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                            
+                                          )
+                                        ],
+                                      )
+                                    ])),
+                              ],
+                            ),
+                          ),
+
+                        );
+                      }
+                       );
+                   
+                     },
+            ),
+            
                 ),
+                
               )
             )
         );
-      }
+     } else
+        return Container();
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
   }
 }

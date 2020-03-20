@@ -93,6 +93,12 @@ class CRUD1 {
     });
   }
 
+  Future<void> rideotp(data, BuildContext context) async {
+    Firestore.instance.collection('ride otp').add(data).catchError((e) {
+      print(e);
+    });
+  }
+
   getData(String table) async {
     return await Firestore.instance.collection(table).getDocuments();
   }
@@ -160,6 +166,17 @@ class CRUD1 {
   deletenoty(docId) {
     Firestore.instance
         .collection("notify")
+        .document(docId)
+        .delete()
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+
+  deleteads(docId) {
+    Firestore.instance
+        .collection("sell car")
         .document(docId)
         .delete()
         .catchError((e) {

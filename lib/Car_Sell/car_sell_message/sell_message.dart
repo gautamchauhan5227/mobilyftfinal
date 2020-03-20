@@ -67,11 +67,11 @@ class _sell_msgState extends State<sell_msg> {
 
         }
         return Padding(
-            padding: EdgeInsets.only(top: 2.0),
+            padding: EdgeInsets.all( 2.0),
             child: Card(
-                color: Colors.lightBlue[50],
+                
                 shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
+                    borderRadius: new BorderRadius.circular(10.0)),
                 child: ListTile(
                   leading: Icon(
                     Icons.account_circle,

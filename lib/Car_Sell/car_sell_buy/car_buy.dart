@@ -141,7 +141,55 @@ void insertfav(BuildContext context) {
 
 
 
-      Widget returncar(int i){
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: 
+        AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(25),
+      ),
+        ),
+        backgroundColor: Colors.white,
+         iconTheme: IconThemeData(
+             color: Colors.black
+          ),
+        title: TextField(
+          onChanged: (val) => initiateSearch(val),
+          style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Search...",
+            hintStyle: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300)
+          ),
+        ),
+      ),
+
+      body: ListView(
+        children: <Widget>[
+          if (cars != null)
+            for (int i = 0; i < cars.documents.length; i++)
+              if (comapny == cars.documents[i].data["car Manufacturer Company"])
+                Column(
+                  children: <Widget>[
+                    returncar(i),
+                  ],
+                ),
+          Padding(padding: EdgeInsets.only(top: 250.0)),
+          if (cars == null)
+            Column(
+              children: <Widget>[
+                Center(child: CircularProgressIndicator()),
+              ],
+            )
+        ],
+      ),
+    );
+  }
+        Widget returncar(int i){
          if (cars != null) {
       if (widget.email != cars.documents[i].data["email"]) {
         return Padding(
@@ -617,36 +665,6 @@ void insertfav(BuildContext context) {
                                         ],
                                       )
                                     ])),
-
-                                    // Padding(
-                                    // padding: EdgeInsets.only(top: 15.0),
-                                    // child: new Column(children: <Widget>[
-                                    //   Row(
-                                    //     children: <Widget>[
-                                    //       Expanded(
-                                    //         child: Text(
-                                    //           "Contact",
-                                    //           // 'Destination'
-                                    //           textAlign: TextAlign.start,
-                                    //           style: TextStyle(
-                                    //               fontSize: 20.0,
-                                    //               fontWeight: FontWeight.w500),
-                                    //         ),
-                                    //         flex: 1,
-                                    //       ),
-                                    //       Icon(Icons.chevron_right),
-                                          
-                                    //       Expanded(
-                                    //         child: FlatButton(
-                                    //             onPressed: () => launch("tel:""${cars.documents[i].data["Contact number"]}"),
-                                    //             child: new Text("${cars.documents[i].data["Contact number"]}",style: TextStyle(
-                                    //               fontSize: 20.0,
-                                    //               fontWeight: FontWeight.w300),)),
-                                            
-                                    //       )
-                                    //     ],
-                                    //   )
-                                    // ])),
                               ],
                             ),
                           ),
@@ -700,54 +718,12 @@ void insertfav(BuildContext context) {
                 ),
         );
             
-            }
+            }else
+        return Container();
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
          }
       }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: 
-        AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(25),
-      ),
-        ),
-        backgroundColor: Colors.white,
-         iconTheme: IconThemeData(
-             color: Colors.black
-          ),
-        title: TextField(
-          onChanged: (val) => initiateSearch(val),
-          style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Search...",
-            hintStyle: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300)
-          ),
-        ),
-      ),
-
-      body: ListView(
-        children: <Widget>[
-          if (cars != null)
-            for (int i = 0; i < cars.documents.length; i++)
-              if (comapny == cars.documents[i].data["car Manufacturer Company"])
-                Column(
-                  children: <Widget>[
-                    returncar(i),
-                  ],
-                ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (cars == null)
-            Column(
-              children: <Widget>[
-                Center(child: CircularProgressIndicator()),
-              ],
-            )
-        ],
-      ),
-    );
-  }
 }
