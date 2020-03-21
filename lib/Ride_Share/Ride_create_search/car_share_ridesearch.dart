@@ -63,7 +63,9 @@ class ridesearchState extends State<ridesearch> {
  time=ride.documents[i].data["time"];
   seat=ride.documents[i].data["Seat"];
   insert(context);
-    Navigator.pop(context);
+    Navigator.pop(context,true);
+     Navigator.pop(context,true);
+      Navigator.pop(context,true);
     Navigator.push(
         context,
         MaterialPageRoute(

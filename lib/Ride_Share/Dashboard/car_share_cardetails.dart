@@ -318,6 +318,11 @@ class _car_detailsState extends State<car_details> {
                 onPressed: () {
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
+                  Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  car_details(email: widget.email)));
                   crudobj.updateVehicleData(selectedDoc, {
                     'car': this._model,
                     'RC book': this._rc,
@@ -325,6 +330,7 @@ class _car_detailsState extends State<car_details> {
                   });
                 },
               ),
+              Padding(padding: EdgeInsets.only(left:15.0)),
               FlatButton(
                 color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(

@@ -183,4 +183,14 @@ class CRUD1 {
       print(e);
     });
   }
+
+  deleterequest(docId) {
+    Firestore.instance
+        .collection("ride request")
+        .document(docId)
+        .delete()
+        .catchError((e) {
+      print(e);
+    });
+  }
 }

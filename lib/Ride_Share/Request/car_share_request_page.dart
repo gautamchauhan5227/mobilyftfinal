@@ -19,7 +19,7 @@ class request_page extends StatefulWidget {
 class _request_pageState extends State<request_page> {
   CRUD1 crudobj = new CRUD1();
   int l = 0;
-  String requester,namereq,phonereq,namereqs,emailreq,emailcr,namecr;
+  String requester,namereq,phonereq,namereqs,emailreq,emailcr,namecr,src,dest,time,seat;
   QuerySnapshot req, user;
 
   void insert(BuildContext context) {
@@ -27,7 +27,10 @@ class _request_pageState extends State<request_page> {
       'Emailcr': widget.email,
       'Emailreqs' : emailcr,
       'Namecr' : namereqs,
-
+      'Source':src,
+      'Destination':dest,
+      'Time':time,
+      'Seat':seat
       
       
     };
@@ -41,7 +44,11 @@ class _request_pageState extends State<request_page> {
   void submit(int i) async {   
 //  namereqs=req.documents[i].data["name"];
  emailcr=req.documents[i].data["Emailreq"];
- namereqs=req.documents[i].data["Namecr"]; 
+ namereqs=req.documents[i].data["Namecr"];
+ src=req.documents[i].data["PickUp"]; 
+ dest=req.documents[i].data["Destination"];
+ time=req.documents[i].data["Time"];
+ seat=req.documents[i].data["Sear"];
  
  
 
@@ -245,6 +252,7 @@ class _request_pageState extends State<request_page> {
                                 style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: (){
+                                 Navigator.pop(context, true);
                                  Navigator.pop(context, true);
                               },
                             ),

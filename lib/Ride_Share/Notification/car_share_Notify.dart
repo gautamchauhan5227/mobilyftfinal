@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
 
-
-
-
 class notify extends StatefulWidget {
   final String email;
   notify({Key key, this.email}) : super(key: key);
@@ -107,6 +104,8 @@ class _notifyState extends State<notify> {
                               onPressed: () {
                                crudobj.deletenoty(ride.documents[i].documentID);
                                 
+                                Navigator.pop(context,true);
+                                Navigator.pop(context,true);
                                 
                                 Navigator.push(
                                     context,
@@ -136,19 +135,6 @@ class _notifyState extends State<notify> {
                       }
                       );
                     },
-                  
-                    // trailing: IconButton(
-                    //   icon: Icon(Icons.cancel, color: Colors.blue),
-
-                    //   onPressed: () {
-                    //     crudobj.deletenoty(ride.documents[i].documentID);
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (BuildContext context) =>
-                    //                 Home_page(email: widget.email,)));
-                    //   },
-                    // )
                     )),
             )
                     );

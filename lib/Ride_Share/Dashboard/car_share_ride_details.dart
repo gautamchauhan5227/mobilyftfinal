@@ -159,8 +159,8 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "Update      ",
-                  style: TextStyle(fontSize: 25.0),
+                  "Update",
+                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   crudobj.updateRideData(selectedDoc, {
@@ -175,21 +175,29 @@ class _Ride_DetailsState extends State<Ride_Details> {
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
+                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Ride_Details(email: widget.email)));
                 },
               ),
+              Padding(padding: EdgeInsets.only(right: 20.0)),
               FlatButton(
                 color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "Cancel      ",
-                  style: TextStyle(fontSize: 25.0),
+                  "Cancel",
+                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   Navigator.pop(context, true);
+                  Navigator.pop(context, true);
                 },
-              )
+              ),
+              Padding(padding: EdgeInsets.only(right: 20.0)),
             ],
           );
         });
@@ -349,12 +357,13 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                         context, ride.documents[i].documentID);
                                   },
                                 ),
+                                Padding(padding: EdgeInsets.only(left:10.0)),
                                 FlatButton(
                                   color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
-                                  child: Text('    Delete    ',
+                                  child: Text('Delete',
                                       style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     //Navigator.of(context).pop();
@@ -363,8 +372,14 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                         ride.documents[i].documentID);
                                     Navigator.pop(context, true);
                                     Navigator.pop(context, true);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Ride_Details(email: widget.email)));
                                   },
                                 ),
+                                Padding(padding: EdgeInsets.only(left:10.0)),
                                 FlatButton(
                                   color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(

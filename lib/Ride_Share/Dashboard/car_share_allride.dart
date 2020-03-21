@@ -2,6 +2,7 @@ import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
 
 class allride extends StatefulWidget {
   final String email;
@@ -11,6 +12,7 @@ class allride extends StatefulWidget {
 }
 
 class _allrideState extends State<allride> {
+  String _src,_dest,_time,_seat;
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride;
   @override
@@ -22,7 +24,47 @@ class _allrideState extends State<allride> {
     });
   }
 
-  int l = 0;
+int l = 0;
+
+void insert(BuildContext context) {    
+    Map<String, dynamic> data = {
+      'email': widget.email,
+      'source': _src,
+      'dest': _dest,
+      'time': _time,
+      'Seat': _seat,
+};
+
+    crudobj.addDetail(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+    crudobj.notify(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+
+    crudobj.history(data, context).then((result) {}).catchError((e) {
+      print(e);
+    });
+  }
+
+
+  void submit(int i) async {
+    
+ _src=ride.documents[i].data["source"]; 
+ _dest=ride.documents[i].data["dest"];
+ _time=ride.documents[i].data["time"];
+ _seat=ride.documents[i].data["Seat"];
+   
+      insert(context);
+      Navigator.pop(context,true);
+      Navigator.pop(context,true);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  allride(email: widget.email)));
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -250,12 +292,11 @@ class _allrideState extends State<allride> {
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                                   child: Text(
-                                    'Re-add',
+                                    ' Re-add ',
                                     style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300),
                                   ),
                                   onPressed: () {
-                                    // updateDialog(
-                                    //     context, ride.documents[i].documentID);
+                                    submit(i);
                                   },
                                 ),
                                 FlatButton(
@@ -272,12 +313,17 @@ class _allrideState extends State<allride> {
                                         ride.documents[i].documentID);
                                     Navigator.pop(context, true);
                                     Navigator.pop(context, true);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              allride(email: widget.email)));
                                   },
                                 ),
                                 FlatButton(
                                   color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius:
                                     new BorderRadius.circular(20.0)),
                                   child: Text('Ok',
                                       style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),

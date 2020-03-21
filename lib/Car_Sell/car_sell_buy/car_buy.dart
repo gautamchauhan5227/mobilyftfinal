@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 class buy_car_search extends StatefulWidget {
   buy_car_search({Key key, this.email}) : super(key: key);
 
