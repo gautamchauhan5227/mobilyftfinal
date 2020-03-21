@@ -39,6 +39,8 @@ String _ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd,ema
     crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
       print(e);
     });
+
+     
   }
 
 
@@ -154,7 +156,7 @@ void submit(int i) async {
                 child: Card(
                    child: ListTile(
                      title: Container(
-                       height: 200.0,
+                       height: 250.0,
                        child: Column(
                          children: <Widget>[
                            Padding(
@@ -175,7 +177,7 @@ void submit(int i) async {
                                    children: <Widget>[
                                      Container(
                                        child:Text(
-                                          "${fav.documents[i].data["Car Company"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
+                                          "${fav.documents[i].data["Car Company"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
                                      ),  
                                    ],
                                  ),
@@ -202,7 +204,7 @@ void submit(int i) async {
                                    children: <Widget>[
                                      Container(
                                        child:Text(
-                                          "${fav.documents[i].data["Car Model"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
+                                          "${fav.documents[i].data["Car Model"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
                                      ),  
                                    ],
                                  ),
@@ -228,7 +230,7 @@ void submit(int i) async {
                                    children: <Widget>[
                                      Container(
                                        child:Text(
-                                          "Rs.""${fav.documents[i].data["car price"]}",style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
+                                          "Rs.""${fav.documents[i].data["car price"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
                                      ),  
                                    ],
                                  ),
@@ -244,6 +246,26 @@ void submit(int i) async {
                                  submit(i);
                                },
                                text: "Intrest",
+                               gradientColors: [secondColor, firstColor],
+                               background: null,
+                             )
+                           ),
+                           Padding(
+                             padding: const EdgeInsets.only(top:15.0),
+                             child: NiceButton(
+                               onPressed: (){
+                                 crudobj.deletefavcar(fav.documents[i].documentID);
+                                
+                                 Navigator.pop(context, true);
+                                 
+                                
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            fav_car(email: widget.email,)));
+                               },
+                               text: "Remove",
                                gradientColors: [secondColor, firstColor],
                                background: null,
                              )

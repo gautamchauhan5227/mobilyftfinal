@@ -120,7 +120,8 @@ class ridesearchState extends State<ridesearch> {
         children: <Widget>[
           if (ride != null)
             for (int i = 0; i < ride.documents.length; i++)
-              if (city == ride.documents[i].data["source"])
+              if (city == ride.documents[i].data["dest"])
+             
                 Column(
                   children: <Widget>[
                     returnride(i),

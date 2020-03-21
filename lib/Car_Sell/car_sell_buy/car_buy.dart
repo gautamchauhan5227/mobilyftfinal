@@ -1,6 +1,8 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Sell/car_sell_dashboard/fav_car.dart';
+import 'package:mobilyft/Car_Sell/car_sell_dashboard/intrested_car.dart';
 import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 
@@ -18,7 +20,7 @@ class _buy_car_searchState extends State<buy_car_search> {
   String comapny = "";
   String emailcr,namecr,_ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd;
   CRUD1 crudobj = new CRUD1();
-int l = 0;
+  int l = 0;
 
   TextEditingController _textFieldController = TextEditingController();
 
@@ -63,6 +65,8 @@ int l = 0;
     crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
       print(e);
     });
+
+     
   }
 
 
@@ -83,12 +87,14 @@ void submit(int i) async {
  
 
   insert(context);
+   Navigator.pop(context, true);
+      Navigator.pop(context, true);
+       Navigator.pop(context, true);
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => sell_home(email: widget.email)));
-             Navigator.pop(context, true);
-      Navigator.pop(context, true);
+            builder: (BuildContext context) => intrested_car(email: widget.email)));
+            
   }
 
 
@@ -130,13 +136,13 @@ void insertfav(BuildContext context) {
  
 
   insertfav(context);
-    
+     Navigator.pop(context, true);
+     Navigator.pop(context, true);
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => sell_home(email: widget.email)));
-             Navigator.pop(context, true);
-      Navigator.pop(context, true);
+            builder: (BuildContext context) => fav_car(email: widget.email)));
+            
   }
 
 
@@ -178,13 +184,15 @@ void insertfav(BuildContext context) {
                     returncar(i),
                   ],
                 ),
+                
           Padding(padding: EdgeInsets.only(top: 250.0)),
           if (cars == null)
             Column(
               children: <Widget>[
                 Center(child: CircularProgressIndicator()),
               ],
-            )
+            ),
+
         ],
       ),
     );
@@ -669,6 +677,7 @@ void insertfav(BuildContext context) {
                             ),
                           ),
                            actions: <Widget>[
+                            //  Padding(padding: EdgeInsets.only(left:10.0)),
                             FlatButton(
                               color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(
@@ -682,6 +691,7 @@ void insertfav(BuildContext context) {
                                 submit(i);
                               },
                             ),
+                            Padding(padding: EdgeInsets.only(left:10.0)),
                             FlatButton(
                               color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(
@@ -695,6 +705,7 @@ void insertfav(BuildContext context) {
                                 submitfav(i);
                               },
                             ),
+                            Padding(padding: EdgeInsets.only(left:10.0)),
                             FlatButton(
                               color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(

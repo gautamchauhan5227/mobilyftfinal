@@ -69,6 +69,8 @@ class CRUD1 {
     });
   }
 
+ 
+
   Future<void> carfav(data, BuildContext context) async {
     Firestore.instance.collection('car fav').add(data).catchError((e) {
       print(e);
@@ -187,6 +189,26 @@ class CRUD1 {
   deleterequest(docId) {
     Firestore.instance
         .collection("ride request")
+        .document(docId)
+        .delete()
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  deletefavcar(docId) {
+    Firestore.instance
+        .collection("car fav")
+        .document(docId)
+        .delete()
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  deleteintrestcar(docId) {
+    Firestore.instance
+        .collection("intrest request")
         .document(docId)
         .delete()
         .catchError((e) {
