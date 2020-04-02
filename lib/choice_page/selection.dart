@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -27,9 +29,18 @@ class _section_pageState extends State<section_page> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot pro;
   String user;
+ Uint8List imagef;
+  StorageReference photoref = FirebaseStorage.instance.ref().child("profile");
 
  @override
   void initState() {
+    int MAX_SIZE = 7 * 1024 * 1024;
+
+    photoref.child("${widget.email}").getData(MAX_SIZE).then((data) {
+      this.setState(() {
+        imagef = data;
+      });
+    }).catchError((error) {});
     crudobj.getData('user').then((result) {
       setState(() {
         pro = result;
@@ -68,7 +79,7 @@ class _section_pageState extends State<section_page> {
       
       drawer: Drawer(
         child: Container(
-          height: 300.0,
+          height: 400.0,
           width: 300.0,
          child: Center(
            child: ListView(
@@ -76,18 +87,31 @@ class _section_pageState extends State<section_page> {
               UserAccountsDrawerHeader(
                 accountName: user_name(), 
                 accountEmail: Text(widget.email,style: TextStyle(fontWeight:FontWeight.w300,fontSize: 18.0),),
-              currentAccountPicture: CircleAvatar(
-                child: Text(
-                "" 
-                )
-              ),
+              currentAccountPicture: Align(
+                      alignment: Alignment.center,
+                      child: CircleAvatar(
+                        radius: 85,
+                        //backgroundColor:,
+                        child: ClipOval(
+                         
+                            child: (imagef != null)
+                                ? Image.memory(
+                                    imagef,
+                                    fit: BoxFit.fill,
+                                  )
+                                : user_name(),
+                                
+                          
+                        ),
+                      ),
+                    ),
                
               ),
               Container(
                 child:Column(
                   children: <Widget>[
                     ListTile(
-                      title:Text("Edit Profile",style: TextStyle(fontWeight:FontWeight.w500,fontSize:25.0),),
+                      title:Text("View Profile",style: TextStyle(fontWeight:FontWeight.w500,fontSize:25.0),),
                       onTap: (){
                         Navigator.push(
                                       context,
@@ -105,27 +129,26 @@ class _section_pageState extends State<section_page> {
             Container(
                        child: Column(
                       children: <Widget>[
-                        Divider(),
+                        Divider(color: Colors.grey,),
                         ListTile(
                             
-                            title: Padding(
-                              padding: const EdgeInsets.only(bottom:12.0),
-                              child: Center(child: Text('Log Out',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 30.0,color: Colors.blue),)),
+                            title: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(Icons.input,color: Colors.blue,size: 30.0,),
+                                                           Padding(
+                                padding: const EdgeInsets.only(left:2.0,top: 1.0,bottom:1.0),
+                                child: Center(child: Text('Log Out',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 30.0,color: Colors.blue),)),
+                              ),
+                                      ],
                             ),
                             onTap:() async {
-                                // FirebaseAuth.instance.signOut().then((value) {
-                                //   Navigator.pop(context);
-                                //   Navigator.pop(context);
-                                //   Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //           builder: (BuildContext context) =>
-                                //               LoginPage()));
-                               // });
+                              
 
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.remove('email');
-                      // prefs.remove('radiovalue');
+                     
                       Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (BuildContext ctx) => LoginPage()));
                               },

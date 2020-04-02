@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'package:email_validator/email_validator.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mobilyft/First_Page/firstpage.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,9 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/choice_page/selection.dart';
-
-
-
 
 void main() {
   runApp(LoginPage());
@@ -20,7 +21,9 @@ class LoginPage extends StatefulWidget {
 
 enum FormType { login, register }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
+  FirstPageeState ob1 = new FirstPageeState();
   CRUD1 crudobj = new CRUD1();
   final formKey = GlobalKey<FormState>();
   String _pin, lic, rc, model;
@@ -32,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   String _phone;
   bool _toggleVisibility = true;
   bool isLoading = true;
+  LoginPage ob;
 
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -39,15 +43,13 @@ class _LoginPageState extends State<LoginPage> {
     if (form.validate()) {
       form.save();
       return true;
-    } else 
-     {
+    } else {
       setState(() {
         isLoading = true;
       });
       return false;
     }
   }
-      
 
   void insert1(BuildContext context) {
     print(_email);
@@ -77,34 +79,58 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void submit() async {
-    if (validateAndSave()) {
-      try {
+    bool temp = true;
+    bool v = true;
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+      }
+      if (validateAndSave()) {
         if (_formType == FormType.login) {
+          setState(() {
+            isLoading = false;
+          });
           FirebaseAuth.instance
               .signInWithEmailAndPassword(email: _email, password: _password)
               .then((user) {
+            v = false;
             Navigator.pop(context);
+            ob1.addStringToSF(_email);
             var route = new MaterialPageRoute(
               // builder: (BuildContext context) =>Home_page(email: _email, ),
-              builder: (BuildContext context) =>section_page(email: _email, ),
+              builder: (BuildContext context) => section_page(
+                email: _email,
+              ),
             );
             Navigator.of(context).push(route);
+          }).catchError((e) {
+            print("hello");
+            setState(() {
+              isLoading = true;
+            });
+            var alertDialog1 = AlertDialog(
+              title: Text("Error"),
+              content: Text("your email/password is wrong"),
+            );
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => alertDialog1);
+            print(e);
           });
         } else {
-          insert1(context);
-          FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: _email, password: _password);
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              // return object of type Dialog
-              return AlertDialog(
-                title: new Text("Thanks"),
-                content: new Text(
-                    "Registration successfully done \n please do login"),
-                actions: <Widget>[
-                  // usually buttons at the bottom of the dialog
-                  new FlatButton(
+          FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+                  email: _email, password: _password)
+              .then((user) {
+            setState(() {
+              insert1(context);
+            });
+            var alertDialog = AlertDialog(
+              title: Text("Account Created Successfully"),
+              content: Text("Please Do Login"),
+              actions: <Widget>[
+                FlatButton(
                     child: new Text("Ok"),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -114,14 +140,27 @@ class _LoginPageState extends State<LoginPage> {
                               builder: (BuildContext context) => LoginPage()));
                     },
                   ),
-                ],
-              );
-            },
-          );
-        }
-      } catch (e) {
-        print("Error is: $e");
+              ],
+            );
+
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => alertDialog);
+          }
+        );
       }
+    }
+  } on SocketException catch (_) {
+      setState(() {
+        isLoading = true;
+      });
+      var alertDialog = AlertDialog(
+        title: Text("Oops,there is no internet connection"),
+        content: Text("please switch on mobile data"),
+      );
+
+      showDialog(
+          context: context, builder: (BuildContext context) => alertDialog);
     }
   }
 
@@ -165,11 +204,9 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
 
-    return 
-    
-    [
+    return [
       Padding(
-        padding: EdgeInsets.only(top: 30.0, right: 100.0, left: 100.0),
+        padding: EdgeInsets.only(top: 20.0, right: 100.0, left: 100.0),
         child: Column(
           children: <Widget>[
             SizedBox(height: 30.0),
@@ -177,76 +214,31 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-
-       // Text('Mobi',
-            //     style: TextStyle(
-            //       fontSize: 40.0,
-            //       color: Colors.grey,
-            //       fontWeight: FontWeight.bold,
-            //     )),
-            // Text(
-            //   'Lyft',
-            //   style: TextStyle(fontSize: 40.0, color: Colors.amberAccent[700]),
-            // )
-
       Padding(
         padding: EdgeInsets.only(right: 100.0, left: 100.0),
-        child:Row( 
+        child: Row(
           children: <Widget>[
-             Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-           
-            TyperAnimatedTextKit(
-              
-              text: ["Mobi Lyft"],
-              textStyle:
-              
-              TextStyle(
-                   fontSize: 40.0,
-                   color: Colors.grey,
-                   fontWeight: FontWeight.bold,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TyperAnimatedTextKit(
+                  text: ["Mobi Lyft"],
+                  textStyle: TextStyle(
+                    fontSize: 40.0,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  pause: Duration(milliseconds: 100000000),
+                  speed: Duration(milliseconds: 50),
                 ),
-              pause: Duration(milliseconds: 100000000), 
-              speed: Duration(milliseconds:50),
+              ],
             ),
-            
-            
           ],
         ),
-
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-            
-
-        //     TyperAnimatedTextKit(
-        //       text: [" Lyft"],
-              
-        //       textStyle:
-              
-        //       TextStyle(
-        //            fontSize: 40.0,
-        //            color: Colors.amberAccent[700],
-                  
-        //         ),
-        //          pause: Duration(milliseconds: 100000000), 
-        //       speed: Duration(milliseconds:800),
-        //     ),
-            
-        //   ],
-        // ),
-          ],
-        ),
-        
-        
       ),
-      
-    
-
 
       SizedBox(
-        height: 20.0,
+        height: 15.0,
       ),
       Padding(
         padding: EdgeInsets.only(right: 25.0, left: 15.0),
@@ -255,10 +247,9 @@ class _LoginPageState extends State<LoginPage> {
           shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(150.0)),
           child: TextFormField(
-            // inputFormatters: [LengthLimitingTextInputFormatter(10)],
             style: TextStyle(color: Colors.black, fontSize: 20.0),
-
-            inputFormatters: [LengthLimitingTextInputFormatter(20)],
+            inputFormatters: [LengthLimitingTextInputFormatter(30)],
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               hoverColor: Colors.black,
               focusColor: Colors.black12,
@@ -266,7 +257,6 @@ class _LoginPageState extends State<LoginPage> {
               border: InputBorder.none,
               hintText: ' abc@gmail.com',
               hintStyle: TextStyle(color: Colors.black54),
-              //focusColor: Colors.grey,
               labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
               prefixIcon: Padding(
                 child: const Icon(
@@ -277,7 +267,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.only(left: 30, right: 10),
               ),
             ),
-            validator: (value) => validateEmail(value),
+            validator: (value) =>validateEmail(value),      
             onSaved: (value) => _email = value,
           ),
         ),
@@ -415,6 +405,7 @@ class _LoginPageState extends State<LoginPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
             child: TextFormField(
+              
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: ' Name',
@@ -447,11 +438,17 @@ class _LoginPageState extends State<LoginPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
             child: TextFormField(
+              controller: TextEditingController(), 
+              inputFormatters: [MaskTextInputFormatter(
+                mask: "##########", 
+                filter: { "#": RegExp(r'[0-9]') 
+                })],
               style: TextStyle(color: Colors.black),
               //maxLength: 10,
               decoration: InputDecoration(
+                
                 labelText: ' Phone',
-                hintText: ' 9845388..',
+                hintText: ' 9845388000',
                 border: InputBorder.none,
                 focusColor: Color.fromRGBO(100, 50, 100, 0.8),
                 hintStyle: TextStyle(color: Colors.black54),
@@ -476,6 +473,11 @@ class _LoginPageState extends State<LoginPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
             child: TextFormField(
+              controller: TextEditingController(), 
+              inputFormatters: [MaskTextInputFormatter(
+                mask: "######", 
+                filter: { "#": RegExp(r'[0-9]') 
+                })],
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: ' Pincode',
@@ -502,89 +504,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
 
         Padding(
-          padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25.0),
-          child: Card(
-            color: Colors.blue[50],
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(150.0)),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: ' Car Model',
-                focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-                border: InputBorder.none,
-                labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: 30, right: 10),
-                  child: const Icon(
-                    Icons.directions_car,
-                    size: 40.0,
-                    color: Colors.teal,
-                  ),
-                ),
-              ),
-              validator: (value) =>
-                  value.isEmpty ? "Model can't be empty" : null,
-              onChanged: (value) => model = value,
-            ),
-          ),
-        ),
-
-        Padding(
-          padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25.0),
-          child: Card(
-            color: Colors.blue[50],
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(150.0)),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: ' RC book number',
-                focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-                border: InputBorder.none,
-                labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: 30, right: 10),
-                  child: const Icon(
-                    Icons.confirmation_number,
-                    size: 40.0,
-                    color: Colors.teal,
-                  ),
-                ),
-              ),
-              validator: (value) => value.isEmpty ? " Can't be empty" : null,
-              onChanged: (value) => rc = value,
-            ),
-          ),
-        ),
-
-        Padding(
-          padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 25.0),
-          child: Card(
-            color: Colors.blue[50],
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(150.0)),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: ' License Number',
-                focusColor: Color.fromRGBO(100, 50, 100, 0.8),
-                border: InputBorder.none,
-                labelStyle: TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: 30, right: 10),
-                  child: const Icon(
-                    Icons.verified_user,
-                    size: 40.0,
-                    color: Colors.teal,
-                  ),
-                ),
-              ),
-              validator: (value) => value.isEmpty ? "Can't be empty" : null,
-              onChanged: (value) => lic = value,
-            ),
-          ),
-        ),
-
-        Padding(
-          padding: EdgeInsets.only(top: 20.0, left: 100.0, right: 100.0),
+          padding: EdgeInsets.only(top: 15.0, left: 100.0, right: 100.0),
           child: Container(
             height: 50.0,
             width: 250.0,
@@ -611,7 +531,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
 
         Padding(
-          padding: EdgeInsets.only(top: 15.0),
+          padding: EdgeInsets.only(top: 10.0),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -641,7 +561,7 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(top: 100.0),
+          padding: EdgeInsets.only(top: 50.0),
         ),
       ];
     }

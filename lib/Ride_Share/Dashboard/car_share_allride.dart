@@ -2,19 +2,17 @@ import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
-import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
-
 class allride extends StatefulWidget {
-  final String email;
   allride({Key key, this.email}) : super(key: key);
+  final String email;
   @override
   _allrideState createState() => _allrideState();
 }
-
 class _allrideState extends State<allride> {
-  String _src,_dest,_time,_seat;
   CRUD1 crudobj = new CRUD1();
+int l = 0;
   QuerySnapshot ride;
+  String _src,_dest,_time,_seat;
   @override
   void initState() {
     crudobj.getData('all ride').then((result) {
@@ -23,9 +21,6 @@ class _allrideState extends State<allride> {
       });
     });
   }
-
-int l = 0;
-
 void insert(BuildContext context) {    
     Map<String, dynamic> data = {
       'email': widget.email,
@@ -33,8 +28,7 @@ void insert(BuildContext context) {
       'dest': _dest,
       'time': _time,
       'Seat': _seat,
-};
-
+    };
     crudobj.addDetail(data, context).then((result) {}).catchError((e) {
       print(e);
     });
@@ -46,15 +40,11 @@ void insert(BuildContext context) {
       print(e);
     });
   }
-
-
-  void submit(int i) async {
-    
+  void submit(int i) async {   
  _src=ride.documents[i].data["source"]; 
  _dest=ride.documents[i].data["dest"];
  _time=ride.documents[i].data["time"];
- _seat=ride.documents[i].data["Seat"];
-   
+ _seat=ride.documents[i].data["Seat"];  
       insert(context);
       Navigator.pop(context,true);
       Navigator.pop(context,true);
@@ -63,61 +53,8 @@ void insert(BuildContext context) {
           MaterialPageRoute(
               builder: (BuildContext context) =>
                   allride(email: widget.email)));
-    
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(15),
-      ),
-        ),
-        backgroundColor: Colors.white,
-         iconTheme: IconThemeData(
-          color: Colors.black
-        ),
-         
-        title:Padding(
-          padding: const EdgeInsets.only(left: 50),
-          child: Text(
-              "Histroy Ride",
-              style: TextStyle(
-                color:Colors.black,
-                fontWeight:FontWeight.w400,
-                fontSize: 30.0
-                ),
-             ),
-        ),
-          leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios), 
-          onPressed:(){
-            Navigator.pop(context, true);
-          }
-          ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          if (ride != null)
-            for (int i = 0; i < ride.documents.length; i++)
-              Column(
-                children: <Widget>[
-                  returnride(i),
-                ],
-              ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (ride == null)
-            Column(
-              children: <Widget>[
-                Center(child: CircularProgressIndicator()),
-              ],
-            )
-        ],
-      ),
-    );
-  }
-
+        }
+  
   Widget returnride(int i) {
     if (ride != null) {
       if (widget.email == ride.documents[i].data["email"]) {
@@ -139,9 +76,18 @@ void insert(BuildContext context) {
                       size: 60.0,
                     ),
                     title: Text(
-                        "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",style: TextStyle(fontSize:30.0,fontWeight: FontWeight.w400),),
+                        "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",
+                        style: TextStyle(
+                          fontSize:30.0,
+                          fontWeight: FontWeight.w400
+                          ),
+                        ),
                     subtitle: Text("Time : "
-                        "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:20.0),),
+                        "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",
+                        style: TextStyle(
+                          fontSize:20.0
+                          ),
+                        ),
                     onTap: () {
                       showDialog<void>(
                         context: context,
@@ -170,15 +116,7 @@ void insert(BuildContext context) {
                                               Icons.location_searching,
                                               size: 40.0,
                                             ),
-                                            // Expanded(
-                                            //   child: Text(
-                                            //     'Pick-Up',
-                                            //     textAlign: TextAlign.start,
-                                            //     style: TextStyle(
-                                            //         fontSize: 20.0,
-                                            //         fontWeight: FontWeight.bold),
-                                            //   ),
-                                            // ),
+                          
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
@@ -200,16 +138,7 @@ void insert(BuildContext context) {
                                               Icons.location_on,
                                               size: 40.0,
                                             ),
-                                            // Expanded(
-                                            //   child: Text(
-                                            //     'Destination',
-                                            //     textAlign: TextAlign.start,
-                                            //     style: TextStyle(
-                                            //         fontSize: 20.0,
-                                            //         fontWeight: FontWeight.bold),
-                                            //   ),
-                                            //   flex: 0,
-                                            // ),
+                                           
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
@@ -231,15 +160,7 @@ void insert(BuildContext context) {
                                               Icons.access_time,
                                               size: 40.0,
                                             ),
-                                            // Expanded(
-                                            //   child: Text(
-                                            //     'Time',
-                                            //     textAlign: TextAlign.start,
-                                            //     style: TextStyle(
-                                            //         fontSize: 20.0,
-                                            //         fontWeight: FontWeight.bold),
-                                            //   ),
-                                            // ),
+                                           
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
@@ -261,15 +182,7 @@ void insert(BuildContext context) {
                                               Icons.airline_seat_recline_normal,
                                               size: 40.0,
                                             ),
-                                            // Expanded(
-                                            //   child: Text(
-                                            //     'Seat',
-                                            //     textAlign: TextAlign.start,
-                                            //     style: TextStyle(
-                                            //         fontSize: 20.0,
-                                            //         fontWeight: FontWeight.bold),
-                                            //   ),
-                                            // ),
+                                            
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
@@ -345,5 +258,58 @@ void insert(BuildContext context) {
         child: CircularProgressIndicator(),
       );
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(15),
+      ),
+        ),
+        backgroundColor: Colors.white,
+         iconTheme: IconThemeData(
+          color: Colors.black
+        ),
+         
+        title:Padding(
+          padding: const EdgeInsets.only(left: 50),
+          child: Text(
+              "Histroy Ride",
+              style: TextStyle(
+                color:Colors.black,
+                fontWeight:FontWeight.w400,
+                fontSize: 30.0
+                ),
+             ),
+        ),
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios), 
+          onPressed:(){
+            Navigator.pop(context, true);
+          }
+          ),
+      ),
+      body: ListView(
+        children: <Widget>[
+          if (ride != null)
+            for (int i = 0; i < ride.documents.length; i++)
+              Column(
+                children: <Widget>[
+                  returnride(i),
+                ],
+              ),
+          Padding(padding: EdgeInsets.only(top: 250.0)),
+          if (ride == null)
+            Column(
+              children: <Widget>[
+                Center(child: CircularProgressIndicator()),
+              ],
+            )
+        ],
+      ),
+    );
   }
 }

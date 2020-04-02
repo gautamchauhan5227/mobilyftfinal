@@ -8,17 +8,12 @@ import 'package:nice_button/nice_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 class msg_ride_response extends StatefulWidget {
    msg_ride_response({Key key, this.email}) : super(key: key);
-
-  final String email;
-  
+  final String email; 
   @override
   _msg_ride_responseState createState() => _msg_ride_responseState();
 }
-
-class _msg_ride_responseState extends State<msg_ride_response> {
-  
-  
-   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
+class _msg_ride_responseState extends State<msg_ride_response> { 
+  var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   int l = 0;
   String requester,namereq,phonereq;
@@ -50,8 +45,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
       body: ListView(
         children: <Widget>[
           if (respo != null)
-            for (int i = 0; i < respo.documents.length; i++)
-             
+            for (int i = 0; i < respo.documents.length; i++) 
               Column(
                 children: <Widget>[
                   returnrespo(i),
@@ -68,7 +62,6 @@ class _msg_ride_responseState extends State<msg_ride_response> {
       ),
     );
   }
-
   Widget returnrespo(int i) {
     if (req != null) {
       if (widget.email == respo.documents[i].data["Emailreqs"]) {
@@ -146,22 +139,18 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                   )
                                   ),
                                 ],
-                              ),
-                              
-                             
-                            ),
-                            
+                              ),                             
+                            ),                            
                           ),
                         );
                       }
                    );
-                               },
-                               text: "Get Start",
-                               gradientColors: [secondColor, firstColor],
-                               background: null,
-                             )
-                           ),
-                  
+                 },
+                 text: "Get Start",
+                 gradientColors: [secondColor, firstColor],
+                 background: null,
+              )
+            ),                 
                   onTap: () {
                     showDialog<void>(
                       context: context,
@@ -245,15 +234,14 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                     style: TextStyle(
                                       fontSize:25.0,
                                       fontWeight: FontWeight.w300
-                                      ),
-                                      )
-                                    ),
-                                            
-                                          
+                                              ),
+                                            )
+                                          ),                                          
                                         ],
                                       )
-                                    ])),
-                               
+                                    ]
+                                  )
+                                ),                            
                               ],
                             ),
                           ),
@@ -261,7 +249,10 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                       },
                     );
                   },
-                ))));
+                )
+              )
+            )
+          );
       } else
         return Container();
     } else {

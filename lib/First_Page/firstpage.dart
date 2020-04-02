@@ -4,10 +4,10 @@ import 'package:mobilyft/Login_Page/loginpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class FirstPagee extends StatefulWidget {
   @override
-  _FirstPageeState createState() => _FirstPageeState();
+  FirstPageeState createState() => FirstPageeState();
 }
 
-class _FirstPageeState extends State<FirstPagee> {
+class FirstPageeState extends State<FirstPagee> {
   @override
   void initState() {
     super.initState();
@@ -19,16 +19,13 @@ class _FirstPageeState extends State<FirstPagee> {
               MaterialPageRoute(builder: (context) => LoginPage()),
             ));
   }
-
-  // addStringToSF(String e,String rv) async {
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // prefs.setString('email',e);
-  // // prefs.setString('radiovalue', rv);
-//}
-
-
-  @override
-  Widget build(BuildContext context) {
+  addStringToSF(String e) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('email',e);
+  
+}
+@override
+Widget build(BuildContext context) {
     
     return Scaffold(
       backgroundColor: Colors.white,

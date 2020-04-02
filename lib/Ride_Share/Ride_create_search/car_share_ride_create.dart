@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:horizontal_time_picker/horizontal_time_picker.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
 
@@ -19,6 +20,7 @@ class _CreateState extends State<Create> {
   final formKey = GlobalKey<FormState>();
   TimeOfDay _tod = TimeOfDay.now();
   TimeOfDay picked;
+  DateTime ti;//=null;
   String _time = "Not set";
   String _src, _dest, _seat;
   CRUD1 crudobj = new CRUD1();
@@ -53,9 +55,9 @@ class _CreateState extends State<Create> {
       print(e);
     });
 
-    crudobj.history(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
+    // crudobj.history(data, context).then((result) {}).catchError((e) {
+    //   print(e);
+    // });
   }
 
   bool validateAndSave() {
@@ -67,9 +69,34 @@ class _CreateState extends State<Create> {
     } else
       return false;
   }
+Future<bool> alert(BuildContext context) async {
+  return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+ return AlertDialog(
+            title: Center(
+              
+              child: Text(
+                "Select Time First!!",
+                style: TextStyle(
+                  fontSize: 22.0,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+ );
+        });
 
+}
   void submit() async {
+    
     if (validateAndSave()) {
+      if(ti == null){
+        print("not complete!!");
+        alert(context);
+      }
       insert(context);
       Navigator.pop(context);
       Navigator.push(
@@ -141,6 +168,10 @@ class _CreateState extends State<Create> {
                 size: 40.0,
                 color: Colors.blue,
               ),
+              suffixIcon: IconButton(
+                icon: null, 
+                onPressed: null
+              )
             ),
           
             validator: (value) =>
@@ -178,67 +209,86 @@ class _CreateState extends State<Create> {
         height: 10.0,
       ),
       Padding(
-        padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 10.0),
+        padding: const EdgeInsets.only(left: 15.0, right: 10.0),
         child: Card(
           color: Colors.lightBlue[50],
-          child: RaisedButton(
-            highlightColor: Colors.lightBlue[50],
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-            onPressed: () {
-              DatePicker.showTimePicker(context,
-                  theme: DatePickerTheme(
-                    containerHeight: 210.0,
-                  ),
-                  showTitleActions: true, onConfirm: (time) {
-                print('confirm $time');
-                _time = '${time.hour} : ${time.minute} ';
-                setState(() {});
-                print('selected $_time');
-              }, currentTime: DateTime.now(), locale: LocaleType.en);
-              setState(() {});
-            },
-            child: Container(
-              color: Colors.lightBlue[50],
-              alignment: Alignment.center,
-              height: 50.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
+          
+                  child: Column(
                     children: <Widget>[
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.access_time,
-                              size: 18.0,
-                              color: Colors.blue,
-                            ),
-                            Text(
-                              " $_time",
-                              style: TextStyle(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                                  Icons.av_timer,
+                                  size: 40.0,
                                   color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0),
-                            ),
-                          ],
-                        ),
-                      )
+                                ),
+                                Text("  Time",style: TextStyle(fontSize:20.0),)
+                        ],
+                      ),
+                      Container(
+            child: HorizontalTimePicker(
+                key: UniqueKey(),
+                onTimeSelected: (time){
+                  
+                
+                 print(_time);
+                  setState(() {
+                     _time = '${time.hour} : ${time.minute} ';
+                       print(ti);
+                  });
+                  
+                },
+                startTimeInHour: 7,
+                endTimeInHour: 24,
+                dateForTime: DateTime.now(),
+                selectedTimeTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Helvetica Neue",
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                      height: 1.0,
+                ),
+                timeTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "Helvetica Neue",
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                      height: 1.0,
+                ),
+                defaultDecoration: const BoxDecoration(
+                      color: Colors.white,
+                      border: Border.fromBorderSide(BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
+                        width: 1,
+                        style: BorderStyle.solid,
+                      )),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                selectedDecoration: const BoxDecoration(
+                      color: Colors.black,
+                      border: Border.fromBorderSide(BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
+                        width: 1,
+                        style: BorderStyle.solid,
+                      )),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                disabledDecoration: const BoxDecoration(
+                      color: Colors.black26,
+                      border: Border.fromBorderSide(BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151),
+                        width: 1,
+                        style: BorderStyle.solid,
+                      )),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                showDisabled: true,
+                
+              ),
+          ),
                     ],
                   ),
-                  Text(
-                    "  Change",
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0),
-                  ),
-                ],
-              ),
-            ),
-            color: Colors.white,
-          ),
         ),
       ),
       Padding(

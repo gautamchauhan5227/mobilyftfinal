@@ -4,24 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
-
 class request_page extends StatefulWidget {
   request_page({Key key, this.email}) : super(key: key);
-
   final String email;
-
   @override
   _request_pageState createState() => _request_pageState();
 }
-
 class _request_pageState extends State<request_page> {
   CRUD1 crudobj = new CRUD1();
   int l = 0;
   String requester,namereq,phonereq,namereqs,emailreq,emailcr,namecr,src,dest,time,seat;
   QuerySnapshot req, user;
-
   void insert(BuildContext context) {
     Map<String, dynamic> data = {
       'Emailcr': widget.email,
@@ -30,18 +23,13 @@ class _request_pageState extends State<request_page> {
       'Source':src,
       'Destination':dest,
       'Time':time,
-      'Seat':seat
-      
-      
+      'Seat':seat   
     };
-
     crudobj.riderequestresponse(data, context).then((result) {}).catchError((e) {
       print(e);
     });
   }
-
-
-  void submit(int i) async {   
+void submit(int i) async {   
 //  namereqs=req.documents[i].data["name"];
  emailcr=req.documents[i].data["Emailreq"];
  namereqs=req.documents[i].data["Namecr"];
@@ -49,9 +37,6 @@ class _request_pageState extends State<request_page> {
  dest=req.documents[i].data["Destination"];
  time=req.documents[i].data["Time"];
  seat=req.documents[i].data["Sear"];
- 
- 
-
   insert(context);
   Navigator.pop(context, true);
   Navigator.pop(context, true);
@@ -61,7 +46,6 @@ class _request_pageState extends State<request_page> {
         MaterialPageRoute(
             builder: (BuildContext context) => Home_page(email: widget.email)));   
   }
-
   @override
   void initState() {
     crudobj.getData('ride request').then((result) {
@@ -69,7 +53,6 @@ class _request_pageState extends State<request_page> {
         req = result;
       });
     });
-   // print(req.documents[0].data["Emailcr"]);
     crudobj.getData('user').then((result) {
       setState(() {
         user = result;
@@ -252,16 +235,23 @@ class _request_pageState extends State<request_page> {
                                 style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: (){
-                                 Navigator.pop(context, true);
-                                 Navigator.pop(context, true);
-                              },
-                            ),
-                            Padding(padding: EdgeInsets.only(left:10.0)),
-                          ]
-                        );
-                      }
-                                );
-                                
+                                crudobj.deleteData(
+                                        req.documents[i].documentID,"ride request");
+                                    Navigator.pop(context, true);
+                                    Navigator.pop(context, true);
+                                    Navigator.pop(context, true);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              request_page(email: widget.email)));
+                                            },
+                                          ),
+                                        Padding(padding: EdgeInsets.only(left:10.0)),
+                                      ]
+                                    );
+                                  }
+                                );                                
                               },
                             ),
                           ],
@@ -278,7 +268,6 @@ class _request_pageState extends State<request_page> {
       );
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -286,8 +275,7 @@ class _request_pageState extends State<request_page> {
       body: ListView(
         children: <Widget>[
           if (req != null)
-            for (int i = 0; i < req.documents.length; i++)
-             
+            for (int i = 0; i < req.documents.length; i++)             
               Column(
                 children: <Widget>[
                   returnride(i),

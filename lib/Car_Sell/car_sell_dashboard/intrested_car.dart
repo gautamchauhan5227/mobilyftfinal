@@ -99,101 +99,98 @@ class _intrested_carState extends State<intrested_car> {
               initDelay: Duration(milliseconds: 0), 
               duration: Duration(seconds: 2), 
               child: Padding(
-                padding: const EdgeInsets.only(left:20.0,right:20.0,top: 20.0,bottom: 20.0),
+                padding: const EdgeInsets.only(left:20.0,right:20.0,top: 20.0),
                 child: Card(
                    child: ListTile(
                      title: Container(
-                       height: 200.0,
+                       height: 240.0,
                        child: Column(
                          children: <Widget>[
-                           Padding(
-                             padding: const EdgeInsets.all(5.0),
-                             child: Row(
-                               children: <Widget>[
+                           
+                      Padding(
+                       padding: EdgeInsets.only(top: 15.0),
+                        child: new Column(children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  "Car Company",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w500),
+                                 ),
+                                   
+                                ),
                                 
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Car Company",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
-                                     ),  
-                                   ],
+                              Expanded(
+                                child: Text(
+                                 "${intrest.documents[i].data["Car Company"]}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    ), 
+                                    flex: 1,             
+                                  )
+                                ],
+                              ),
+                               Padding(padding: EdgeInsets.only(top: 5.0),),
+                               Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  "Car Model",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w500),
                                  ),
-                                Padding(padding: EdgeInsets.only(left:40.0)),
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "${intrest.documents[i].data["Car Company"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                     ),  
-                                   ],
+                                   
+                                ),
+                               
+                              Expanded(
+                                child: Text(
+                                 "${intrest.documents[i].data["Car Model"]}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    ), 
+                                    flex: 1,             
+                                  )
+                                ],
+                              ),
+                              Padding(padding: EdgeInsets.only(top: 5.0),),
+                              Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  "Car Price",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w500),
                                  ),
-                               ]
-                             ),
-                           ),
-
-
-                           Padding(
-                             padding: const EdgeInsets.all(5.0),
-                             child: Row(
-                               children: <Widget>[
+                                   
+                                ),
                                 
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Car Model",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
-                                     ),  
-                                   ],
-                                 ),
-                                 Padding(padding: EdgeInsets.only(left:65.0)),
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "${intrest.documents[i].data["Car Model"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                     ),  
-                                   ],
-                                 ),
-                               ]
-                             ),
-                           ),
-
-                           Padding(
-                             padding: const EdgeInsets.all(5.0),
-                             child: Row(
-                               children: <Widget>[
-                                
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Car Price",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
-                                     ),  
-                                   ],
-                                 ),
-                                 Padding(padding: EdgeInsets.only(left:74.0)),
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Rs.""${intrest.documents[i].data["car price"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                     ),  
-                                   ],
-                                 ),
-                               ]
-                             ),
-                           ),
+                              Expanded(
+                                child: Text(
+                                 "${intrest.documents[i].data["car price"]}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    ),
+                                    flex: 1,              
+                                  )
+                                ],
+                              )
+                            ]
+                          )
+                        ),
 
                            Padding(
                              padding: const EdgeInsets.only(top:15.0),
                              child: NiceButton(
                                onPressed: (){
-                                 crudobj.deleteintrestcar(intrest.documents[i].documentID);
-                                
-                                 Navigator.pop(context, true);
-                                 
-                                
+                                 crudobj.deleteintrestcar(intrest.documents[i].documentID);                               
+                                 Navigator.pop(context, true);                                                               
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -204,17 +201,12 @@ class _intrested_carState extends State<intrested_car> {
                                gradientColors: [secondColor, firstColor],
                                background: null,
                              )
-                           ),
-                               
-                             ],
-                           ),
-                        
-                      
+                           ),                               
+                         ],
+                       ),          
                      ),
-                                 ),
-            
-                ),
-                
+                  ),
+                ), 
               )
             )
         );

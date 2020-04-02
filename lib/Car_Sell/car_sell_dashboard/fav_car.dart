@@ -6,19 +6,16 @@ import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:nice_button/NiceButton.dart';
 class fav_car extends StatefulWidget {
   fav_car({Key key, this.email}) : super(key: key);
-
   final String email;
   @override
   _fav_carState createState() => _fav_carState();
 }
-
 class _fav_carState extends State<fav_car> {
-   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
+  var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   QuerySnapshot fav,cars,user;
-   CRUD1 crudobj = new CRUD1();
+  CRUD1 crudobj = new CRUD1();
   int l = 0;
-String _ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd,emailcr,namecr;
-
+  String _ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd,emailcr,namecr;
   void insert(BuildContext context) {
     Map<String, dynamic> data = {
       'Emailreq': widget.email,
@@ -32,21 +29,14 @@ String _ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd,ema
       'car gear type':_cgear,
       'car fuel type':_cfuel,
       'Address person':_cadd,
-      'Contact number':_cnumber
-      
+      'Contact number':_cnumber     
     };
-
     crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
       print(e);
-    });
-
-     
-  }
-
-
-void submit(int i) async {
-    //
-    
+    }
+  );
+}
+void submit(int i) async { 
  namecr=user.documents[i].data["name"];
  emailcr=cars.documents[i].data["email"];
  _ccomapny=cars.documents[i].data["car Manufacturer Company"];
@@ -58,19 +48,15 @@ void submit(int i) async {
  _cfuel=cars.documents[i].data["car fuel type"];
  _cadd=cars.documents[i].data["Address person"];
  _cnumber=cars.documents[i].data["Contact number"];
- 
- 
-
   insert(context);
+  crudobj.deletefavcar(fav.documents[i].documentID); 
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => sell_home(email: widget.email)));
-             
-      
-  }
-
-
+            builder: (BuildContext context) => fav_car(email: widget.email)
+        )
+      );
+    }
   @override
   void initState() {
     crudobj.getData('car fav').then((result) {
@@ -111,15 +97,15 @@ void submit(int i) async {
                 color:Colors.black,
                 fontWeight:FontWeight.w400,
                 fontSize: 30.0
-                ),
-             ),
-        ),
+              ),
+            ),
+          ),
           leading: IconButton(
           icon: Icon(Icons.arrow_back_ios), 
           onPressed:(){
             Navigator.pop(context, true);
           }
-          ),
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -161,110 +147,103 @@ void submit(int i) async {
                          children: <Widget>[
                            Padding(
                              padding: const EdgeInsets.all(5.0),
-                             child: Row(
+                             child: Column(
                                children: <Widget>[
+                                 Row(
+                                   children: <Widget>[
+                                     Expanded(
+                                child: Text(
+                                      "Car Company",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.w500),
+                                     ),    
+                                ),                               
+                                 Expanded(
+                                child: Text(
+                                 "${fav.documents[i].data["Car Company"]}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    ), 
+                                    flex: 1,             
+                                  )
+                                   ]
+                                 ),
+                                 Padding(padding: EdgeInsets.only(top: 5.0),),
+                               Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  "Car Model",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w500),
+                                 ),
+                                   
+                                ),
+                               
+                              Expanded(
+                                child: Text(
+                                 "${fav.documents[i].data["Car Model"]}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    ), 
+                                    flex: 1,             
+                                  )
+                                ],
+                              ),
+                              Padding(padding: EdgeInsets.only(top: 5.0),),
+                              Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  "Car Price",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.w500),
+                                 ),
+                                   
+                                ),
                                 
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Car Company",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
-                                     ),  
-                                   ],
-                                 ),
-                                Padding(padding: EdgeInsets.only(left:40.0)),
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "${fav.documents[i].data["Car Company"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                     ),  
-                                   ],
-                                 ),
-                               ]
-                             ),
-                           ),
-
-
-                           Padding(
-                             padding: const EdgeInsets.all(5.0),
-                             child: Row(
-                               children: <Widget>[
-                                
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Car Model",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
-                                     ),  
-                                   ],
-                                 ),
-                                 Padding(padding: EdgeInsets.only(left:65.0)),
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "${fav.documents[i].data["Car Model"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                     ),  
-                                   ],
-                                 ),
-                               ]
-                             ),
-                           ),
-
-                           Padding(
-                             padding: const EdgeInsets.all(5.0),
-                             child: Row(
-                               children: <Widget>[
-                                
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Car Price",style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left,),
-                                     ),  
-                                   ],
-                                 ),
-                                 Padding(padding: EdgeInsets.only(left:74.0)),
-                                 Column(
-                                   children: <Widget>[
-                                     Container(
-                                       child:Text(
-                                          "Rs.""${fav.documents[i].data["car price"]}",style: TextStyle(fontSize:25.0,fontWeight:FontWeight.w300),textAlign: TextAlign.left),
-                                     ),  
-                                   ],
-                                 ),
-                               ]
-                             ),
-                           ),
-
-
-                           Padding(
-                             padding: const EdgeInsets.only(top:15.0),
-                             child: NiceButton(
-                               onPressed: (){
-                                 submit(i);
-                               },
-                               text: "Intrest",
-                               gradientColors: [secondColor, firstColor],
-                               background: null,
+                              Expanded(
+                                child: Text(
+                                 "${fav.documents[i].data["car price"]}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    ),
+                                    flex: 1,              
+                                  )
+                                ],
+                              )                               
+                            ],
+                          )
+                        ),                    
+                       Padding(
+                         padding: const EdgeInsets.only(top:15.0),
+                           child: NiceButton(
+                             onPressed: (){
+                               submit(i);
+                             },
+                             text: "Intrest",
+                             gradientColors: [secondColor, firstColor],
+                             background: null,
                              )
                            ),
                            Padding(
                              padding: const EdgeInsets.only(top:15.0),
                              child: NiceButton(
                                onPressed: (){
-                                 crudobj.deletefavcar(fav.documents[i].documentID);
-                                
-                                 Navigator.pop(context, true);
-                                 
-                                
+                                 crudobj.deletefavcar(fav.documents[i].documentID);                                
+                                Navigator.pop(context, true);                                
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
                                             fav_car(email: widget.email,)));
-                               },
+                                  },
                                text: "Remove",
                                gradientColors: [secondColor, firstColor],
                                background: null,

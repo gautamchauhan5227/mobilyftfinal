@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Car_Service/get_service/service_home.dart';
-import 'package:mobilyft/Car_Service/give_service/give_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nice_button/NiceButton.dart';
@@ -98,8 +97,10 @@ int flag=0;
           Navigator.push(
                        context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              give_home(email: widget.email)));
+                         builder: (BuildContext context) =>
+                             get_services(email: widget.email)
+                             )
+                             );
                
 
             // if (garage != null)
@@ -290,14 +291,14 @@ int flag=0;
         child: new Container(
           width: 310.0,
           height: 200.0, 
-          child: Image.asset("asets/give_Service.jpg",height: 200.0,width: 310.0,fit: BoxFit.fill,),
+          child: Image.asset("asets/searchrent.jpg",height: 200.0,width: 310.0,fit: BoxFit.fill,),
         )
     ),
 
      SizedBox(
           height: 10.0,
               ),
-                  Text("Give Service",style: TextStyle(
+                  Text("Get Service",style: TextStyle(
                               fontSize: 50.0, 
                               fontWeight: FontWeight.w300
                           ),),
@@ -322,7 +323,7 @@ new GestureDetector(
      SizedBox(
           height: 10.0,
               ),
-                  Text("Get Service",style: TextStyle(
+                  Text("Recent Service",style: TextStyle(
                               fontSize: 50.0, 
                               fontWeight: FontWeight.w300
                           ),),

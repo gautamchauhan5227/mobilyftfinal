@@ -26,6 +26,11 @@ class CRUD1 {
       print(e);
     });
   }
+  Future<void> addcar(data, BuildContext context) async {
+    Firestore.instance.collection('car_detail').add(data).catchError((e) {
+      print(e);
+    });
+  }
 
   Future<void> notify(data, BuildContext context) async {
     Firestore.instance.collection('notify').add(data).catchError((e) {
@@ -105,19 +110,20 @@ class CRUD1 {
     return await Firestore.instance.collection(table).getDocuments();
   }
 
-  updateRideData(selectedDoc, newValue) {
+  updateData(selectedDoc, newValue,String coll) {
     Firestore.instance
-        .collection("current ride")
+        .collection(coll)
         .document(selectedDoc)
         .updateData(newValue)
         .catchError((e) {
       print(e);
     });
+  
   }
 
-  updateAllRideData(selectedDoc, newValue) {
+  updateCurrentRideData(selectedDoc, newValue) {
     Firestore.instance
-        .collection("all ride")
+        .collection("current ride")
         .document(selectedDoc)
         .updateData(newValue)
         .catchError((e) {
@@ -145,9 +151,9 @@ class CRUD1 {
     });
   }
 
-  deleteData(docId) {
+  deleteData(docId,String coll) {
     Firestore.instance
-        .collection("current ride")
+        .collection(coll)
         .document(docId)
         .delete()
         .catchError((e) {
