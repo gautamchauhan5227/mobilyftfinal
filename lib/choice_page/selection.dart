@@ -1,6 +1,6 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,6 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:mobilyft/Car_Insurance/Car_Insurance_CompanyList.dart';
 import 'package:mobilyft/Car_Rent/Car_Rent_HomePage/car_rent_homepage.dart';
 import 'package:mobilyft/Car_Sell/car_sell_home.dart';
-import 'package:mobilyft/Car_Service/car_ser_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/Login_Page/loginpage.dart';
 import 'package:mobilyft/Profile/profile.dart';
@@ -74,381 +73,376 @@ class _section_pageState extends State<section_page> {
     return  WillPopScope(
       onWillPop: manage_back_button,
     
-    child:Scaffold(
-     
-      
-      drawer: Drawer(
-        child: Container(
-          height: 400.0,
-          width: 300.0,
-         child: Center(
-           child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: user_name(), 
-                accountEmail: Text(widget.email,style: TextStyle(fontWeight:FontWeight.w300,fontSize: 18.0),),
-              currentAccountPicture: Align(
-                      alignment: Alignment.center,
-                      child: CircleAvatar(
-                        radius: 85,
-                        //backgroundColor:,
-                        child: ClipOval(
-                         
-                            child: (imagef != null)
-                                ? Image.memory(
-                                    imagef,
-                                    fit: BoxFit.fill,
+    child:SafeArea(
+      child: Scaffold(        
+        drawer: Drawer(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height ,
+           child: Center(
+             child: ListView(
+              children: <Widget>[
+                UserAccountsDrawerHeader(
+                  accountName: user_name(), 
+                  accountEmail: Text(widget.email,style: TextStyle(fontWeight:FontWeight.w300,fontSize: 18.0),),
+                  currentAccountPicture: Align(
+                        alignment: Alignment.center,
+                        child: CircleAvatar(
+                          radius: 85,
+                          child: ClipOval(                          
+                              child: (imagef != null)
+                                  ? Image.memory(
+                                      imagef,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : user_name(),                            
+                          ),
+                        ),
+                      ), 
+                ),
+                
+                Container(
+                  child:Column(
+                    children: <Widget>[
+                      ListTile(
+                        title:Text("View Profile",style: TextStyle(fontWeight:FontWeight.w500,fontSize:25.0),),
+                        onTap: (){
+                          Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                              profile(email: widget.email,) ));                      
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+               
+              Padding(padding: EdgeInsets.only(top:320.0)),
+              Container(
+                child: Column(
+                children: <Widget>[
+                  Divider(color: Colors.grey,),
+                  ListTile(
+                    title: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.input,color: Colors.blue,size: 30.0,),
+                          Padding(
+                            padding: const EdgeInsets.only(left:2.0,top: 1.0,bottom:1.0),
+                            child: Center(child: Text('Log Out',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 30.0,color: Colors.blue),)),
+                            ),
+                          ],
+                        ),
+                  onTap:() async {                              
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        prefs.remove('email');                       
+                        Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (BuildContext ctx) => LoginPage()));
+                            },
+                          ),   
+                        ],
+                      )
+                    )
+                  ], 
+                ),
+              ),          
+            ),          
+          ),
+  
+        body: 
+        Container(
+           decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.green,Colors.green,Colors.white,Colors.green[100],Colors.green[100]])),
+          child: ListView(
+              children: <Widget>[
+                Padding(padding:EdgeInsets.only(top:30.0),
+                child: Center(
+                  child: Text(
+                    "Welcome To MobiLyft",
+                    style: TextStyle(
+                      fontFamily:"Merriweather",
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.black
+                      ),
+                    )
+                  ),                
+                ),
+
+              Padding(padding: EdgeInsets.only(top:35.0)),
+
+                SizedBox(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.439,
+                              height: MediaQuery.of(context).size.height*0.21,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [Colors.green, Colors.black]
+                                )
+                              ),
+                              child: RaisedButton(
+                                color: Colors.transparent,
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                              Home_page(email: widget.email),                                             
+                                    )
+                                  );                              
+                                },
+                                child: Text(
+                                  'Ride Share',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: Colors.white
                                   )
-                                : user_name(),
-                                
-                          
+                                )
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-               
-              ),
-              Container(
-                child:Column(
-                  children: <Widget>[
-                    ListTile(
-                      title:Text("View Profile",style: TextStyle(fontWeight:FontWeight.w500,fontSize:25.0),),
-                      onTap: (){
-                        Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                             profile(email: widget.email,) ));
-                        
-                      },
-                    ),
-                  ],
-                ),
-              ),
-             
-              Padding(padding: EdgeInsets.only(top:320.0)),
-            Container(
-                       child: Column(
-                      children: <Widget>[
-                        Divider(color: Colors.grey,),
-                        ListTile(
-                            
-                            title: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(Icons.input,color: Colors.blue,size: 30.0,),
-                                                           Padding(
-                                padding: const EdgeInsets.only(left:2.0,top: 1.0,bottom:1.0),
-                                child: Center(child: Text('Log Out',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 30.0,color: Colors.blue),)),
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.439,
+                              height: MediaQuery.of(context).size.height*0.21,
+                               decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [Colors.green, Colors.black]
+                                )
                               ),
-                                      ],
+                              child: RaisedButton(
+                                color: Colors.transparent,
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                              rent_homepage(email: widget.email),                                             
+                                    )
+                                  );
+                                },
+                                child: Text(
+                                  'Car Rent',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: Colors.white
+                                  )
+                                )
+                              ),
                             ),
-                            onTap:() async {
-                              
-
-                                SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.remove('email');
-                     
-                      Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (BuildContext ctx) => LoginPage()));
-                              },
-                            ),
-                       
-                      ],
-                    )
+                          ],
+                       ),
+                      )
+                    ],
                   )
-            ], 
-        
-           ),
-         ),
-        
-        
-        ),
-        
-        
-        
-      ),
-      
-      
-      
-      
-      body: 
-      Container(
-         decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.blue, Colors.white,Colors.lightBlue])),
-        child: ListView(
-          
-            children: <Widget>[
-              Padding(padding:EdgeInsets.only(top:20.0),
-              child: Center(child: Text("Welcome To MobiLyft",style: TextStyle(fontFamily:"Merriweather",fontSize: 30.0,fontWeight: FontWeight.bold),)),
-              
-              ),
-             
-              
-              Padding(
-                padding: EdgeInsets.only(top: 40.0, left: 10, right: 10),
-                child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(child:  Column(
-                      children: <Widget>[
-                             Container(
-                            
-                         
-                         height:140.0,
-                         width:160.0,
-                         child: RaisedButton(
-                           
-                            color: Colors.white,
-                            child: ColorizeAnimatedTextKit(
-                            text: ["Ride Share"],                          
-                            textStyle: TextStyle(
-                                fontSize: 30.0, 
-                                fontFamily: "Horizon",                           
-                            ),                         
-                            colors: [
-                              Colors.black,
-                              Colors.blue,
-                              Colors.yellow,
-                              Colors.red,
-                            ],
-                            textAlign: TextAlign.center,
-                            alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                     ),
-                            onPressed: () {
-                              Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            Home_page(
-                                              email: widget.email,
-                                            )));
-                            },
-                            // shape: CircleBorder()
-                            ),
-                       ),
-                                         
-                      ],
-                    ),),
-
-                   Expanded(child:  Column(
-                      children: <Widget>[
-                       SizedBox(
-                         height:140.0,
-                         width:160.0,
-                         child: RaisedButton(
-                            color: Colors.white,
-                            child: ColorizeAnimatedTextKit(    
-                            text: ["Car Rent"],                          
-                            textStyle: TextStyle(
-                                fontSize: 30.0, 
-                                fontFamily: "Horizon",                           
-                            ),                          
-                            colors: [
-                              Colors.black,
-                              Colors.blue,
-                              Colors.yellow,
-                              Colors.red,
-                            ],
-                            textAlign: TextAlign.center,
-                            alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                     ),
-                            onPressed: () {
-                               Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            rent_homepage(
-                                              email: widget.email,
-                                            )));
-                            },
-                            // shape: CircleBorder()
-                            ),
-                       ),
-                            
-                      ],
-                    ),),
-                  ],
                 ),
+
+            Padding(padding: EdgeInsets.only(top:35.0)),
+
+              SizedBox(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.439,
+                              height: MediaQuery.of(context).size.height*0.21,
+                               decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [Colors.green, Colors.black]
+                                )
+                              ),
+                              child: RaisedButton(
+                                color: Colors.transparent,
+                                onPressed: (){
+                                  // Navigator.push(context, MaterialPageRoute(
+                                  //   builder: (BuildContext context) =>
+                                  //             car_ser_selection(email: widget.email),                                             
+                                  //   )
+                                  // );
+                                },
+                                child: Text(
+                                  'Car Service',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: Colors.white
+                                  ),
+                                  textAlign: TextAlign.center,
+                                )
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.439,
+                              height: MediaQuery.of(context).size.height*0.21,
+                               decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [Colors.green, Colors.black]
+                                )
+                              ),
+                              child: RaisedButton(
+                                color: Colors.transparent,
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                              sell_home(email: widget.email),                                             
+                                  )
+                                 );
+                                },
+                                child: Text(
+                                  'Car sell',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: Colors.white
+                                  )
+                                )
+                              ),
+                            ),
+                          ],
+                       ),
+                      )
+                    ],
+                  )
+                ),
+
+              Padding(padding: EdgeInsets.only(top:35.0)),
+
+                SizedBox(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.439,
+                              height: MediaQuery.of(context).size.height*0.21,
+                               decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [Colors.green, Colors.black]
+                                )
+                              ),
+                              child: RaisedButton(
+                                color: Colors.transparent,
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                              insurance_company(email: widget.email),                                             
+                                    )
+                                  );
+                                },
+                                child: Text(
+                                  'Car Insurance',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: Colors.white
+                                  ),
+                                  textAlign: TextAlign.center,
+                                )
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.439,
+                              height: MediaQuery.of(context).size.height*0.21,
+                               decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [Colors.green, Colors.black]
+                                )
+                              ),
+                              child: RaisedButton(
+                                color: Colors.transparent,
+                                onPressed: (){
+                                  // Navigator.push(context, MaterialPageRoute(
+                                  //   builder: (BuildContext context) =>
+                                  //             sell_home(email: widget.email),                                             
+                                  //   )
+                                  // );
+                                },
+                                child: Text(
+                                  'About',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: Colors.white
+                                  )
+                                )
+                              ),
+                            ),
+                          ],
+                       ),
+                      )
+                    ],
+                  )
+                ),                   
+              ],
             ),
-
-Padding(padding: EdgeInsets.only(top:30.0,left: 10, right: 10),
-                 child:Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(child:  Column(
-                      children: <Widget>[
-                       SizedBox(
-                         height:140.0,
-                         width:160.0,
-                         child: RaisedButton(
-                            color: Colors.white,
-                            child: ColorizeAnimatedTextKit(
-                            text: ["Car Service"],                          
-                            textStyle: TextStyle(
-                                fontSize: 30.0, 
-                                fontFamily: "Horizon",                           
-                            ),                         
-                            colors: [
-                              Colors.black,
-                              Colors.blue,
-                              Colors.yellow,
-                              Colors.red,
-                            ],
-                            textAlign: TextAlign.center,
-                            alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                     ) ,
-                            onPressed: () {
-                              Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                             car_ser_selection(email: widget.email,) ));
-                            },
-                            // shape: CircleBorder()
-                            ),
-                       ),
-                              
-                      ],
-                    ),),
-
-                   Expanded(child:  Column(
-                      children: <Widget>[
-                       SizedBox(
-                         height:140.0,
-                         width:160.0,
-                         child: RaisedButton(
-                            color: Colors.white,
-                            child: ColorizeAnimatedTextKit(    
-                            text: ["Car sell"],                          
-                            textStyle: TextStyle(
-                                fontSize: 30.0, 
-                                fontFamily: "Horizon",                           
-                            ),                          
-                            colors: [
-                              Colors.black,
-                              Colors.blue,
-                              Colors.yellow,
-                              Colors.red,
-                            ],
-                            textAlign: TextAlign.center,
-                            alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                     ),
-                            onPressed: () {
-                              Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            sell_home(
-                                              email: widget.email,
-                                            )));
-                            },
-                            // shape: CircleBorder()
-                            ),
-                       ),                                 
-                      ],
-                    ),),
-                  ],
-                 )
-                ),
-
-
-                Padding(padding: EdgeInsets.only(top:30.0,left: 10, right: 10),
-
-                 child:Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(child:  Column(
-                      children: <Widget>[
-                       SizedBox(
-                         height:140.0,
-                         width:160.0,
-                         child: RaisedButton(
-                            color: Colors.white,
-                            child: ColorizeAnimatedTextKit(
-                            text: ["Car Insurance"],                          
-                            textStyle: TextStyle(
-                                fontSize: 30.0, 
-                                fontFamily: "Horizon",                           
-                            ),                         
-                            colors: [
-                              Colors.black,
-                              Colors.blue,
-                              Colors.yellow,
-                              Colors.red,
-                            ],
-                            textAlign: TextAlign.center,
-                            alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                     ),
-                            onPressed: () {
-                              Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            insurance_company(
-                                              email: widget.email,
-                                            )));
-                            },
-                            // shape: CircleBorder()
-                            ),
-                       ),                 
-                      ],
-                    ),),
-
-                   Expanded(child:  Column(
-                      children: <Widget>[
-                       SizedBox(
-                         height:140.0,
-                         width:160.0,
-                         child: RaisedButton(
-                            color: Colors.white,
-                            child: ColorizeAnimatedTextKit(    
-                            text: ["About"],                          
-                            textStyle: TextStyle(
-                                fontSize: 30.0, 
-                                fontFamily: "Horizon",                           
-                            ),                          
-                            colors: [
-                              Colors.black,
-                              Colors.blue,
-                              Colors.yellow,
-                              Colors.red,
-                            ],
-                            textAlign: TextAlign.center,
-                            alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                     ), 
-                            onPressed: () {},
-                            // shape: CircleBorder()
-                            ),
-                       ),                               
-                      ],
-                    ),),
-                  ],
-                 )
-                ),              
-              
-            ],
+          )
         ),
       )
-    )
     );
   }
-
   Widget user_name() {
     if (pro != null) {
       for (int i = 0; i <= pro.documents.length; i++) {
         if (widget.email == pro.documents[i].data['email']) {
           user = pro.documents[i].data['name'];
-          return Text(pro.documents[i].data['name'],style: TextStyle(fontSize: 25.0,fontWeight:FontWeight.w600),textAlign: TextAlign.center,);
+          return Text(
+            pro.documents[i].data['name'],
+            style: TextStyle(
+              fontSize: 25.0,
+              fontWeight:FontWeight.w600
+            ),
+            textAlign: TextAlign.center,
+          );
         }
       }
     } else
       return CircularProgressIndicator();
   }
 }
+
+class Bloc {
+  final _themeController = StreamController<bool>();
+  get changeTheme => _themeController.sink.add;
+  get darkThemeEnabled => _themeController.stream;
+}
+
+final bloc = Bloc();

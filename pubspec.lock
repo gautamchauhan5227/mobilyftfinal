@@ -395,7 +395,7 @@ packages:
     source: hosted
     version: "0.6.3+4"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -569,6 +569,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2+4"
+  simple_autocomplete_formfield:
+    dependency: "direct main"
+    description:
+      name: simple_autocomplete_formfield
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.4"
   sky_engine:
     dependency: transitive
     description: flutter

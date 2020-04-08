@@ -20,7 +20,7 @@ class _intrested_carState extends State<intrested_car> {
 
   @override
   void initState() {
-    crudobj.getData('intrest request').then((result) {
+    crudobj.getData('interest request').then((result) {
       setState(() {
         intrest= result;
       });

@@ -193,7 +193,9 @@ bool validateAndSave() {
                            gradientColors: [secondColor, firstColor],
                            background: null,
                          )
-                       ),
+                        ),
+
+                      Divider(),
 
                       Padding(
                         padding: const EdgeInsets.only(top:15.0),

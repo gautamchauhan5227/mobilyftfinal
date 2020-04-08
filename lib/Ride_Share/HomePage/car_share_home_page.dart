@@ -12,7 +12,7 @@ class Home_page extends StatefulWidget {
   _Home_pageState createState() => _Home_pageState();
 }
 class _Home_pageState extends State<Home_page> {
-  int _currentIndex = 2;
+  int _currentIndex =2;
   GlobalKey _bottomNavigationKey = GlobalKey();
   Widget callPage(int currentIndex) {
     switch (_currentIndex) {
@@ -31,27 +31,28 @@ class _Home_pageState extends State<Home_page> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: callPage(_currentIndex), 
-          bottomNavigationBar: ConvexAppBar(
-          backgroundColor: Colors.white,
-          activeColor: Colors.blue,
-          color: Colors.lightBlue,
-    items: [
-      TabItem(icon: Icons.dashboard, title: 'Dashboard'),
-      TabItem(icon: Icons.person_add, title: 'Request'),
-      TabItem(icon: Icons.add, title: 'Add'),
-      TabItem(icon: Icons.notifications, title: 'Notification'),
-      TabItem(icon: Icons.message, title: 'Message'),
-    ], 
-    initialActiveIndex: 2,
-     onTap: (value) {
-            _currentIndex = value;
-            setState(() {}
-            );
-          },
-        ),
-      );
-    }
-}
+    return SafeArea(
+            child: Scaffold(
+              resizeToAvoidBottomPadding: false,
+              body: callPage(_currentIndex),
+              bottomNavigationBar: ConvexAppBar(
+                backgroundColor: Colors.white,
+                activeColor: Colors.blue,
+                color: Colors.lightBlue,
+                items: [
+                  TabItem(icon: Icons.dashboard, title: 'Dashboard'),
+                  TabItem(icon: Icons.person_add, title: 'Request'),
+                  TabItem(icon: Icons.add, title: 'Add'),
+                  TabItem(icon: Icons.notifications, title: 'Notification'),
+                  TabItem(icon: Icons.message, title: 'Message'),
+                ],
+                initialActiveIndex: 2,
+                onTap: (value) {
+                  _currentIndex = value;
+                  setState(() {});
+                },
+              ),
+            ),
+          );  
+        }
+      }

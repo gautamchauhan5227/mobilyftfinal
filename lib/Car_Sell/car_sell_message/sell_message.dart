@@ -63,13 +63,10 @@ class _sell_msgState extends State<sell_msg> {
           for(int i=0;i < user.documents.length; i++)
             if(requester == user.documents[i].data["email"])
               namereq=user.documents[i].data["name"];
-              
-
         }
         return Padding(
             padding: EdgeInsets.all( 2.0),
-            child: Card(
-                
+            child: Card(               
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
                 child: ListTile(

@@ -31,10 +31,10 @@ class _fav_carState extends State<fav_car> {
       'Address person':_cadd,
       'Contact number':_cnumber     
     };
-    crudobj.intrestrequest(data, context).then((result) {}).catchError((e) {
+    crudobj.adddata(data, context,"interest request").then((result) {}).catchError((e) {
       print(e);
-    }
-  );
+      }
+    );  
 }
 void submit(int i) async { 
  namecr=user.documents[i].data["name"];

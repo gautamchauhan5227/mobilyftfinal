@@ -39,52 +39,54 @@ class _car_detailsState extends State<car_details> {
   int l = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(15),
-      ),
+    return SafeArea(
+          child: Scaffold(
+        appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(15),
+        ),
+          ),
+          backgroundColor: Colors.white,
+           iconTheme: IconThemeData(
+            color: Colors.black
+          ),
+           
+          title:Padding(
+            padding: const EdgeInsets.only(left: 50),
+            child: Text(
+                "Vehicle Detail",
+                style: TextStyle(
+                  color:Colors.black,
+                  fontWeight:FontWeight.w400,
+                  fontSize: 30.0
+                  ),
+               ),
+          ),
+            leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios), 
+            onPressed:(){
+              Navigator.pop(context, true);
+            }
+            ),
         ),
         backgroundColor: Colors.white,
-         iconTheme: IconThemeData(
-          color: Colors.black
-        ),
-         
-        title:Padding(
-          padding: const EdgeInsets.only(left: 50),
-          child: Text(
-              "Vehicle Detail",
-              style: TextStyle(
-                color:Colors.black,
-                fontWeight:FontWeight.w400,
-                fontSize: 30.0
+        body: ListView(
+          children: <Widget>[
+            if (pro != null)
+              for (int i = 0; i < pro.documents.length; i++)
+                Container(
+                  child: cardetails(i),
                 ),
-             ),
+            Padding(padding: EdgeInsets.only(top: 250.0)),
+            if (pro == null)
+              Column(
+                children: <Widget>[
+                  Center(child: CircularProgressIndicator()),
+                ],
+              )
+          ],
         ),
-          leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios), 
-          onPressed:(){
-            Navigator.pop(context, true);
-          }
-          ),
-      ),
-      backgroundColor: Colors.white,
-      body: ListView(
-        children: <Widget>[
-          if (pro != null)
-            for (int i = 0; i < pro.documents.length; i++)
-              Container(
-                child: cardetails(i),
-              ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (pro == null)
-            Column(
-              children: <Widget>[
-                Center(child: CircularProgressIndicator()),
-              ],
-            )
-        ],
       ),
     );
   }
@@ -161,7 +163,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["car Number"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize: 20.0, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -204,7 +206,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["License"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize: 20.0, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -246,7 +248,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["Chassis No"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize: 20.0, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -287,9 +289,9 @@ class _car_detailsState extends State<car_details> {
                   children: <Widget>[
                     new Flexible(
                         child: Text(
-                      "${pro.documents[i].data["Engine No"]}",
+                      "${pro.documents[i].data["Engine Number"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize: 20.0, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -324,8 +326,8 @@ class _car_detailsState extends State<car_details> {
             content: Form(
                 key: formKey,
               child: Container(
-                  height: 200.0,
-                  width: 270.0,
+                  height: MediaQuery.of(context).size.height*0.3,
+                  width: MediaQuery.of(context).size.width*4,
                   child: ListView(children: <Widget>[
                     TextFormField(
                        controller: TextEditingController(),
@@ -334,7 +336,11 @@ class _car_detailsState extends State<car_details> {
                       decoration: InputDecoration(
                         labelText: 'Car Number',
                         labelStyle:
-                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
+                          TextStyle(
+                            color: Colors.grey[900], 
+                            fontSize: 20.0
+                          ),
+                          hintText: 'GJ 05 AA 0220',
                         prefixIcon: const Icon(
                         Icons.person,
                         size: 40.0,
@@ -353,26 +359,27 @@ class _car_detailsState extends State<car_details> {
             actions: <Widget>[
               FlatButton(
                 color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
+                shape: RoundedRectangleBorder(
+                borderRadius:new BorderRadius.circular(20.0))                                    ,
                 child: Text(
                   "   Update   ",
                   style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
-                   if (validateAndSave()) {
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                  Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  car_details(email: widget.email)));
-                  crudobj.updateVehicleData(selectedDoc, {
-                    'car Number': this._model,
-                  });
-                }
+                  if (validateAndSave()) {
+                    Navigator.pop(context, true);
+                    Navigator.pop(context, true);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              car_details(email: widget.email)));
+                              crudobj.updateData(selectedDoc, {
+                                      'car Number': this._model,
+                                  },
+                                  "car_detail"
+                                );
+                  }
                 },
               ),
               Padding(padding: EdgeInsets.only(left:15.0)),
@@ -454,14 +461,16 @@ class _car_detailsState extends State<car_details> {
                   Navigator.pop(context, true);
                   Navigator.pop(context, true);
                   Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  car_details(email: widget.email)));
-                  crudobj.updateVehicleData(selectedDoc, {
-                    'License': this._model,
-                  });
-                }
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            car_details(email: widget.email)));
+                                crudobj.updateData(selectedDoc, {
+                                      'License': this._model,
+                                  },
+                                  "car_detail"
+                                );
+                  }
                 },
               ),
               Padding(padding: EdgeInsets.only(left:15.0)),
@@ -547,9 +556,11 @@ class _car_detailsState extends State<car_details> {
           MaterialPageRoute(
               builder: (BuildContext context) =>
                   car_details(email: widget.email)));
-                  crudobj.updateVehicleData(selectedDoc, {
-                    'Chassis No': this._model,
-                  });
+                  crudobj.updateData(selectedDoc, {
+                                      'Chassis No': this._model,
+                                  },
+                                  "car_detail"
+                                );
                 }
                 },
               ),
@@ -636,9 +647,11 @@ class _car_detailsState extends State<car_details> {
           MaterialPageRoute(
               builder: (BuildContext context) =>
                   car_details(email: widget.email)));
-                  crudobj.updateVehicleData(selectedDoc, {
-                    'Engine Number': this._model,
-                  });
+                  crudobj.updateData(selectedDoc, {
+                                      'Engine Number': this._model,
+                                  },
+                                  "car_detail"
+                                );
                 }
                 },
               ),

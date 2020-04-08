@@ -8,18 +8,24 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String spe;
   spe=prefs.getString('email');
-  runApp(MaterialApp(debugShowCheckedModeBanner: false,home: spe != null ? section_page(email: spe) : FirstPagee()));
-  
-}
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: spe != null ? section_page(email: spe) : FirstPagee()
+      )
+    ); 
+  }
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Moilyft",
-        home: Scaffold(
-                    body: FirstPagee(),
-                      )
-                    );
-  }
-}
+        home: SafeArea(
+                  child: Scaffold(
+                body: FirstPagee(),
+                ),
+            ),
+          );
+        }
+      }

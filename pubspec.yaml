@@ -57,7 +57,10 @@ dependencies:
   animated_card:
   horizontal_time_picker:
   email_validator:
+  simple_autocomplete_formfield:
   autocomplete_textfield:
+  intl:
+
   
   
 

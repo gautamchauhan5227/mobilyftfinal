@@ -1,26 +1,28 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Ride_Share/Dashboard/car_share_ride_details.dart';
 class allride extends StatefulWidget {
-  allride({Key key, this.email}) : super(key: key);
   final String email;
+  allride({Key key, this.email}) : super(key: key);
   @override
   _allrideState createState() => _allrideState();
 }
 class _allrideState extends State<allride> {
-  CRUD1 crudobj = new CRUD1();
-int l = 0;
-  QuerySnapshot ride;
   String _src,_dest,_time,_seat;
+  CRUD1 crudobj = new CRUD1();
+  QuerySnapshot ride;
   @override
   void initState() {
-    crudobj.getData('all ride').then((result) {
+    crudobj.getData('history').then((result) {
       setState(() {
         ride = result;
       });
     });
   }
+int l = 0;
 void insert(BuildContext context) {    
     Map<String, dynamic> data = {
       'email': widget.email,
@@ -28,36 +30,84 @@ void insert(BuildContext context) {
       'dest': _dest,
       'time': _time,
       'Seat': _seat,
-    };
-    crudobj.addDetail(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
-    crudobj.notify(data, context).then((result) {}).catchError((e) {
-      print(e);
-    });
-
-    crudobj.history(data, context).then((result) {}).catchError((e) {
+};
+    crudobj.adddata(data, context,"current ride").then((result) {}).catchError((e) {
       print(e);
     });
   }
   void submit(int i) async {   
- _src=ride.documents[i].data["source"]; 
- _dest=ride.documents[i].data["dest"];
- _time=ride.documents[i].data["time"];
+ _src=ride.documents[i].data["Source"]; 
+ _dest=ride.documents[i].data["Destination"];
+ _time=ride.documents[i].data["Time"];
  _seat=ride.documents[i].data["Seat"];  
-      insert(context);
-      Navigator.pop(context,true);
-      Navigator.pop(context,true);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  allride(email: widget.email)));
-        }
-  
+  insert(context);
+  Navigator.pop(context,true);
+  Navigator.pop(context,true);
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+     builder: (BuildContext context) =>
+      Ride_Details(email: widget.email)
+      )
+   );
+  } 
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+           child: Scaffold(
+            appBar: AppBar(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(15),
+                ),
+              ),
+              backgroundColor: Colors.white,
+              iconTheme: IconThemeData(
+                color: Colors.black
+              ),         
+              title:Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: Text(
+                  "Histroy Ride",
+                  style: TextStyle(
+                    color:Colors.black,
+                    fontWeight:FontWeight.w400,
+                    fontSize: 30.0
+                  ),
+                ),
+              ),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios), 
+                onPressed:(){
+                  Navigator.pop(context, true);
+                }
+              ),
+            ),
+            body: ListView(
+              children: <Widget>[
+                if (ride != null)
+                for (int i = 0; i < ride.documents.length; i++)
+                Column(
+                  children: <Widget>[
+                    returnride(i),
+                  ],
+                ),
+                Padding(padding: EdgeInsets.only(top: 250.0)),
+                if (ride == null)
+                Column(
+                  children: <Widget>[
+                    Center(child: CircularProgressIndicator()),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      }
+
   Widget returnride(int i) {
     if (ride != null) {
-      if (widget.email == ride.documents[i].data["email"]) {
+      if (widget.email == ride.documents[i].data["Email"]) {
         return Padding(
             padding: EdgeInsets.only(top: 2.0),
             child: AnimatedCard(
@@ -76,24 +126,15 @@ void insert(BuildContext context) {
                       size: 60.0,
                     ),
                     title: Text(
-                        "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",
-                        style: TextStyle(
-                          fontSize:30.0,
-                          fontWeight: FontWeight.w400
-                          ),
-                        ),
+                        "${ride.documents[i].data["Source"]}\tto\t${ride.documents[i].data["Destination"]}",style: TextStyle(fontSize:30.0,fontWeight: FontWeight.w400),),
                     subtitle: Text("Time : "
-                        "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",
-                        style: TextStyle(
-                          fontSize:20.0
-                          ),
-                        ),
+                        "${ride.documents[i].data["Time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:20.0),),
                     onTap: () {
                       showDialog<void>(
                         context: context,
-                        barrierDismissible: false, // user must tap button!
+                        barrierDismissible: true, // user must tap button!
                         builder: (BuildContext context) {
-                          return AlertDialog(
+                          return CupertinoAlertDialog(
                             title: Center(
                               child: Text(
                                 'Ride Details',
@@ -116,13 +157,12 @@ void insert(BuildContext context) {
                                               Icons.location_searching,
                                               size: 40.0,
                                             ),
-                          
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
-                                                "${ride.documents[i].data["source"]}",
+                                                "${ride.documents[i].data["Source"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -138,13 +178,12 @@ void insert(BuildContext context) {
                                               Icons.location_on,
                                               size: 40.0,
                                             ),
-                                           
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
-                                                "${ride.documents[i].data["dest"]}",
+                                                "${ride.documents[i].data["Destination"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -160,13 +199,12 @@ void insert(BuildContext context) {
                                               Icons.access_time,
                                               size: 40.0,
                                             ),
-                                           
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
-                                                "${ride.documents[i].data["time"]}",
+                                                "${ride.documents[i].data["Time"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -182,13 +220,12 @@ void insert(BuildContext context) {
                                               Icons.airline_seat_recline_normal,
                                               size: 40.0,
                                             ),
-                                            
                                             Icon(Icons.chevron_right),
                                             Expanded(
                                               child: Text(
                                                 "${ride.documents[i].data["Seat"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -200,10 +237,6 @@ void insert(BuildContext context) {
                             ),
                             actions: <Widget>[
                                FlatButton(
-                                  color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
                                   child: Text(
                                     ' Re-add ',
                                     style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300),
@@ -213,17 +246,11 @@ void insert(BuildContext context) {
                                   },
                                 ),
                                 FlatButton(
-                                  color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                                  child: Text('    Delete    ',
+                                  child: Text('Delete',
                                       style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     //Navigator.of(context).pop();
-
-                                    crudobj.deleteallride(
-                                        ride.documents[i].documentID);
+                                    crudobj.deleteData(ride.documents[i].documentID,"all ride");
                                     Navigator.pop(context, true);
                                     Navigator.pop(context, true);
                                     Navigator.push(
@@ -233,83 +260,24 @@ void insert(BuildContext context) {
                                               allride(email: widget.email)));
                                   },
                                 ),
-                                FlatButton(
-                                  color: Colors.lightBlue[50],
-                                 shape: RoundedRectangleBorder(
-                                     borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                                  child: Text('Ok',
-                                      style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
-                                  onPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  )),
-            )));
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    )
+                  ),
+                )
+              )
+            );
       } else
-        return Container();
+        return Container(
+          
+        );
     } else {
       return Center(
         child: CircularProgressIndicator(),
       );
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(15),
-      ),
-        ),
-        backgroundColor: Colors.white,
-         iconTheme: IconThemeData(
-          color: Colors.black
-        ),
-         
-        title:Padding(
-          padding: const EdgeInsets.only(left: 50),
-          child: Text(
-              "Histroy Ride",
-              style: TextStyle(
-                color:Colors.black,
-                fontWeight:FontWeight.w400,
-                fontSize: 30.0
-                ),
-             ),
-        ),
-          leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios), 
-          onPressed:(){
-            Navigator.pop(context, true);
-          }
-          ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          if (ride != null)
-            for (int i = 0; i < ride.documents.length; i++)
-              Column(
-                children: <Widget>[
-                  returnride(i),
-                ],
-              ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (ride == null)
-            Column(
-              children: <Widget>[
-                Center(child: CircularProgressIndicator()),
-              ],
-            )
-        ],
-      ),
-    );
   }
 }

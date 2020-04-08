@@ -233,131 +233,139 @@ class _profileState extends State<profile> {
                     )),
                   ],
                 )),
-            Padding(
-                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
+
+
+                Padding(
+                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
                 child: new Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
                           'Email ID',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontSize: 25.0, fontWeight: FontWeight.w700),
                         ),
-                        Flexible(
-                            child: Text(
-                          "${pro.documents[i].data["email"]}",
-                          style: TextStyle(
-                              fontSize: 18.0, fontFamily: 'sans-serif-light'),
-                        )),
                       ],
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.edit,
-                        size: 15.0,
-                      ),
-                      onPressed: () {
-                        getImage();
-                      },
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                         IconButton(
+                           icon: Icon(Icons.edit,size: 20.0,color: Colors.black54,), 
+                           onPressed: (){
+                            //  updateCarNo(context, pro.documents[i].documentID);
+                             } 
+                          ),
+                      ],
                     ),
                   ],
                 )),
             Padding(
-                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
+                padding: EdgeInsets.only(left: 25.0, right: 25.0),
                 child: new Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Flexible(
+                        child: Text(
+                      "${pro.documents[i].data["email"]}",
+                      style: TextStyle(
+                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                    )),
+                  ],
+                )),
+
+
+                Padding(
+                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     new Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
                           'Mobile',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontSize: 25.0, fontWeight: FontWeight.w700),
                         ),
-                        new Flexible(
-                            child: Text(
-                          "${pro.documents[i].data["phone"]}",
-                          style: TextStyle(
-                              fontSize: 18.0, fontFamily: 'sans-serif-light'),
-                        )),
                       ],
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.edit,
-                        size: 15.0,
-                      ),
-                      onPressed: () {
-                        getImage();
-                      },
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                         IconButton(
+                           icon: Icon(Icons.edit,size: 20.0,color: Colors.black54,), 
+                           onPressed: (){
+                            //  updateCarNo(context, pro.documents[i].documentID);
+                             } 
+                          ),
+                      ],
                     ),
                   ],
                 )),
             Padding(
-                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
+                padding: EdgeInsets.only(left: 25.0, right: 25.0),
                 child: new Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Flexible(
+                        child: Text(
+                      "${pro.documents[i].data["phone"]}",
+                      style: TextStyle(
+                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                    )),
+                  ],
+                )),
+
+                Padding(
+                padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     new Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Text(
                           'Pin Code',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontSize: 25.0, fontWeight: FontWeight.w700),
                         ),
-                        new Flexible(
-                            child: Text(
-                          "${pro.documents[i].data["pincode"]}",
-                          style: TextStyle(
-                              fontSize: 18.0, fontFamily: 'sans-serif-light'),
-                        )),
                       ],
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.edit,
-                        size: 15.0,
-                      ),
-                      onPressed: () {
-                        return showDialog(
-        
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-                        return AlertDialog(
-                            content: SingleChildScrollView(
-                                                          child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: ' Name',
-                              labelStyle: TextStyle(
-                                  color: Colors.grey[900], fontSize: 20.0),
-                              prefixIcon: const Icon(
-                                Icons.person,
-                                size: 40.0,
-                                color: Colors.blue,
-                              ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                         IconButton(
+                           icon: Icon(Icons.edit,size: 20.0,color: Colors.black54,), 
+                           onPressed: (){
+                            //  updateCarNo(context, pro.documents[i].documentID);
+                             } 
                           ),
-                          validator: (value) =>
-                                value.isEmpty ? "Name can't be empty" : null,
-                          onChanged: (value) {
-                              this._name = value;
-                          },
-                        ),
-                            ));});
-                      },
+                      ],
                     ),
                   ],
                 )),
+            Padding(
+                padding: EdgeInsets.only(left: 25.0, right: 25.0),
+                child: new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    new Flexible(
+                        child: Text(
+                      "${pro.documents[i].data["pincode"]}",
+                      style: TextStyle(
+                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                    )
+                  ),
+                ],
+              ),
+            )
           ],
         );
       } else
@@ -367,121 +375,5 @@ class _profileState extends State<profile> {
         child: CircularProgressIndicator(),
       );
     }
-  }
-
-  Future<bool> updateDialog(BuildContext context, selectedDoc) async {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Center(
-              child: Text(
-                "Update Personal Details",
-                style: TextStyle(
-                  fontSize: 22.0,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            content: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Container(
-                  height: 180.0,
-                  width: 270.0,
-                  child: ListView(children: <Widget>[
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: ' Name',
-                        labelStyle:
-                            TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                        prefixIcon: const Icon(
-                          Icons.person,
-                          size: 40.0,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      validator: (value) =>
-                          value.isEmpty ? "Name can't be empty" : null,
-                      onChanged: (value) {
-                        this._name = value;
-                      },
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: ' Phone',
-                        labelStyle:
-                            TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                        prefixIcon: const Icon(
-                          Icons.phone_iphone,
-                          size: 40.0,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      validator: (value) =>
-                          value.isEmpty ? "Phone Number can't be empty" : null,
-                      onChanged: (value) {
-                        this._phone = value;
-                      },
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: ' Pin',
-                        labelStyle:
-                            TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                        prefixIcon: const Icon(
-                          Icons.person_pin_circle,
-                          size: 40.0,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      validator: (value) =>
-                          value.isEmpty ? "Pincode can't be empty" : null,
-                      onChanged: (value) {
-                        this._pin = value;
-                      },
-                    ),
-                  ]),
-                ),
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(
-                  "Update      ",
-                  style: TextStyle(fontSize: 25.0),
-                ),
-                onPressed: () {
-                  if (validateAndSave()) {
-                    Navigator.of(context).pop();
-                    crudobj.updateProfileData(selectedDoc, {
-                      'name': this._name,
-                      'phone': this._phone,
-                      'pincode': this._pin
-                    });
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => profile(
-                                  email: widget.email,
-                                )));
-                  }
-                },
-              ),
-              FlatButton(
-                child: Text(
-                  "Cancel      ",
-                  style: TextStyle(fontSize: 25.0),
-                ),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              )
-            ],
-          );
-        });
   }
 }

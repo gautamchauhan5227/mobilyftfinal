@@ -1,18 +1,18 @@
-import 'dart:math';
 
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:nice_button/nice_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 class msg_ride_response extends StatefulWidget {
-   msg_ride_response({Key key, this.email}) : super(key: key);
+  msg_ride_response({Key key, this.email}) : super(key: key);
   final String email; 
   @override
   _msg_ride_responseState createState() => _msg_ride_responseState();
 }
-class _msg_ride_responseState extends State<msg_ride_response> { 
+class _msg_ride_responseState extends State<msg_ride_response> {  
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   int l = 0;
@@ -25,7 +25,6 @@ class _msg_ride_responseState extends State<msg_ride_response> {
         req = result;
       });
     });
-   // print(req.documents[0].data["Emailcr"]);
     crudobj.getData('user').then((result) {
       setState(() {
         user = result;
@@ -38,94 +37,101 @@ class _msg_ride_responseState extends State<msg_ride_response> {
       });
     });
   }
+  
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView(
-        children: <Widget>[
-          if (respo != null)
-            for (int i = 0; i < respo.documents.length; i++) 
+    return SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: ListView(
+                children: <Widget>[
+                  if (respo != null)
+                  for (int i = 0; i < respo.documents.length; i++) 
+                  Column(
+                  children: <Widget>[
+                    returnrespo(i),
+                  ],
+                ),
+            Padding(padding: EdgeInsets.only(top: 250.0)),
+            if (req == null)
               Column(
                 children: <Widget>[
-                  returnrespo(i),
+                  Center(child: CircularProgressIndicator()),
                 ],
-              ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
-          if (req == null)
-            Column(
-              children: <Widget>[
-                Center(child: CircularProgressIndicator()),
-              ],
-            )
-        ],
+              )
+          ],
+        ),
       ),
     );
   }
+
   Widget returnrespo(int i) {
-    if (req != null) {
+    if (respo != null) {
       if (widget.email == respo.documents[i].data["Emailreqs"]) {
-        requester = req.documents[i].data["Emailcr"];
+        requester = respo.documents[i].data["Emailcr"];
         if(user != null){
           for(int i=0;i < user.documents.length; i++)
-            if(requester == user.documents[i].data["email"])
-              namereq=user.documents[i].data["name"];
-              phonereq = user.documents[i].data["phone"];
+          if(requester == user.documents[i].data["email"])
+          namereq=user.documents[i].data["name"];
+          phonereq = user.documents[i].data["phone"];
         }
         return Padding(
-            padding: EdgeInsets.only(top: 10.0,left: 10.0,right: 10.0,),
-            child: AnimatedCard(
-              direction: AnimatedCardDirection.right, 
-              initDelay: Duration(milliseconds: 0), 
-              duration: Duration(seconds: 2), 
+          padding: EdgeInsets.only(top: 10.0,left: 10.0,right: 10.0,),
+          child: AnimatedCard(
+            direction: AnimatedCardDirection.right, 
+            initDelay: Duration(milliseconds: 0), 
+            duration: Duration(seconds: 2), 
             child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(15.0)),
+                  borderRadius: new BorderRadius.circular(15.0)),
                 child: ListTile(
                   leading: Icon(
                     Icons.account_circle,
                     size: 60.0,
                   ),
                   title: Text(
-                    "$namereq""\t""is Ready For Ride Share With You at from"
+                    "$namereq""\t""is Ready To Share Ride With You From"
                     "\t"
-                    "${req.documents[i].data["PickUp"]}"
+                    "${respo.documents[i].data["Source"]}"
                     "\t""To""\t"
-                    "${req.documents[i].data["Destination"]}"
+                    "${respo.documents[i].data["Destination"]}"
                     "\n"
-                    "Time:-""\t""${req.documents[i].data["Time"]}",
+                    "Time:-""\t""${respo.documents[i].data["Time"]}"
+                    "\n"
+                    "RideCode:- ${respo.documents[i].data["Otp"]}",
+
                     style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w300),
                     ),
                     subtitle:Padding(
                              padding: const EdgeInsets.only(top:25.0,bottom:15.0,right: 50.0),
                              child: NiceButton(
                                onPressed: (){
-                                 int min = 100000; //min and max values act as your 6 digit range
-                int max = 999999;
-                var randomizer = new Random(); 
-                var rNum = min + randomizer.nextInt(max - min);
-                  // push(context, Invite(randomNum: rNum));
-                   showDialog<void>(
-                      context: context,
-                      barrierDismissible: false, // user must tap button!
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          content: SingleChildScrollView(
-                            child:Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Padding(padding: EdgeInsets.only(top:15.0),
-                                    child: Text("Ride Code",
-                                    style:TextStyle(fontSize: 35.0,fontWeight:FontWeight.w400)),
-                                  ),
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible: false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return CupertinoAlertDialog(
+                                        content: SingleChildScrollView(
+                                          child:Container(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Padding(padding: EdgeInsets.only(top:15.0),
+                                                child: Text("Ride Code",
+                                                style:TextStyle(
+                                                  fontSize: 35.0,
+                                                  fontWeight:FontWeight.w400
+                                                )
+                                              ),
+                                            ),
                                   Divider(),
                                   Padding(padding: EdgeInsets.only(top:10.0),
-                                   child: Text("$rNum",
+                                   child: Text("Make Payment!! ",
                                    style: TextStyle(fontSize:50.0,fontWeight:FontWeight.w700),),
                                   ),
                                   
                                   Padding(padding: EdgeInsets.only(top:10.0),
-                                  child: Text("This Code Share With Only ""$namereq",
+                                  child: Text(" ",
                                   style: TextStyle(fontSize:15.0,fontWeight:FontWeight.w300),)
                                   ),
                                   Padding(padding: EdgeInsets.only(top:20.0),
@@ -139,18 +145,22 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                   )
                                   ),
                                 ],
-                              ),                             
-                            ),                            
+                              ),
+                              
+                             
+                            ),
+                            
                           ),
                         );
                       }
                    );
-                 },
-                 text: "Get Start",
-                 gradientColors: [secondColor, firstColor],
-                 background: null,
-              )
-            ),                 
+                               },
+                               text: "Get Start",
+                               gradientColors: [secondColor, firstColor],
+                               background: null,
+                             )
+                           ),
+                  
                   onTap: () {
                     showDialog<void>(
                       context: context,
@@ -206,7 +216,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                           Icon(Icons.chevron_right),
                                           Expanded(
                                             child: Text(
-                                              "${req.documents[i].data["Emailcr"]}",
+                                              requester,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                                             ),
@@ -234,14 +244,15 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                     style: TextStyle(
                                       fontSize:25.0,
                                       fontWeight: FontWeight.w300
-                                              ),
-                                            )
-                                          ),                                          
+                                      ),
+                                      )
+                                    ),
+                                            
+                                          
                                         ],
                                       )
-                                    ]
-                                  )
-                                ),                            
+                                    ])),
+                               
                               ],
                             ),
                           ),
@@ -249,12 +260,11 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                       },
                     );
                   },
-                )
-              )
-            )
-          );
+                ))));
       } else
-        return Container();
+        return Container(
+          
+        );
     } else {
       return Center(
         child: CircularProgressIndicator(),

@@ -1,17 +1,15 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
-
 class notify extends StatefulWidget {
   final String email;
   notify({Key key, this.email}) : super(key: key);
-
   @override
   _notifyState createState() => _notifyState();
 }
-
 class _notifyState extends State<notify> {
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride;
@@ -56,7 +54,7 @@ class _notifyState extends State<notify> {
     if (ride != null) {
       if (widget.email == ride.documents[i].data["email"]) {
         return Padding(
-            padding: EdgeInsets.only(top: 5.0,left: 10.0,right: 10.0),
+            padding: EdgeInsets.only(top: 5.0,left: 10.0,right: 5.0),
             child: AnimatedCard(
               direction: AnimatedCardDirection.right, 
               initDelay: Duration(milliseconds: 0), 
@@ -69,18 +67,17 @@ class _notifyState extends State<notify> {
                       Icons.account_circle,
                       size: 50.0,
                     ),
-                    title: Text("Your Ride "
-                        "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}"
-                        " Successfully Added",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w400),),
-                    subtitle: Text("Get Ready For Ride",style: TextStyle(fontSize:15.0,fontWeight:FontWeight.w300),),
+                    title: Text(
+                        "${ride.documents[i].data["notice"]}",
+                        style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w400),),
+                    subtitle: Text("${ride.documents[i].data["detail"]}",
+                    style: TextStyle(fontSize:15.0,fontWeight:FontWeight.w300),),
                     onLongPress: (){
                       showDialog<void>(
                       context: context,
                       barrierDismissible: false, // user must tap button!
                       builder: (BuildContext context) {
-                        return AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius:BorderRadius.all(Radius.circular(10.0))),
+                        return CupertinoAlertDialog(
                             content: SingleChildScrollView(
                               child: Center(
                                 child: Text(
@@ -93,20 +90,14 @@ class _notifyState extends State<notify> {
                             ),
                              actions: <Widget>[
                             FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
                               child: Text(
-                                "    Yes    ",
+                                "Yes",
                                 style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
-                               crudobj.deletenoty(ride.documents[i].documentID);
-                                
+                               crudobj.deleteData(ride.documents[i].documentID,"notify");
                                 Navigator.pop(context,true);
-                                Navigator.pop(context,true);
-                                
+                                Navigator.pop(context,true);                                
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -117,12 +108,8 @@ class _notifyState extends State<notify> {
                             ),
                             Padding(padding: EdgeInsets.only(left:17.0)),
                             FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
                               child: Text(
-                                "    No    ",
+                                "No",
                                 style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
@@ -130,16 +117,17 @@ class _notifyState extends State<notify> {
                               },
                             ),
                             Padding(padding: EdgeInsets.only(left:20.0)),
-                             ]
+                          ]
                         );
                       }
-                      );
-                    },
-                    )),
-            )
                     );
+                  },
+                  )
+                ),
+            )
+          );
       } else
-        return Container();
+        return Container( );
     } else {
       return Center(
         child: CircularProgressIndicator(),
