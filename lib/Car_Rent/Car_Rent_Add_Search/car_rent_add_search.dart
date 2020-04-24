@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Car_Rent/Car_Rent_Add_Search/car_rent_add.dart';
 class rent_addsearch extends StatefulWidget {
@@ -7,68 +6,98 @@ class rent_addsearch extends StatefulWidget {
   @override
   _rent_addsearchState createState() => _rent_addsearchState();
 }
-
 class _rent_addsearchState extends State<rent_addsearch> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        resizeToAvoidBottomPadding: false,
-        
-        body: ListView(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 50, left: 15, right: 15),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-  new GestureDetector(
-        onTap: (){  
-             Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              rent_add(email: widget.email))); 
-        },
-        child: new Container(
-          width: 310.0,
-          height: 160.0, 
-          child: Image.asset("asets/caradd.jpg",height: 160.0,width: 310.0,fit: BoxFit.fill,),
-        )
-    ),
+    return SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              resizeToAvoidBottomPadding: false,
+                body: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 50, left: 15, right: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                        new GestureDetector(
+                                onTap: (){  
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                        rent_add(email: widget.email)
+                                      )
+                                    ); 
+                                },
+                                child: new Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(width: 2.0),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                    width: MediaQuery.of(context).size.width*1.0,
+                                    height: MediaQuery.of(context).size.height*0.28, 
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top:2.8,left: 2.5,right: 2.5,bottom: 2.8),
+                                      child: Image.asset(
+                                        "asets/caradd.jpg",
+                                        //fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                )
+                            ),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height*0.08,
+                                child:Text("Add Car On Rent",
+                                      style: TextStyle(
+                                        fontSize: 35.0,
+                                        fontWeight: FontWeight.w400
+                                      ),
+                                  )
+                            ),
 
-     SizedBox(
-          height: 10.0,
-              ),
-                  Text("Add Rent Car",style: TextStyle(
-                              fontSize: 50.0, 
-                              fontFamily: "Horizon"
-                          ),),
+                            Padding(padding: EdgeInsets.only(top:30.0)),
 
-Padding(padding: EdgeInsets.only(top:30.0)),
-  
-new GestureDetector(
-        onTap: (){   
-        },
-        child: new Container(
-          width: 310.0,
-          height: 160.0, 
-          child: Image.asset("asets/searchrent.jpg",height: 160.0,width: 310.0,fit: BoxFit.fill,),
-        )
-    ),
+                            new GestureDetector(
+                                onTap: (){   
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (BuildContext context) =>
+                                  //       payment()
+                                  //     )
+                                  //   ); 
+                                  },
+                                  child: new Container(
+                                    decoration: BoxDecoration(
+                                    border: Border.all(width: 2.0),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                    width: MediaQuery.of(context).size.width*1.0,
+                                    height: MediaQuery.of(context).size.height*0.28, 
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Image.asset(
+                                        "asets/searchrent.jpg",                                        
+                                      ),
+                                    ),
+                                  )
+                              ),
 
-     SizedBox(
-          height: 10.0,
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height*0.08,
+                                child:Text("Search Car On Rent",
+                                      style: TextStyle(
+                                      fontSize: 35.0,
+                                      fontWeight: FontWeight.w400
+                                    ),
+                                  )
+                            ),
+                  ],
+                ),
               ),
-                  Text("Search Rent Car",style: TextStyle(
-                              fontSize: 50.0, 
-                              fontFamily: "Horizon"
-                          ),),
-                ],
-              ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 }

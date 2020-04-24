@@ -28,37 +28,37 @@ class _sell_homeState extends State<sell_home> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: callPage(_currentIndex),
-        // appBar: AppBar(
-        //   backgroundColor: Colors.white,
-        // ),
+    return SafeArea(
+            child: Scaffold(
+              resizeToAvoidBottomPadding: false,
+              body: callPage(_currentIndex),
+                      // appBar: AppBar(
+                      //   backgroundColor: Colors.white,
+                      // ),
 
-      //   appBar:  PreferredSize(
-      //     preferredSize: Size.fromHeight(50.0), // here the desired height
-      //     child:AppBar(backgroundColor: Colors.white,
-      //       iconTheme: IconThemeData(color: Colors.black,size: 30.0),
-      //     ),
-      // ),  
-          bottomNavigationBar: ConvexAppBar(
-          backgroundColor: Colors.white,
-          activeColor: Colors.blue,
-          color: Colors.lightBlue,
-    items: [
-      TabItem(icon: Icons.dashboard, title: 'Dashboard'),
-      // TabItem(icon: Icons.person_add, title: 'Request'),
-      TabItem(icon: Icons.add, title: 'Add'),
-      // TabItem(icon: Icons.notifications, title: 'Notification'),
-      TabItem(icon: Icons.message, title: 'Message'),
-    ],
-    
-    initialActiveIndex: 1,
-     onTap: (value) {
-            _currentIndex = value;
-            setState(() {});
-          },
-  ),
-        );
-  }
+                    //   appBar:  PreferredSize(
+                    //     preferredSize: Size.fromHeight(50.0), // here the desired height
+                    //     child:AppBar(backgroundColor: Colors.white,
+                    //       iconTheme: IconThemeData(color: Colors.black,size: 30.0),
+                    //     ),
+                    // ),  
+              bottomNavigationBar: ConvexAppBar(
+                backgroundColor: Colors.white,
+                activeColor: Colors.blue,
+                color: Colors.lightBlue,
+                items: [
+                  TabItem(icon: Icons.dashboard, title: 'Dashboard'),
+                  TabItem(icon: Icons.add, title: 'Add'),
+                  TabItem(icon: Icons.message, title: 'Message'),
+                ],
+      
+                initialActiveIndex: 1,
+                onTap: (value) {
+                  _currentIndex = value;
+                  setState(() {});
+                },
+              ),
+            ),
+          );
+      }
 }

@@ -1,5 +1,6 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 class view_sell_car_detail extends StatefulWidget {
@@ -13,9 +14,11 @@ class view_sell_car_detail extends StatefulWidget {
 }
 
 class _view_sell_car_detailState extends State<view_sell_car_detail> {
+  String email,name,company,model,year,fuel,gear,color,carnum,km,price,add;
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot pro,user;
   String namecr;
+  
   @override
   void initState() {
     crudobj.getData('sell car').then((result) {
@@ -35,6 +38,63 @@ class _view_sell_car_detailState extends State<view_sell_car_detail> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: BottomAppBar(
+          child: RaisedGradientButton(
+            child: Text(
+              'You Want Buy Car',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 30.0,
+                fontWeight: FontWeight.w300
+              ),
+            ),
+            gradient: LinearGradient(
+              colors: <Color>[Colors.lightBlue, Colors.white],
+            ),
+            onPressed: (){
+              showCupertinoDialog(
+                context: context,  
+                 builder: (BuildContext context){
+                   return CupertinoAlertDialog(                         
+                      title: Center(
+                        child: Text(
+                          'Are You Interested to Buy Car?',
+                          style: TextStyle(
+                            fontFamily: 'helvetica_neue_light',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Yes",
+                            style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context,true);
+                            Navigator.pop(context,true);
+                          },
+                        ),
+                        FlatButton(
+                          child: Text(
+                            "No",
+                            style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context,true);
+                            Navigator.pop(context,true);
+                            Navigator.pop(context,true);
+                          },
+                        ),
+                      ],
+                   );
+                 }
+              );
+            }
+          ),
+        ),
         body: ListView(
           children: <Widget>[
            if (pro != null)
@@ -478,4 +538,44 @@ class _view_sell_car_detailState extends State<view_sell_car_detail> {
     }
   }
 
+}
+
+class RaisedGradientButton extends StatelessWidget {
+  final Widget child;
+  final Gradient gradient;
+  final double width;
+  final double height;
+  final Function onPressed;
+
+  const RaisedGradientButton({
+    Key key,
+    @required this.child,
+    this.gradient,
+    this.width = double.infinity,
+    this.height = 50.0,
+    this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: 50.0,
+      decoration: BoxDecoration(gradient: gradient, boxShadow: [
+        BoxShadow(
+          color: Colors.grey[500],
+          offset: Offset(0.0, 1.5),
+          blurRadius: 1.5,
+        ),
+      ]),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+            onTap: onPressed,
+            child: Center(
+              child: child,
+            )),
+      ),
+    );
+  }
 }

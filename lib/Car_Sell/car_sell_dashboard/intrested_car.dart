@@ -53,7 +53,7 @@ class _intrested_carState extends State<intrested_car> {
         title:Padding(
           padding: const EdgeInsets.only(left: 50),
           child: Text(
-              "Intrested Car",
+              "Interested Car",
               style: TextStyle(
                 color:Colors.black,
                 fontWeight:FontWeight.w400,
@@ -103,7 +103,6 @@ class _intrested_carState extends State<intrested_car> {
                 child: Card(
                    child: ListTile(
                      title: Container(
-                       height: 240.0,
                        child: Column(
                          children: <Widget>[
                            
@@ -201,7 +200,8 @@ class _intrested_carState extends State<intrested_car> {
                                gradientColors: [secondColor, firstColor],
                                background: null,
                              )
-                           ),                               
+                           ),  
+                          Padding(padding: EdgeInsets.only(top:15.0)),                             
                          ],
                        ),          
                      ),

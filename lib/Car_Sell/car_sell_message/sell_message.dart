@@ -15,7 +15,7 @@ class _sell_msgState extends State<sell_msg> {
   String requester,namereq,phonereq,car;
    @override
   void initState() {
-    crudobj.getData('intrest request').then((result) {
+    crudobj.getData('interest request').then((result) {
       setState(() {
         req = result;
       });

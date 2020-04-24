@@ -1,6 +1,8 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Sell/car_sell_dashboard/view_ads.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:nice_button/NiceButton.dart';
 class car_ads extends StatefulWidget {
@@ -103,7 +105,7 @@ bool validateAndSave() {
                 child: Card(
                    child: ListTile(
                      title: Container(
-                       height: 300.0,
+                       
                        child: Column(
                          children: <Widget>[
                             Padding(
@@ -126,7 +128,7 @@ bool validateAndSave() {
                                 child: Text(
                                  "${ads.documents[i].data["car Manufacturer Company"]}",
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
                                     ), 
                                     flex: 1,             
                                   )
@@ -150,7 +152,7 @@ bool validateAndSave() {
                                 child: Text(
                                  "${ads.documents[i].data["car Model"]}",
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
                                     ), 
                                     flex: 1,             
                                   )
@@ -174,7 +176,7 @@ bool validateAndSave() {
                                 child: Text(
                                  "${ads.documents[i].data["car price"]}",
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                    style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
                                     ),
                                     flex: 1,              
                                   )
@@ -183,94 +185,223 @@ bool validateAndSave() {
                             ]
                           )
                         ),
-                        Padding(
-                         padding: const EdgeInsets.only(top:25.0),
-                           child: NiceButton(
-                             onPressed: (){
-                                   
-                                 },
-                           text: "Update",
-                           gradientColors: [secondColor, firstColor],
-                           background: null,
-                         )
-                        ),
-
-                      Divider(),
-
-                      Padding(
-                        padding: const EdgeInsets.only(top:15.0),
-                          child: NiceButton(
-                            onPressed: (){
-                             showDialog<void>(
-                              context: context,
-                              barrierDismissible: false, // user must tap button!
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:BorderRadius.all(Radius.circular(10.0))),
-                                      content: SingleChildScrollView(
-                                        child: Center(
-                                          child: Text(
-                                            "Your Car is Sold?",
-                                              style: TextStyle(
-                                                fontSize:25,
-                                                fontWeight:FontWeight.w400
-                                                ),
-                                              )
-                                            ),
-                                          ),
-                             actions: <Widget>[
-                            FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                              child: Text(
-                                "    Yes    ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                              ),
-                              onPressed: () {
-                               crudobj.deleteads(ads.documents[i].documentID);                               
-                                  Navigator.pop(context, true);
-                                  Navigator.pop(context, true);                               
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            car_ads(email: widget.email)
-                                            )
-                                          );                             
-                                        },
-                                      ),
-                            Padding(padding: EdgeInsets.only(left:17.0)),
-                            FlatButton(
-                              color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                              child: Text(
-                                "    No    ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                              ),
-                              onPressed: () {
-                               Navigator.pop(context, true);
-                              },
-                            ),
-                            Padding(padding: EdgeInsets.only(left:20.0)),
-                             ]
-                            );
-                          }
-                        ); 
-                      },
-                          text: "Sold",
-                          gradientColors: [secondColor, firstColor],
-                          background: null,
-                    )
-                  ),                              
+                        Padding(padding: EdgeInsets.only(top:15.0)),          
                 ],
               ),               
             ),
-          )
+            onTap: (){
+              if (widget.email == ads.documents[i].data["email"])
+              showCupertinoDialog(
+                context: context, 
+                builder: (BuildContext context){
+                  return CupertinoAlertDialog(
+                    title: Center(
+                      child: Text(
+                        "Car Detail",
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.w600
+                        ),
+                      ),
+                    ),
+                    content: ListBody(
+                      children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 0.0),
+                              child: new Column(children: <Widget>[
+                                Divider(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top:10.0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Text(
+                                              "Company",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                          Icon(Icons.chevron_right),
+                                          Expanded(
+                                            child: Text(
+                                              "${ads.documents[i].data["car Manufacturer Company"]}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                            ),
+                                          ),  
+                                        ],
+                                      ),
+                                    )
+                                  ])),
+
+                                  Padding(
+                                  padding: EdgeInsets.only(top: 15.0),
+                                  child: new Column(children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Text(
+                                            "Model",
+                                            // 'Destination'
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                        Icon(Icons.chevron_right),
+                                        Expanded(
+                                          child: Text(
+                                            "${ads.documents[i].data["car Model"]}",
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                          ),                                          
+                                        )
+                                      ],
+                                    )
+                                  ])),
+
+                                  Padding(
+                                  padding: EdgeInsets.only(top: 15.0),
+                                  child: new Column(children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Text(
+                                            "Price",
+                                            // 'Destination'
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                        Icon(Icons.chevron_right),
+                                        Expanded(
+                                          child: Text(
+                                            "${ads.documents[i].data["car price"]}",
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
+                                          ),                                          
+                                        )
+                                      ],
+                                    )
+                                  ])),
+
+                      ],
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                              child: Text(
+                                "View Car Detail",
+                                style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
+                              ),
+                              onPressed: () {
+                                 Navigator.pop(context, true);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                            view_ads(
+                                              email: ads.documents[i].data["email"], 
+                                              company:ads.documents[i].data["car Manufacturer Company"],
+                                              model:ads.documents[i].data["car Model"],
+                                              year:ads.documents[i].data["car Registration Year"],
+                                              fuel:ads.documents[i].data["car fuel type"],
+                                              gear:ads.documents[i].data["car gear type"],
+                                              color:ads.documents[i].data["car color"],
+                                              carnum:ads.documents[i].data["car number"],
+                                              km:ads.documents[i].data["km of use"],
+                                              price:ads.documents[i].data["car price"],
+                                              number:ads.documents[i].data["Contact number"],
+                                              address:ads.documents[i].data["Address person"]
+                                            )
+                                      )
+                                    );
+                              },
+                            ),
+
+                            FlatButton(
+                              onPressed: (){
+                                showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return CupertinoAlertDialog(
+                                          
+                                              content: SingleChildScrollView(
+                                                child: Center(
+                                                  child: Text(
+                                                    "Your Car is Sold? Yes/No",
+                                                      style: TextStyle(
+                                                        fontSize:25,
+                                                        fontWeight:FontWeight.w400
+                                                        ),
+                                                      )
+                                                    ),
+                                                  ),
+                                    actions: <Widget>[
+                                    FlatButton(
+                                      
+                                      
+                                      child: Text(
+                                        "    Yes    ",
+                                        style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                      ),
+                                      onPressed: () {
+                                      crudobj.deleteads(ads.documents[i].documentID);                               
+                                          Navigator.pop(context, true);
+                                          Navigator.pop(context, true); 
+                                          Navigator.pop(context, true);                               
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                    car_ads(email: widget.email)
+                                                    )
+                                                  );                             
+                                                },
+                                              ),
+                                    Padding(padding: EdgeInsets.only(left:17.0)),
+                                    FlatButton(
+                                      
+                                      child: Text(
+                                        "    No    ",
+                                        style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                      ),
+                                      onPressed: () {
+                                      Navigator.pop(context, true);
+                                      },
+                                    ),
+                                    Padding(padding: EdgeInsets.only(left:20.0)),
+                                    ]
+                                    );
+                                  }
+                                ); 
+                              },
+                               
+                              child: Text(
+                                "Sold",
+                                style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
+                              ),
+                            ),
+                            FlatButton(
+                              onPressed: (){
+                                Navigator.pop(context,true);
+                              },
+                               child: Text(
+                                "Cancle",
+                                style: TextStyle(fontSize: 23.0,fontWeight: FontWeight.w300),
+                              )
+                            )
+                    ],
+                  );
+                }
+              );
+            },
+          ),
         ),
       )
     )

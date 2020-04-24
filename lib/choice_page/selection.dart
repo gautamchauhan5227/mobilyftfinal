@@ -77,12 +77,22 @@ class _section_pageState extends State<section_page> {
       child: Scaffold(        
         drawer: Drawer(
           child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[400],
+            ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height ,
            child: Center(
              child: ListView(
               children: <Widget>[
                 UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(
+              
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white60,Colors.teal,Colors.teal[100],Colors.blue,Colors.teal]),
+            ),
                   accountName: user_name(), 
                   accountEmail: Text(widget.email,style: TextStyle(fontWeight:FontWeight.w300,fontSize: 18.0),),
                   currentAccountPicture: Align(
@@ -157,7 +167,7 @@ class _section_pageState extends State<section_page> {
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                colors: [Colors.green,Colors.green,Colors.white,Colors.green[100],Colors.green[100]])),
+                colors: [Colors.blue,Colors.teal,Colors.teal[100],Colors.white,Colors.white60,Colors.teal])),
           child: ListView(
               children: <Widget>[
                 Padding(padding:EdgeInsets.only(top:30.0),
@@ -187,9 +197,9 @@ class _section_pageState extends State<section_page> {
                               height: MediaQuery.of(context).size.height*0.21,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                colors: [Colors.green, Colors.black]
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Colors.teal[400],Colors.teal[100],Colors.blue[300]]
                                 )
                               ),
                               child: RaisedButton(
@@ -222,9 +232,9 @@ class _section_pageState extends State<section_page> {
                               height: MediaQuery.of(context).size.height*0.21,
                                decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                colors: [Colors.green, Colors.black]
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Colors.blue[300],Colors.teal[100],Colors.teal[400]]
                                 )
                               ),
                               child: RaisedButton(
@@ -266,9 +276,9 @@ class _section_pageState extends State<section_page> {
                               height: MediaQuery.of(context).size.height*0.21,
                                decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                colors: [Colors.green, Colors.black]
+                               begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Colors.blue[300],Colors.teal[100],Colors.teal[400]]
                                 )
                               ),
                               child: RaisedButton(
@@ -276,7 +286,7 @@ class _section_pageState extends State<section_page> {
                                 onPressed: (){
                                   // Navigator.push(context, MaterialPageRoute(
                                   //   builder: (BuildContext context) =>
-                                  //             car_ser_selection(email: widget.email),                                             
+                                  //             abc(email: widget.email),                                             
                                   //   )
                                   // );
                                 },
@@ -302,9 +312,9 @@ class _section_pageState extends State<section_page> {
                               height: MediaQuery.of(context).size.height*0.21,
                                decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                colors: [Colors.green, Colors.black]
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Colors.teal[400],Colors.teal[100],Colors.blue[300]]
                                 )
                               ),
                               child: RaisedButton(
@@ -346,9 +356,9 @@ class _section_pageState extends State<section_page> {
                               height: MediaQuery.of(context).size.height*0.21,
                                decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                colors: [Colors.green, Colors.black]
+                               begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Colors.teal[400],Colors.teal[100],Colors.blue[300]]
                                 )
                               ),
                               child: RaisedButton(
@@ -382,9 +392,9 @@ class _section_pageState extends State<section_page> {
                               height: MediaQuery.of(context).size.height*0.21,
                                decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.topRight,
-                                colors: [Colors.green, Colors.black]
+                               begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Colors.blue[300],Colors.teal[100],Colors.teal[400]]
                                 )
                               ),
                               child: RaisedButton(

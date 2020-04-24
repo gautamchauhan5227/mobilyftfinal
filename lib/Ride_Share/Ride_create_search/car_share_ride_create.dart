@@ -46,7 +46,6 @@ class _CreateState extends State<Create> {
       );
    }
   bool validateAndSave() {
-
     final form = formKey.currentState;
     form.save();
     if (form.validate()) {

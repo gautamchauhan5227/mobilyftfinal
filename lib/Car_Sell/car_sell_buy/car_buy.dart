@@ -15,7 +15,7 @@ class buy_car_search extends StatefulWidget {
 }
 class _buy_car_searchState extends State<buy_car_search> {
   String currentText = "";
-   GlobalKey<AutoCompleteTextFieldState<String>> keyComp = new GlobalKey();
+  GlobalKey<AutoCompleteTextFieldState<String>> keyComp = new GlobalKey();
   QuerySnapshot  user, cars;
   String comapny = "";
   String emailcr,namecr,_ccomapny,_cmodel,_cprice,_cyear,_ccolor,_cfuel,_cgear,_cnumber,_cadd;
@@ -110,23 +110,24 @@ void insertfav(BuildContext context) {
   }
 
   void submitfav(int i) async {
- _ccomapny=cars.documents[i].data["car Manufacturer Company"];
- _cmodel=cars.documents[i].data["car Model"];
- _cprice=cars.documents[i].data["car price"];
- _cyear=cars.documents[i].data["car Registration Year"];
- _ccolor=cars.documents[i].data["car color"];
- _cgear=cars.documents[i].data["car gear type"];
- _cfuel=cars.documents[i].data["car fuel type"];
- _cadd=cars.documents[i].data["Address person"];
- _cnumber=cars.documents[i].data["Contact number"];
-  insertfav(context);
-     Navigator.pop(context, true);
-     Navigator.pop(context, true);
+    _ccomapny=cars.documents[i].data["car Manufacturer Company"];
+    _cmodel=cars.documents[i].data["car Model"];
+    _cprice=cars.documents[i].data["car price"];
+    _cyear=cars.documents[i].data["car Registration Year"];
+    _ccolor=cars.documents[i].data["car color"];
+    _cgear=cars.documents[i].data["car gear type"];
+    _cfuel=cars.documents[i].data["car fuel type"];
+    _cadd=cars.documents[i].data["Address person"];
+    _cnumber=cars.documents[i].data["Contact number"];
+    insertfav(context);
+    Navigator.pop(context, true);
+    Navigator.pop(context, true);
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => fav_car(email: widget.email)));
-            
+            builder: (BuildContext context) => fav_car(email: widget.email)
+        )
+      );          
   }
   @override
   Widget build(BuildContext context) {
@@ -408,182 +409,6 @@ Widget returncar(int i){
                                       ],
                                     )
                                   ])),
-
-                                  //  Padding(
-                                  // padding: EdgeInsets.only(top: 15.0),
-                                  // child: new Column(children: <Widget>[
-                                  //   Row(
-                                  //     children: <Widget>[
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "Buy",
-                                  //           // 'Destination'
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(
-                                  //               fontSize: 20.0,
-                                  //               fontWeight: FontWeight.w500),
-                                  //         ),
-                                  //         flex: 1,
-                                  //       ),
-                                  //       Icon(Icons.chevron_right),
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "${cars.documents[i].data["car Registration Year"]}",
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                  //         ),
-                                          
-                                  //       )
-                                  //     ],
-                                  //   )
-                                  // ])),
-
-                                  //  Padding(
-                                  // padding: EdgeInsets.only(top: 15.0),
-                                  // child: new Column(children: <Widget>[
-                                  //   Row(
-                                  //     children: <Widget>[
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "Fuel Type",
-                                  //           // 'Destination'
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(
-                                  //               fontSize: 20.0,
-                                  //               fontWeight: FontWeight.w500),
-                                  //         ),
-                                  //         flex: 1,
-                                  //       ),
-                                  //       Icon(Icons.chevron_right),
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "${cars.documents[i].data["car fuel type"]}",
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                  //         ),
-                                          
-                                  //       )
-                                  //     ],
-                                  //   )
-                                  // ])),
-
-                                  // Padding(
-                                  // padding: EdgeInsets.only(top: 15.0),
-                                  // child: new Column(children: <Widget>[
-                                  //   Row(
-                                  //     children: <Widget>[
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "Gear Type",
-                                  //           // 'Destination'
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(
-                                  //               fontSize: 20.0,
-                                  //               fontWeight: FontWeight.w500),
-                                  //         ),
-                                  //         flex: 1,
-                                  //       ),
-                                  //       Icon(Icons.chevron_right),
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "${cars.documents[i].data["car gear type"]}",
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                  //         ),
-                                          
-                                  //       )
-                                  //     ],
-                                  //   )
-                                  // ])),
-
-                                  //  Padding(
-                                  // padding: EdgeInsets.only(top: 15.0),
-                                  // child: new Column(children: <Widget>[
-                                  //   Row(
-                                  //     children: <Widget>[
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "Color",
-                                  //           // 'Destination'
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(
-                                  //               fontSize: 20.0,
-                                  //               fontWeight: FontWeight.w500),
-                                  //         ),
-                                  //         flex: 1,
-                                  //       ),
-                                  //       Icon(Icons.chevron_right),
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "${cars.documents[i].data["car color"]}",
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                  //         ),
-                                          
-                                  //       )
-                                  //     ],
-                                  //   )
-                                  // ])),
-
-                                   
-                                // Padding(
-                                //   padding: EdgeInsets.only(top: 15.0),
-                                //   child: new Column(children: <Widget>[
-                                //     Row(
-                                //       children: <Widget>[
-                                //         Expanded(
-                                //           child: Text(
-                                //             "Car Number",
-                                //             // 'Destination'
-                                //             textAlign: TextAlign.start,
-                                //             style: TextStyle(
-                                //                 fontSize: 20.0,
-                                //                 fontWeight: FontWeight.w500),
-                                //           ),
-                                //           flex: 1,
-                                //         ),
-                                //         Icon(Icons.chevron_right),
-                                //         Expanded(
-                                //           child: Text(
-                                //             "${cars.documents[i].data["car number"]}",
-                                //             textAlign: TextAlign.start,
-                                //             style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                //           ),
-                                          
-                                //         )
-                                //       ],
-                                //     )
-                                //   ])),
-
-                                  // Padding(
-                                  // padding: EdgeInsets.only(top: 15.0),
-                                  // child: new Column(children: <Widget>[
-                                  //   Row(
-                                  //     children: <Widget>[
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "KM Of Used",
-                                  //           // 'Destination'
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(
-                                  //               fontSize: 20.0,
-                                  //               fontWeight: FontWeight.w500),
-                                  //         ),
-                                  //         flex: 1,
-                                  //       ),
-                                  //       Icon(Icons.chevron_right),
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "${cars.documents[i].data["km of use"]}",
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                  //         ),
-                                          
-                                  //       )
-                                  //     ],
-                                  //   )
-                                  // ])),
-
                                   Padding(
                                   padding: EdgeInsets.only(top: 15.0),
                                   child: new Column(children: <Widget>[
@@ -612,35 +437,6 @@ Widget returncar(int i){
                                       ],
                                     )
                                   ])),
-
-                                  // Padding(
-                                  // padding: EdgeInsets.only(top: 15.0),
-                                  // child: new Column(children: <Widget>[
-                                  //   Row(
-                                  //     children: <Widget>[
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "Address",
-                                  //           // 'Destination'
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(
-                                  //               fontSize: 20.0,
-                                  //               fontWeight: FontWeight.w500),
-                                  //         ),
-                                  //         flex: 1,
-                                  //       ),
-                                  //       Icon(Icons.chevron_right),
-                                  //       Expanded(
-                                  //         child: Text(
-                                  //           "${cars.documents[i].data["Address person"]}",
-                                  //           textAlign: TextAlign.start,
-                                  //           style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w300),
-                                  //         ),
-                                          
-                                  //       )
-                                  //     ],
-                                  //   )
-                                  // ])),
                             ],
                           ),
                            actions: <Widget>[

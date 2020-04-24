@@ -185,7 +185,7 @@ class _Ride_statusState extends State<Ride_status> {
                       title: Text(
                         "$namereq"
                         "\t"
-                        "Give Respone to Ride From"
+                        "Ready to Share Ride From"
                         "\t"
                         "${respo.documents[i].data["Source"]}"
                         "\t"

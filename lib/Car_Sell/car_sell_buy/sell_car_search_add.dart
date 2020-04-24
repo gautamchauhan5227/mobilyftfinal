@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobilyft/Car_Sell/car_sell_buy/car_buy.dart';
 import 'package:mobilyft/Car_Sell/car_sell_buy/sell_car.dart';
-import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 class car_add_search extends StatefulWidget {
   car_add_search({Key key, this.email}) : super(key: key);
   final String email;
@@ -12,70 +11,95 @@ class car_add_search extends StatefulWidget {
 class _car_add_searchState extends State<car_add_search> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-        resizeToAvoidBottomPadding: false,
-        body: ListView(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 20, left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+    return SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            resizeToAvoidBottomPadding: false,
+            body: ListView(
+              children: <Widget>[            
+                Padding(padding: EdgeInsets.only(top:20.0)),
                   SizedBox(
-                      height: 160.0,
-                      width: 310.0,
+                    height: MediaQuery.of(context).size.height*0.25,
+                    child: Center(
                       child: RaisedButton(
-                          color: Colors.white,
-                          child: Icon(Icons.directions_car,size:140.0),
-                          onPressed: () {
-                           
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              car_sell(email: widget.email)));
-                
+                        onPressed: (){
+                          Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              car_sell(email: widget.email,)
+                                        )
+                                  );
+                        },
+                        child: Image.asset(
+                            'asets/car_add.png',
+                            height:MediaQuery.of(context).size.height*0.35 ,
+                            width: MediaQuery.of(context).size.width*0.35,
+                          ),
+                        // shape: CircleBorder(side: BorderSide(color: Colors.blue,width: 3.0)),
+                        shape: CircleBorder(),
+                        color: Colors.white,
+                      )
+                    ),
+                  ), 
+
+                  Padding(padding: EdgeInsets.only(top:10.0)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.09,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text('Add Car',
+                          style: TextStyle(
+                            fontSize: 50.0,
+                            fontWeight: FontWeight.w600
+                          )
+                        ),
+                      ),
+                  ),
+
+                  Padding(padding: EdgeInsets.only(top:20.0)),
+                    Container(
+                      height: MediaQuery.of(context).size.height*0.25,
+                      
+                      child: Center(
+                        child: RaisedButton(
+                          onPressed: (){
+                            Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                buy_car_search(email: widget.email,)
+                                          )
+                                    );
                           },
+                          child: Image.asset(
+                            'asets/car_search.png',
+                            height:MediaQuery.of(context).size.height*0.35 ,
+                            width: MediaQuery.of(context).size.width*0.35,
+                          ),
+                          // shape: CircleBorder(side: BorderSide(color: Colors.lightBlue,width: 3.0)),
                           shape: CircleBorder(),
+                          color: Colors.white,
                         )
                       ),
-                  SizedBox(
-                    height: 10.0,
+                  ), 
+            
+                  Padding(padding: EdgeInsets.only(top:10.0)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.09,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text('Search Car',
+                          style: TextStyle(
+                            fontSize: 50.0,
+                            fontWeight: FontWeight.w600
+                          )
+                        ),
+                      ),
                   ),
-                  Text(
-                    "Sell Car",
-                    style: TextStyle(color: Colors.black54, fontSize: 30.0,fontWeight: FontWeight.w400),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: SizedBox(
-                        height: 160.0,
-                        width: 310.0,
-                        child: RaisedButton(
-                            color: Colors.white,
-                            child: Icon(Icons.search,size: 140.0,),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          buy_car_search(email: widget.email)));
-                            },
-                            shape: CircleBorder(),)),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    "Buy Car",
-                    style: TextStyle(color: Colors.black54, fontSize: 30.0,fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
+              ],
             ),
-          ],
-        )
-    );
+          ),
+    );  
   }
 }

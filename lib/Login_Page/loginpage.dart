@@ -468,7 +468,7 @@ class _LoginPageState extends State<LoginPage>
               shape: RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(150.0)),
               child: TextFormField(
-                controller: TextEditingController(), 
+               // controller: TextEditingController(), 
                 inputFormatters: [MaskTextInputFormatter(
                   mask: "##########", 
                   filter: { "#": RegExp(r'[0-9]') 
@@ -489,7 +489,7 @@ class _LoginPageState extends State<LoginPage>
                 ),
                 keyboardType: TextInputType.number,
                 validator: (value) => validateMobile(value),
-                onChanged: (value) => _phone = value,
+                onSaved: (value) => _phone = value,
               ),
             ),
           ),
@@ -507,7 +507,7 @@ class _LoginPageState extends State<LoginPage>
               shape: RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(150.0)),
               child: TextFormField(
-                controller: TextEditingController(), 
+               // controller: TextEditingController(), 
                 inputFormatters: [MaskTextInputFormatter(
                   mask: "######", 
                   filter: { "#": RegExp(r'[0-9]') 
@@ -532,7 +532,7 @@ class _LoginPageState extends State<LoginPage>
                 keyboardType: TextInputType.number,
                 validator: (value) =>
                     value.isEmpty ? "Pincode can't be empty" : null,
-                onChanged: (value) => _pin = value,
+                onSaved: (value) => _pin = value,
               ),
             ),
           ),

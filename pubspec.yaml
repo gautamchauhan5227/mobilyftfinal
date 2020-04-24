@@ -60,6 +60,11 @@ dependencies:
   simple_autocomplete_formfield:
   autocomplete_textfield:
   intl:
+  bot_toast:
+  overlay_support:
+  flutter_google_pay:
+  carousel_pro:
+
 
   
   
@@ -114,6 +119,8 @@ flutter:
     - asets/searchrent.jpg
     - asets/caradd.jpg
     - asets/give_Service.jpg
+    - asets/car_add.png
+    - asets/car_search.png
 
 
 

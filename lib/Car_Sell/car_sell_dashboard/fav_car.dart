@@ -1,6 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilyft/Car_Sell/car_sell_dashboard/intrested_car.dart';
 import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:nice_button/NiceButton.dart';
@@ -49,11 +50,12 @@ void submit(int i) async {
  _cadd=cars.documents[i].data["Address person"];
  _cnumber=cars.documents[i].data["Contact number"];
   insert(context);
+  Navigator.pop(context,true);
   crudobj.deletefavcar(fav.documents[i].documentID); 
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => fav_car(email: widget.email)
+            builder: (BuildContext context) => intrested_car(email: widget.email)
         )
       );
     }
@@ -142,7 +144,6 @@ void submit(int i) async {
                 child: Card(
                    child: ListTile(
                      title: Container(
-                       height: 250.0,
                        child: Column(
                          children: <Widget>[
                            Padding(
@@ -227,7 +228,7 @@ void submit(int i) async {
                              onPressed: (){
                                submit(i);
                              },
-                             text: "Intrest",
+                             text: "Inetrest",
                              gradientColors: [secondColor, firstColor],
                              background: null,
                              )
@@ -249,7 +250,7 @@ void submit(int i) async {
                                background: null,
                              )
                            ),
-                               
+                             Padding(padding: EdgeInsets.only(top:15.0)),  
                              ],
                            ),
                         

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
+import 'package:mobilyft/Ride_Share/Dashboard/car_share_cardetails.dart';
 import 'car_share_ride_create.dart';
 import 'car_share_ridesearch.dart';
 class Ride_Page extends StatefulWidget {
@@ -52,12 +53,12 @@ class _Ride_PageState extends State<Ride_Page> {
     if (validateAndSave()) {
       insert(context);
       Navigator.pop(context,true);
-      
+      Navigator.pop(context,true);
       print("submitted");
       Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (BuildContext context) =>Create(email: widget.email)));
+        builder: (BuildContext context) =>car_details(email: widget.email)));
                                               
     }
   }
@@ -90,7 +91,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       fontSize: 20.0,
                       fontWeight: FontWeight.w300
                       ),
-                      controller: TextEditingController(),
+                     // controller: TextEditingController(),
                       textCapitalization: TextCapitalization.characters, 
                       inputFormatters: [MaskTextInputFormatter(
                         mask: "## ** ## ****", 
@@ -103,7 +104,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       ),
                       validator: (value) =>
                         value.isEmpty ? "Car Number can't be empty" : null,
-                      onChanged: (value) {
+                      onSaved: (value) {
                         this.model = value;
                       },
                     ),
@@ -113,7 +114,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       fontSize: 20.0,
                       fontWeight: FontWeight.w300
                       ),
-                      controller: TextEditingController(),
+                     // controller: TextEditingController(),
                       textCapitalization: TextCapitalization.characters, 
                       inputFormatters: [MaskTextInputFormatter(
                         mask: "##** ***********", 
@@ -126,7 +127,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       ),
                       validator: (value) =>
                         value.isEmpty ? "License Number can't be empty" : null,
-                      onChanged: (value) {
+                      onSaved: (value) {
                         this.lic = value;
                       },
                     ),
@@ -136,7 +137,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       fontSize: 20.0,
                       fontWeight: FontWeight.w300
                       ),
-                      controller: TextEditingController(),
+                      //controller: TextEditingController(),
                       textCapitalization: TextCapitalization.characters, 
                       inputFormatters: [
                         MaskTextInputFormatter(
@@ -152,7 +153,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       ),
                       validator: (value) =>
                         value.isEmpty ? "Chassis Number can't be empty" : null,
-                      onChanged: (value) {
+                      onSaved: (value) {
                         this.chas = value;
                       },
                     ),
@@ -162,7 +163,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       fontSize: 20.0,
                       fontWeight: FontWeight.w300
                       ),
-                      controller: TextEditingController(),
+                     // controller: TextEditingController(),
                       textCapitalization: TextCapitalization.characters, 
                       inputFormatters: [
                         MaskTextInputFormatter(
@@ -178,7 +179,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       ),
                       validator: (value) =>
                         value.isEmpty ? "Engine Number can't be empty" : null,
-                      onChanged: (value) {
+                      onSaved: (value) {
                         this.eng = value;
                       },
                     ),                    
@@ -219,7 +220,7 @@ class _Ride_PageState extends State<Ride_Page> {
           child: Scaffold(
           backgroundColor: Colors.white,
           resizeToAvoidBottomPadding: false,
-          body: Column(
+          body: ListView(
             children: <Widget>[
               Padding(padding: EdgeInsets.only(top:30.0)),
               Row(

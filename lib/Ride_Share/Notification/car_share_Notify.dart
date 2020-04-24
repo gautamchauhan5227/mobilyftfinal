@@ -30,6 +30,7 @@ class _notifyState extends State<notify> {
       //appBar: AppBar(),
       backgroundColor: Colors.white,
       body: ListView(
+        
         children: <Widget>[
           if (ride != null)
             for (int i = 0; i < ride.documents.length; i++)
@@ -38,7 +39,7 @@ class _notifyState extends State<notify> {
                   returnride(i),
                 ],
               ),
-          Padding(padding: EdgeInsets.only(top: 250.0)),
+          Padding(padding: EdgeInsets.only(top: 20.0)),
           if (ride == null)
             Column(
               children: <Widget>[
