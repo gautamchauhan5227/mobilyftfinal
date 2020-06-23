@@ -11,180 +11,183 @@ class cmp_icici extends StatefulWidget {
 }
 
 class _cmp_iciciState extends State<cmp_icici> {
+  bool size=false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+          child: Scaffold(
 
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child:Center(
-              
-              child: Text("ICICI Lombard General Insurance ",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
+        body: ListView(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child:Center(
+                
+                child: Text("ICICI Lombard General Insurance ",style: TextStyle(fontFamily:"Merriweather",fontSize:(size)?16:16,),),
+              ),
             ),
-          ),
-          Padding(padding: EdgeInsets.only(top:10.0)),
-          Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+            Padding(padding: EdgeInsets.only(top:10.0)),
+            Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("The company issued over 26.5 million policies and settled over 1.6 million claims as on March 31, 2019.",
-                    style: TextStyle(fontSize:20.0),
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
-                ),
-                flex: 6,
-              )
+                ), ),
               
-            ],
-          ),
-          Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("The company issued over 26.5 million policies and settled over 1.6 million claims as on March 31, 2019.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
+                )
+                
+              ],
+            ),
+            Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("we provide travel,two wheeler,car,health,NRI service,business insurance,home insurance.",
-                    style: TextStyle(fontSize:20.0),
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
-                ),
-                flex: 6,
-              )
+                ), ),
               
-            ],
-          ),
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("we provide travel,two wheeler,car,health,NRI service,business insurance,home insurance.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
+                )
+                
+              ],
+            ),
 
-           Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+             Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("In India with a Gross Written Premium (GWP) of Rs147.89 billion for the year ended March 31, 2019.",
-                    style: TextStyle(fontSize:20.0),
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
-                ),
-                flex: 6,
-              )
+                ), ),
               
-            ],
-          ),
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("In India with a Gross Written Premium (GWP) of Rs147.89 billion for the year ended March 31, 2019.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
+                )
+                
+              ],
+            ),
 
 
-           Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+             Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("We give upo 70% insurance.",
-                    style: TextStyle(fontSize:20.0,),
-                    textAlign: TextAlign.left,
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
+                ), ),
+              
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("We give upo 70% insurance.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      textAlign: TextAlign.left,
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
                 ),
-                flex: 6,
-              ),
 
+                
+                Padding(padding: EdgeInsets.only(right:80.0)),
+                
+              ],
+            ),
+            
+
+            Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
+                  children: <Widget>[
+                    Icon(Icons.call),
+                    
+                  ],
+                ), ),
               
-              Padding(padding: EdgeInsets.only(right:80.0)),
-              
-            ],
-          ),
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                       FlatButton(
+                onPressed: () => launch("tel:1800 2666"),
+                child: new Text("1800 2666",style: TextStyle(fontSize:(size)?16:16,fontWeight: FontWeight.bold),)),
+               
+                    ],
+                  ),
+                  flex: 6,
+                ),
+
+                
+                Padding(padding: EdgeInsets.only(right:130.0)),
+                
+              ],
+            ),
+
+
+
+
+            Padding(padding: EdgeInsets.only(top:40.0,left:20.0,right:20.0)),
+            Row(
+              children: <Widget>[
+              Padding(padding: EdgeInsets.only(left:40.0)),
+               NiceButton(
+                 text: "Buy Insurance",
+                 fontSize:(size)?20:20,
+                 textColor: Colors.black,
+                 onPressed: _launchURL,
+                                gradientColors: [Colors.blue,Colors.white],
+                                background: null,
+                              ),
+
           
+                              
+                             ],
+                           ),
 
-          Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.call),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
-                  children: <Widget>[
-                     FlatButton(
-              onPressed: () => launch("tel:1800 2666"),
-              child: new Text("1800 2666",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
-             
-                  ],
-                ),
-                flex: 6,
-              ),
-
-              
-              Padding(padding: EdgeInsets.only(right:130.0)),
-              
-            ],
-          ),
-
-
-
-
-          Padding(padding: EdgeInsets.only(top:40.0,left:20.0,right:20.0)),
-          Row(
-            children: <Widget>[
-            Padding(padding: EdgeInsets.only(left:40.0)),
-             NiceButton(
-               text: "Buy Insurance",
-               fontSize: 30.0,
-               textColor: Colors.black,
-               onPressed: _launchURL,
-                              gradientColors: [Colors.blue,Colors.white],
-                              background: null,
-                            ),
-
-        
-                            
-                           ],
-                         ),
-
-                         
                            
-               
-                       ],
+                             
+                 
+                         ],
+                       ),
+                 
                      ),
-               
-                   );
+    );
                    
                  }
                

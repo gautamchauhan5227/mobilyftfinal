@@ -65,16 +65,6 @@ class _mapsState extends State<maps> {
             ),
           ],
         ),
-        
-        // GoogleMap(
-        //   onMapCreated: _onMapCreated,
-        //   initialCameraPosition: CameraPosition(
-        //     target: _center,
-        //     zoom: 11.0,
-        //   ),
-        // ),
-      
-
     );
   }
   searchandNavigate(){

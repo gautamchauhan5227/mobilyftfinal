@@ -19,25 +19,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_datetime_picker: ^1.3.4
+  flutter_datetime_picker: 
   firebase_storage:
-  curved_navigation_bar: ^0.3.2
-  fab_circular_menu: ^0.1.4
-  flutter_speed_dial: ^1.2.5
-  slide_popup_dialog: ^0.0.2
-  neuomorphic_container: ^1.0.1
-  nice_button: ^0.1.7
-  loading_animations: ^2.1.0
-  loading_card: ^0.0.5
-  flutter_feather_icons: ^1.0.3
+  curved_navigation_bar: 
+  fab_circular_menu: 
+  flutter_speed_dial: 
+  slide_popup_dialog: 
+  neuomorphic_container: 
+  nice_button:
+  loading_animations:
+  loading_card: 
+  flutter_feather_icons: 
   giffy_dialog:
   google_maps_flutter:
   flutter_google_places:
-  location: ^2.5.3
-  search_map_place: ^0.1.1
-  geolocator: ^5.3.0
-  hidden_drawer_menu: ^1.1.2
-  sliding_up_panel: ^1.0.0
+  location: 
+  search_map_place: 
+  geolocator: 
+  hidden_drawer_menu: 
+  sliding_up_panel:
   google_map_polyline:
   convex_bottom_bar:
   curved_drawer:
@@ -49,6 +49,7 @@ dependencies:
   permission:
   spring_button:
   shared_preferences:
+  flutter_polyline_points:
   slider_button:
   flutter_neumorphic:
   multiselect_formfield:
@@ -64,6 +65,12 @@ dependencies:
   overlay_support:
   flutter_google_pay:
   carousel_pro:
+  firebase_auth:
+  cloud_firestore:
+  datetime_picker_formfield:
+  mask_text_input_formatter:
+  flutter_slidable:
+
 
 
   
@@ -73,15 +80,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  firebase_auth:
-  cloud_firestore:
-  datetime_picker_formfield: ^0.1.8
-  mask_text_input_formatter:
-  flutter_slidable: "^0.5.4"
+ 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.3"
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.jpg"
 
 #flutter_icons:
  # android: true
@@ -121,6 +129,7 @@ flutter:
     - asets/give_Service.jpg
     - asets/car_add.png
     - asets/car_search.png
+    - asets/logo.jpg
 
 
 

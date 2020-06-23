@@ -28,6 +28,8 @@ class _LoginPageState extends State<LoginPage>
   final formKey = GlobalKey<FormState>();
   String _pin, lic, rc, model;
 
+  bool size=false;
+  
   String _email;
   FormType _formType = FormType.login;
   String _name;
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage>
                 builder: (BuildContext context) => alertDialog1);
             print(e);
           });
-        } else {
+        } else { 
           FirebaseAuth.instance
               .createUserWithEmailAndPassword(
                   email: _email, password: _password)
@@ -196,6 +198,7 @@ class _LoginPageState extends State<LoginPage>
     }
 
     return [
+      
       Center(
         child: Column(
           children: <Widget>[
@@ -255,29 +258,32 @@ class _LoginPageState extends State<LoginPage>
           color: Colors.blue[50],
           shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(150.0)),
-          child: TextFormField(
-            style: TextStyle(color: Colors.black, fontSize: 20.0,fontWeight: FontWeight.w400),
-            inputFormatters: [LengthLimitingTextInputFormatter(30)],
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              hoverColor: Colors.black,
-              focusColor: Colors.black12,
-              labelText: ' Email',
-              border: InputBorder.none,
-              hintText: ' abc@gmail.com',
-              hintStyle: TextStyle(color: Colors.black54),
-              labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
-              prefixIcon: Padding(
-                child: const Icon(
-                  Icons.mail,
-                  size: 40.0,
-                  color: Colors.teal,
+          child: Padding(
+            padding: const EdgeInsets.only(top:8.0),
+            child: TextFormField(
+              style: TextStyle(color: Colors.black,  fontSize: (size)?18:18,fontWeight: FontWeight.w400),
+              inputFormatters: [LengthLimitingTextInputFormatter(30)],
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                hoverColor: Colors.black,
+                focusColor: Colors.black12,
+                hintText: ' Email',
+                border: InputBorder.none,
+                //hintText: ' abc@gmail.com',
+                hintStyle: TextStyle(color: Colors.black54, fontSize: (size)?18:18,),
+                labelStyle: TextStyle(color: Colors.black, fontSize: (size)?18:18,),
+                prefixIcon: Padding(
+                  child: const Icon(
+                    Icons.mail,
+                    size: 40.0,
+                    color: Colors.teal,
+                  ),
+                  padding: EdgeInsets.only(left: 30, right: 10),
                 ),
-                padding: EdgeInsets.only(left: 30, right: 10),
               ),
+              validator: (value) =>validateEmail(value),      
+              onSaved: (value) => _email = value,
             ),
-            validator: (value) =>validateEmail(value),      
-            onSaved: (value) => _email = value,
           ),
         ),
       ),
@@ -294,42 +300,45 @@ class _LoginPageState extends State<LoginPage>
             color: Colors.blue[50],
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(150.0)),
-            child: TextFormField(
-              style: TextStyle(color: Colors.black, fontSize: 20.0,fontWeight: FontWeight.w400),
-              //maxLength: 15,
-              maxLengthEnforced: true,
-              decoration: InputDecoration(
-                labelText: ' Password',
-                hintText: ' *********',
-                border: InputBorder.none,
-                hintStyle: TextStyle(color: Colors.black54),
-                focusColor: Color.fromRGBO(255, 0, 0, 0.8),
-                labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
-                prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: 30, right: 10),
-                  child: const Icon(
-                    Icons.vpn_key,
-                    size: 40.0,
-                    color: Colors.teal,
+            child: Padding(
+              padding: const EdgeInsets.only(top:8.0),
+              child: TextFormField(
+                style: TextStyle(color: Colors.black, fontSize: (size)?18:18,fontWeight: FontWeight.w400),
+                //maxLength: 15,
+                maxLengthEnforced: true,
+                decoration: InputDecoration(
+                  hintText: ' Password',
+                  //hintText: ' *********',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.black54,fontSize: (size)?18:18),
+                  focusColor: Color.fromRGBO(255, 0, 0, 0.8),
+                  labelStyle: TextStyle(color: Colors.black, fontSize: (size)?18:18),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.only(left: 30, right: 10),
+                    child: const Icon(
+                      Icons.vpn_key,
+                      size: 40.0,
+                      color: Colors.teal,
+                    ),
+                  ),
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _toggleVisibility = !_toggleVisibility;
+                        });
+                      },
+                      icon: _toggleVisibility
+                          ? Icon(Icons.visibility_off)
+                          : Icon(Icons.visibility),
+                    ),
                   ),
                 ),
-                suffixIcon: Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _toggleVisibility = !_toggleVisibility;
-                      });
-                    },
-                    icon: _toggleVisibility
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility),
-                  ),
-                ),
+                obscureText: _toggleVisibility,
+                validator: (value) => validateName(value),
+                onSaved: (value) => _password = value,
               ),
-              obscureText: _toggleVisibility,
-              validator: (value) => validateName(value),
-              onSaved: (value) => _password = value,
             ),
           ),
         ),
@@ -608,6 +617,7 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
+    final _font=(size)?14:14;
     return SafeArea(
           child: Scaffold(
           resizeToAvoidBottomPadding: false,

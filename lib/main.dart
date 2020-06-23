@@ -12,7 +12,7 @@ void main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: spe != null ? section_page(email: spe) : FirstPagee()
-      )
+      ) 
     ); 
   }
 class MyApp extends StatelessWidget {

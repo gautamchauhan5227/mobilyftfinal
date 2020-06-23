@@ -13,6 +13,7 @@ class Ride_status extends StatefulWidget {
 }
 
 class _Ride_statusState extends State<Ride_status> {
+  bool size=false;
   CRUD1 crudobj = new CRUD1();
   int l = 0;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
@@ -56,7 +57,7 @@ class _Ride_statusState extends State<Ride_status> {
                         padding: EdgeInsets.only(top: 15.0),
                         child: Text("Verified!!",
                             style: TextStyle(
-                                fontSize: 35.0, fontWeight: FontWeight.w400)),
+                                fontSize:(size)?24:24, fontWeight: FontWeight.w400)),
                       ),
                       Divider(),
                       Padding(
@@ -64,7 +65,7 @@ class _Ride_statusState extends State<Ride_status> {
                         child: Text(
                           "Enjoy Your Ride..",
                           style: TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ),
                      
@@ -97,12 +98,12 @@ class _Ride_statusState extends State<Ride_status> {
                                 children: <Widget>[
                                   Padding(padding: EdgeInsets.only(top:15.0),
                                     child: Text("!! Not Match !!",
-                                    style:TextStyle(fontSize: 35.0,fontWeight:FontWeight.w400)),
+                                    style:TextStyle(fontSize:(size)?24:24,fontWeight:FontWeight.w400)),
                                   ),
                                   Divider(),
                                   Padding(padding: EdgeInsets.only(top:10.0),
                                    child: Text("Please Enter Correct Code",
-                                   style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w700),),
+                                   style: TextStyle(fontSize:(size)?20:20,fontWeight:FontWeight.w700),),
                                   ),
                                 
                                   Padding(padding: EdgeInsets.only(top:20.0),
@@ -197,7 +198,7 @@ class _Ride_statusState extends State<Ride_status> {
                         "\t"
                         "${respo.documents[i].data["Time"]}",
                         style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w300),
+                            fontSize:(size)?16:16, fontWeight: FontWeight.w300),
                       ),
                       subtitle: Padding(
                           padding: const EdgeInsets.only(
@@ -220,7 +221,7 @@ class _Ride_statusState extends State<Ride_status> {
                                                     EdgeInsets.only(top: 15.0),
                                                 child: Text("Enter Ride Code",
                                                     style: TextStyle(
-                                                        fontSize: 35.0,
+                                                        fontSize:(size)?24:24,
                                                         fontWeight:
                                                             FontWeight.w400)),
                                               ),
@@ -233,7 +234,7 @@ class _Ride_statusState extends State<Ride_status> {
                                                     labelText: ' Code',
                                                     labelStyle: TextStyle(
                                                         color: Colors.grey[900],
-                                                        fontSize: 20.0),
+                                                        fontSize:(size)?20:20,),
                                                     prefixIcon: const Icon(
                                                       Icons.fiber_pin,
                                                       size: 40.0,
@@ -270,6 +271,7 @@ class _Ride_statusState extends State<Ride_status> {
                                   });
                             },
                             text: "Get Start",
+                            fontSize:(size)?20:20,
                             gradientColors: [secondColor, firstColor],
                             background: null,
                           )),
@@ -285,7 +287,7 @@ class _Ride_statusState extends State<Ride_status> {
                                   style: TextStyle(
                                     fontFamily: 'helvetica_neue_light',
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 30.0,
+                                    fontSize:(size)?20:20,
                                   ),
                                 ),
                               ),
@@ -332,7 +334,7 @@ class _Ride_statusState extends State<Ride_status> {
                                                   "${respo.documents[i].data["Emailreqs"]}",
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                      fontSize: 25.0,
+                                                      fontSize:(size)?20:20,
                                                       fontWeight:
                                                           FontWeight.w300),
                                                 ),
@@ -358,7 +360,7 @@ class _Ride_statusState extends State<Ride_status> {
                                                     "$phonereq",
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        fontSize: 25.0,
+                                                        fontSize:(size)?20:20,
                                                         fontWeight:
                                                             FontWeight.w300),
                                                   )),

@@ -13,6 +13,7 @@ class Ride_Details extends StatefulWidget {
 }
 class _Ride_DetailsState extends State<Ride_Details> {
   CRUD1 crudobj = new CRUD1();
+  bool size=false;
   QuerySnapshot ride,all;
   final formKey = GlobalKey<FormState>();
   int flag=0;
@@ -87,7 +88,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                   style: TextStyle(
                     color:Colors.black,
                     fontWeight:FontWeight.w400,
-                    fontSize: 30.0
+                    fontSize:(size)?24:24,
                   ),
                ),
               ),
@@ -113,7 +114,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                     "No data!!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize:25.0
+                      fontSize:(size)?20:20,
                     ),
                   ),                          
                 ), 
@@ -154,14 +155,14 @@ class _Ride_DetailsState extends State<Ride_Details> {
                       title: Text(
                         "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",
                         style: TextStyle(
-                          fontSize:30.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),
                       ),
                       subtitle: Text("Time : "
                         "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",
                         style: TextStyle(
-                          fontSize:20.0
+                          fontSize:(size)?18:18,
                         ),
                       ),
                       onTap: () {
@@ -218,7 +219,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                 textAlign: TextAlign.start,
                                                 style:
                                                   TextStyle(
-                                                    fontSize: 22.0,
+                                                    fontSize:(size)?20:20,
                                                     fontWeight: FontWeight.w300
                                                   ),
                                                 ),
@@ -245,7 +246,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                 "${ride.documents[i].data["dest"]}",
                                                 textAlign: TextAlign.start,
                                                 style:TextStyle(
-                                                  fontSize: 22.0,
+                                                  fontSize:(size)?20:20,
                                                   fontWeight: FontWeight.w300
                                                 ),                                                 
                                               ),
@@ -273,7 +274,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                                 "${ride.documents[i].data["time"]}",
                                                 textAlign: TextAlign.start,
                                                 style:TextStyle(                                                 
-                                                    fontSize: 22.0,
+                                                    fontSize:(size)?20:20,
                                                     fontWeight: FontWeight.w300
                                                 ),
                                               ),
@@ -299,7 +300,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                               "${ride.documents[i].data["Seat"]}",
                                               textAlign: TextAlign.start,
                                               style:TextStyle(                                                
-                                                fontSize: 22.0,
+                                               fontSize:(size)?20:20,
                                                 fontWeight: FontWeight.w300
                                               ),
                                             ),
@@ -315,7 +316,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                               actions: <Widget>[
                                 FlatButton(
                                   child: Text('View Ride',
-                                      style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
+                                      style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     //  Navigator.pop(context, true);
                                     //  Navigator.pop(context, true);
@@ -338,7 +339,7 @@ class _Ride_DetailsState extends State<Ride_Details> {
                                     
                                 FlatButton(
                                   child: Text('Delete',
-                                      style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.w300)),
+                                      style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300)),
                                   onPressed: () {
                                     crudobj.deleteData(ride.documents[i].documentID,"current ride");                                      
                                     Navigator.pop(context, true);

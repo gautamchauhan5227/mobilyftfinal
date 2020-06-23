@@ -11,184 +11,186 @@ class cmp_bajaj extends StatefulWidget {
 }
 
 class _cmp_bajajState extends State<cmp_bajaj> {
-  
+  bool size=false;
   
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+          child: Scaffold(
 
-     
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child:Center(
-              
-              child: Text("Bajaj Allianz General Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize: 20.0),),
+       
+        body: ListView(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child:Center(
+                
+                child: Text("Bajaj Allianz General Insurance",style: TextStyle(fontFamily:"Merriweather",fontSize:(size)?16:16,),),
+              ),
             ),
-          ),
-          Padding(padding: EdgeInsets.only(top:10.0)),
-          Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+            Padding(padding: EdgeInsets.only(top:10.0)),
+            Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("Bajaj Allianz continues to be one of the most financially robust general insurance companies in India by maintaining its growth as well as profitability.",
-                    style: TextStyle(fontSize:20.0),
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
-                ),
-                flex: 6,
-              )
+                ), ),
               
-            ],
-          ),
-          Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("Bajaj Allianz continues to be one of the most financially robust general insurance companies in India by maintaining its growth as well as profitability.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
+                )
+                
+              ],
+            ),
+            Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("The company has registered a net profit of Rs 780 crore.",
-                    style: TextStyle(fontSize:20.0),
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
-                ),
-                flex: 6,
-              )
+                ), ),
               
-            ],
-          ),
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("The company has registered a net profit of Rs 780 crore.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
+                )
+                
+              ],
+            ),
 
-           Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+             Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("A revenue of Rs. 11,097 crore, that has grown by 17% compared to the last fiscal year.",
-                    style: TextStyle(fontSize:20.0),
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
-                ),
-                flex: 6,
-              )
+                ), ),
               
-            ],
-          ),
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("A revenue of Rs. 11,097 crore, that has grown by 17% compared to the last fiscal year.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
+                )
+                
+              ],
+            ),
 
 
-           Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.arrow_right),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
+             Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
                   children: <Widget>[
-                    Text("We give upo 70% insurance.",
-                    style: TextStyle(fontSize:20.0,),
-                    textAlign: TextAlign.left,
+                    Icon(Icons.arrow_right),
                     
-                    )
                   ],
+                ), ),
+              
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                      Text("We give upo 70% insurance.",
+                      style: TextStyle(fontSize:(size)?16:16,),
+                      textAlign: TextAlign.left,
+                      
+                      )
+                    ],
+                  ),
+                  flex: 6,
                 ),
-                flex: 6,
-              ),
 
+                
+                Padding(padding: EdgeInsets.only(right:80.0)),
+                
+              ],
+            ),
+            
+
+            Padding(padding: EdgeInsets.only(top:20.0)),
+             Row(
+              children: <Widget>[
+                Expanded(child:Column(
+                  children: <Widget>[
+                    Icon(Icons.call),
+                    
+                  ],
+                ), ),
               
-              Padding(padding: EdgeInsets.only(right:80.0)),
-              
-            ],
-          ),
+                Expanded(
+                  child:Column(
+                    children: <Widget>[
+                       FlatButton(
+                onPressed: () => launch("tel:1800-209-0144"),
+                child: new Text("1800-209-0144",style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.bold),)),
+               
+                    ],
+                  ),
+                  flex: 6,
+                ),
+
+                
+                Padding(padding: EdgeInsets.only(right:130.0)),
+                
+              ],
+            ),
+
+
+
+
+            Padding(padding: EdgeInsets.only(top:40.0,left:20.0,right:20.0)),
+            Row(
+              children: <Widget>[
+              Padding(padding: EdgeInsets.only(left:40.0)),
+               NiceButton(
+                 text: "Buy Insurance",
+                 fontSize:(size)?20:20,
+                 textColor: Colors.black,
+                 onPressed: _launchURL,
+                                gradientColors: [Colors.blue,Colors.white],
+                                background: null,
+                              ),
+
           
+                              
+                             ],
+                           ),
 
-          Padding(padding: EdgeInsets.only(top:20.0)),
-           Row(
-            children: <Widget>[
-              Expanded(child:Column(
-                children: <Widget>[
-                  Icon(Icons.call),
-                  
-                ],
-              ), ),
-            
-              Expanded(
-                child:Column(
-                  children: <Widget>[
-                     FlatButton(
-              onPressed: () => launch("tel:1800-209-0144"),
-              child: new Text("1800-209-0144",style: TextStyle(fontSize:25.0,fontWeight: FontWeight.bold),)),
-             
-                  ],
-                ),
-                flex: 6,
-              ),
-
-              
-              Padding(padding: EdgeInsets.only(right:130.0)),
-              
-            ],
-          ),
-
-
-
-
-          Padding(padding: EdgeInsets.only(top:40.0,left:20.0,right:20.0)),
-          Row(
-            children: <Widget>[
-            Padding(padding: EdgeInsets.only(left:40.0)),
-             NiceButton(
-               text: "Buy Insurance",
-               fontSize: 30.0,
-               textColor: Colors.black,
-               onPressed: _launchURL,
-                              gradientColors: [Colors.blue,Colors.white],
-                              background: null,
-                            ),
-
-        
-                            
-                           ],
-                         ),
-
-                         
                            
-               
-                       ],
+                             
+                 
+                         ],
+                       ),
+                 
                      ),
-               
-                   );
+    );
                    
                  }
                

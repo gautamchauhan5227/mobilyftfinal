@@ -14,6 +14,7 @@ class _allrideState extends State<allride> {
   String _src,_dest,_time,_seat;
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride;
+  bool size=false;
   @override
   void initState() {
     crudobj.getData('history').then((result) {
@@ -72,7 +73,7 @@ void insert(BuildContext context) {
                   style: TextStyle(
                     color:Colors.black,
                     fontWeight:FontWeight.w400,
-                    fontSize: 30.0
+                    fontSize: (size)?24:24
                   ),
                 ),
               ),
@@ -126,9 +127,9 @@ void insert(BuildContext context) {
                       size: 60.0,
                     ),
                     title: Text(
-                        "${ride.documents[i].data["Source"]}\tto\t${ride.documents[i].data["Destination"]}",style: TextStyle(fontSize:30.0,fontWeight: FontWeight.w400),),
+                        "${ride.documents[i].data["Source"]}\tto\t${ride.documents[i].data["Destination"]}",style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w400),),
                     subtitle: Text("Time : "
-                        "${ride.documents[i].data["Time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:20.0),),
+                        "${ride.documents[i].data["Time"]}\nSeat : ${ride.documents[i].data["Seat"]}",style: TextStyle(fontSize:(size)?16:16,),),
                     onTap: () {
                       showDialog<void>(
                         context: context,
@@ -162,7 +163,7 @@ void insert(BuildContext context) {
                                               child: Text(
                                                 "${ride.documents[i].data["Source"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -183,7 +184,7 @@ void insert(BuildContext context) {
                                               child: Text(
                                                 "${ride.documents[i].data["Destination"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -204,7 +205,7 @@ void insert(BuildContext context) {
                                               child: Text(
                                                 "${ride.documents[i].data["Time"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )
@@ -225,7 +226,7 @@ void insert(BuildContext context) {
                                               child: Text(
                                                 "${ride.documents[i].data["Seat"]}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                               ),
                                               flex: 1,
                                             )

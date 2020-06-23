@@ -15,6 +15,7 @@ class view_ride extends StatefulWidget {
 }
 
 class _view_rideState extends State<view_ride> {
+  bool size=false;
   Places selectedpickup,selecteddest;
   Seat selectedseat;
   String _time;
@@ -46,34 +47,7 @@ class _view_rideState extends State<view_ride> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.vertical(
-        //           bottom: Radius.circular(15),
-        //         ),
-        //       ),
-        //       backgroundColor: Colors.white,
-        //       iconTheme: IconThemeData(
-        //         color: Colors.black
-        //       ),         
-        //       title:Padding(
-        //         padding: const EdgeInsets.only(left: 50),
-        //         child: Text(
-        //           "Current Ride Details",
-        //           style: TextStyle(
-        //             color:Colors.black,
-        //             fontWeight:FontWeight.w400,
-        //             fontSize: 30.0
-        //           ),
-        //        ),
-        //       ),
-        //       leading: IconButton(
-        //         icon: Icon(Icons.arrow_back_ios), 
-        //         onPressed:(){
-        //           Navigator.pop(context, true);
-        //         }
-        //       ),
-        //     ),
+        
         body: ListView(
           children: <Widget>[
            if (pro != null)
@@ -128,7 +102,7 @@ class _view_rideState extends State<view_ride> {
                         text:TextSpan(
                           text:'Current Ri',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize:(size)?30:30,
                             fontWeight: FontWeight.w800,
                             color: Colors.black
                           ),
@@ -137,7 +111,7 @@ class _view_rideState extends State<view_ride> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: Colors.blue,
-                                fontSize: 40
+                                fontSize:(size)?30:30,
                               )
                             )
                           ]
@@ -166,7 +140,7 @@ class _view_rideState extends State<view_ride> {
                         children: <Widget>[
                           Text("Source",
                             style: TextStyle(
-                              fontSize: 30.0,
+                              fontSize:(size)?20:20,
                               fontWeight: FontWeight.w700
                             ),
                           )
@@ -193,7 +167,7 @@ class _view_rideState extends State<view_ride> {
                       Expanded(
                         child: Text("${pro.documents[i].data["source"]}",
                           style: TextStyle(
-                            fontSize: 25.0,
+                            fontSize:(size)?18:18,
                             fontWeight: FontWeight.w300
                           ),
                         ),
@@ -224,7 +198,7 @@ class _view_rideState extends State<view_ride> {
                         children: <Widget>[
                           Text("Destination",
                             style: TextStyle(
-                              fontSize: 30.0,
+                              fontSize:(size)?20:20,
                               fontWeight: FontWeight.w700
                             ),
                           )
@@ -251,7 +225,7 @@ class _view_rideState extends State<view_ride> {
                       Expanded(
                         child: Text("${pro.documents[i].data["dest"]}",
                           style: TextStyle(
-                            fontSize: 25.0,
+                            fontSize:(size)?18:18,
                             fontWeight: FontWeight.w300
                           ),
                         ),
@@ -282,7 +256,7 @@ class _view_rideState extends State<view_ride> {
                         children: <Widget>[
                           Text("Seat",
                             style: TextStyle(
-                              fontSize: 30.0,
+                              fontSize:(size)?20:20,
                               fontWeight: FontWeight.w700
                             ),
                           )
@@ -309,7 +283,7 @@ class _view_rideState extends State<view_ride> {
                       Expanded(
                         child: Text("${pro.documents[i].data["Seat"]}",
                           style: TextStyle(
-                            fontSize: 25.0,
+                            fontSize:(size)?18:18,
                             fontWeight: FontWeight.w300
                           ),
                         ),
@@ -337,7 +311,7 @@ Divider(),
                         children: <Widget>[
                           Text("Time",
                             style: TextStyle(
-                              fontSize: 30.0,
+                              fontSize:(size)?20:20,
                               fontWeight: FontWeight.w700
                             ),
                           )
@@ -364,7 +338,7 @@ Divider(),
                       Expanded(
                         child: Text("${pro.documents[i].data["time"]}",
                           style: TextStyle(
-                            fontSize: 25.0,
+                            fontSize:(size)?18:18,
                             fontWeight: FontWeight.w300
                           ),
                         ),
@@ -395,7 +369,7 @@ Divider(),
               child: Text(
                 "Update Time",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?24:24,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -471,8 +445,8 @@ Divider(),
                 shape: RoundedRectangleBorder(
                 borderRadius:new BorderRadius.circular(20.0))                                    ,
                 child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Update",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   if (validateAndSave()) {
@@ -499,8 +473,8 @@ Divider(),
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Cancel",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   
@@ -521,7 +495,7 @@ Divider(),
               child: Text(
                 "Update Source",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -542,7 +516,7 @@ Divider(),
                     SimpleAutocompleteFormField<Places>(
                       suggestionsHeight: 80.0,
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize:(size)?20:20,
                         fontWeight: FontWeight.w300
                       ),
                       decoration: InputDecoration(  
@@ -559,7 +533,7 @@ Divider(),
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.grey[900], 
-                          fontSize: 20.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),            
                       ),
@@ -595,8 +569,8 @@ Divider(),
                 shape: RoundedRectangleBorder(
                 borderRadius:new BorderRadius.circular(20.0))                                    ,
                 child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Update",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   if (validateAndSave()) {
@@ -621,8 +595,8 @@ Divider(),
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Cancel",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {                
                   Navigator.pop(context, true);
@@ -644,7 +618,7 @@ Divider(),
               child: Text(
                 "Update Destination",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -659,7 +633,7 @@ Divider(),
                     SimpleAutocompleteFormField<Places>(
                       suggestionsHeight: 80.0,
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize:(size)?20:20,
                         fontWeight: FontWeight.w300
                       ),
                       decoration: InputDecoration(  
@@ -676,7 +650,7 @@ Divider(),
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.grey[900], 
-                          fontSize: 20.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),            
                       ),
@@ -712,8 +686,8 @@ Divider(),
                 shape: RoundedRectangleBorder(
                 borderRadius:new BorderRadius.circular(20.0))                                    ,
                 child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Update",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   if (validateAndSave()) {
@@ -738,8 +712,8 @@ Divider(),
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Cancel",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {                
                   Navigator.pop(context, true);
@@ -762,7 +736,7 @@ Divider(),
               child: Text(
                 "Update Source",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -777,7 +751,7 @@ Divider(),
                     SimpleAutocompleteFormField<Seat>(
                       suggestionsHeight: 80.0,
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize:(size)?20:20,
                         fontWeight: FontWeight.w300
                       ),
                       decoration: InputDecoration(  
@@ -794,7 +768,7 @@ Divider(),
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.grey[900], 
-                          fontSize: 20.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),            
                       ),
@@ -830,8 +804,8 @@ Divider(),
                 shape: RoundedRectangleBorder(
                 borderRadius:new BorderRadius.circular(20.0))                                    ,
                 child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Update",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   if (validateAndSave()) {
@@ -856,8 +830,8 @@ Divider(),
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Cancel",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {                
                   Navigator.pop(context, true);

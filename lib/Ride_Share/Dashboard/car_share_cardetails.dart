@@ -17,6 +17,7 @@ class _car_detailsState extends State<car_details> {
   String _rc;
   String _lic;
   QuerySnapshot pro;
+  bool size=false;
   final formKey = GlobalKey<FormState>();
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -59,7 +60,7 @@ class _car_detailsState extends State<car_details> {
                 style: TextStyle(
                   color:Colors.black,
                   fontWeight:FontWeight.w400,
-                  fontSize: 30.0
+                  fontSize:(size)?24:24,
                   ),
                ),
           ),
@@ -104,7 +105,7 @@ class _car_detailsState extends State<car_details> {
             ),
             Center(
               child:
-                  Icon(Icons.directions_car, size: 150.0, color: Colors.black),
+                  Icon(Icons.directions_car, size:(size)?100:100, color: Colors.black),
             ),
             Padding(
               padding: EdgeInsets.only(),
@@ -113,13 +114,13 @@ class _car_detailsState extends State<car_details> {
                 children: <Widget>[
                   Text('Vehicle',
                       style: TextStyle(
-                        fontSize: 40.0,
+                        fontSize:(size)?28:28,
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
                       )),
                   Text(
                     '  Details',
-                    style: TextStyle(fontSize: 40.0, color: Colors.blueAccent),
+                    style: TextStyle(fontSize:(size)?28:28, color: Colors.blueAccent),
                   )
                 ],
               ),
@@ -136,7 +137,7 @@ class _car_detailsState extends State<car_details> {
                         new Text(
                           'Car Number',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -163,7 +164,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["car Number"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w300),
+                          fontSize:(size)?18:18, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -180,7 +181,7 @@ class _car_detailsState extends State<car_details> {
                         new Text(
                           'License Number',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -206,7 +207,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["License"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w300),
+                          fontSize:(size)?18:18, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -222,7 +223,7 @@ class _car_detailsState extends State<car_details> {
                         new Text(
                           'Chassis Number',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -248,7 +249,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["Chassis No"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w300),
+                          fontSize:(size)?18:18, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -265,7 +266,7 @@ class _car_detailsState extends State<car_details> {
                         new Text(
                           'Engine Number',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -291,7 +292,7 @@ class _car_detailsState extends State<car_details> {
                         child: Text(
                       "${pro.documents[i].data["Engine No"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w300),
+                          fontSize:(size)?18:18, fontWeight: FontWeight.w300),
                     )),
                   ],
                 )),
@@ -317,7 +318,7 @@ class _car_detailsState extends State<car_details> {
               child: Text(
                 "Update Car Number",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -341,11 +342,11 @@ class _car_detailsState extends State<car_details> {
                             fontSize: 20.0
                           ),
                           hintText: 'GJ 05 AA 0220',
-                        prefixIcon: const Icon(
-                        Icons.person,
-                        size: 40.0,
-                        color: Colors.blue,
-                      ),
+                      //   prefixIcon: const Icon(
+                      //   Icons.person,
+                      //   size: 40.0,
+                      //   color: Colors.blue,
+                      // ),
                      ),
                       validator: (value) =>
                        value.isEmpty ? "Car Number can't be empty" : null,
@@ -357,45 +358,49 @@ class _car_detailsState extends State<car_details> {
                 ),
               ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.lightBlue[50],
-                shape: RoundedRectangleBorder(
-                borderRadius:new BorderRadius.circular(20.0))                                    ,
-                child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                  shape: RoundedRectangleBorder(
+                  borderRadius:new BorderRadius.circular(20.0))                                    ,
+                  child: Text(
+                    "Update",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                    if (validateAndSave()) {
+                      Navigator.pop(context, true);
+                      Navigator.pop(context, true);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                car_details(email: widget.email)));
+                                crudobj.updateData(selectedDoc, {
+                                        'car Number': this._model,
+                                    },
+                                    "car_detail"
+                                  );
+                    }
+                  },
                 ),
-                onPressed: () {
-                  if (validateAndSave()) {
-                    Navigator.pop(context, true);
-                    Navigator.pop(context, true);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              car_details(email: widget.email)));
-                              crudobj.updateData(selectedDoc, {
-                                      'car Number': this._model,
-                                  },
-                                  "car_detail"
-                                );
-                  }
-                },
               ),
-              Padding(padding: EdgeInsets.only(left:15.0)),
-              FlatButton(
+              Padding(padding: EdgeInsets.only(left:15.0,right:20.0),
+              child:FlatButton(
                 color: Colors.lightBlue[50],
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     new BorderRadius.circular(20.0)),
                 child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                  "Cancel",
+                  style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                 ),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
-              )
+              ),
+          ),
             ],
           );
         });
@@ -411,7 +416,7 @@ class _car_detailsState extends State<car_details> {
               child: Text(
                 "Update License Number",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -430,12 +435,12 @@ class _car_detailsState extends State<car_details> {
                       decoration: InputDecoration(
                         labelText: 'License Number',
                         labelStyle:
-                        TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                        prefixIcon: const Icon(
-                        Icons.person,
-                        size: 40.0,
-                        color: Colors.blue,
-                      ),
+                        TextStyle(color: Colors.grey[900], fontSize:(size)?20:20,),
+                      //   prefixIcon: const Icon(
+                      //   Icons.person,
+                      //   size: 40.0,
+                      //   color: Colors.blue,
+                      // ),
                      ),
                       validator: (value) =>
                        value.isEmpty ? "License Number can't be empty" : null,
@@ -447,45 +452,51 @@ class _car_detailsState extends State<car_details> {
                 ),
               ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(20.0)),
+                  child: Text(
+                    "Update",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                     if (validateAndSave()) {
+                    Navigator.pop(context, true);
+                    Navigator.pop(context, true);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              car_details(email: widget.email)));
+                                  crudobj.updateData(selectedDoc, {
+                                        'License': this._model,
+                                    },
+                                    "car_detail"
+                                  );
+                    }
+                  },
                 ),
-                onPressed: () {
-                   if (validateAndSave()) {
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            car_details(email: widget.email)));
-                                crudobj.updateData(selectedDoc, {
-                                      'License': this._model,
-                                  },
-                                  "car_detail"
-                                );
-                  }
-                },
               ),
-              Padding(padding: EdgeInsets.only(left:15.0)),
-              FlatButton(
-                color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+             
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(20.0)),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
               )
             ],
           );
@@ -502,7 +513,7 @@ class _car_detailsState extends State<car_details> {
               child: Text(
                 "Update Chassis Number",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -522,11 +533,11 @@ class _car_detailsState extends State<car_details> {
                         labelText: 'Chassis Number',
                         labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                        prefixIcon: const Icon(
-                        Icons.person,
-                        size: 40.0,
-                        color: Colors.blue,
-                      ),
+                      //   prefixIcon: const Icon(
+                      //   Icons.person,
+                      //   size: 40.0,
+                      //   color: Colors.blue,
+                      // ),
                      ),
                       validator: (value) =>
                        value.isEmpty ? "Chassis Number can't be empty" : null,
@@ -538,45 +549,51 @@ class _car_detailsState extends State<car_details> {
                 ),
               ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                ),
-                onPressed: () {
-                   if (validateAndSave()) {
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                  Navigator.push(
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(20.0)),
+                  child: Text(
+                    "Update",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                     if (validateAndSave()) {
+                    Navigator.pop(context, true);
+                    Navigator.pop(context, true);
+                    Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  car_details(email: widget.email)));
-                  crudobj.updateData(selectedDoc, {
-                                      'Chassis No': this._model,
-                                  },
-                                  "car_detail"
-                                );
-                }
-                },
-              ),
-              Padding(padding: EdgeInsets.only(left:15.0)),
-              FlatButton(
-                color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                builder: (BuildContext context) =>
+                    car_details(email: widget.email)));
+                    crudobj.updateData(selectedDoc, {
+                                        'Chassis No': this._model,
+                                    },
+                                    "car_detail"
+                                  );
+                  }
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
+              ),
+              
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(20.0)),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                ),
               )
             ],
           );
@@ -593,7 +610,7 @@ class _car_detailsState extends State<car_details> {
               child: Text(
                 "Update Engine Number",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -613,11 +630,11 @@ class _car_detailsState extends State<car_details> {
                         labelText: 'Engine Number',
                         labelStyle:
                         TextStyle(color: Colors.grey[900], fontSize: 20.0),
-                        prefixIcon: const Icon(
-                        Icons.person,
-                        size: 40.0,
-                        color: Colors.blue,
-                      ),
+                      //   prefixIcon: const Icon(
+                      //   Icons.person,
+                      //   size: 40.0,
+                      //   color: Colors.blue,
+                      // ),
                      ),
                       validator: (value) =>
                        value.isEmpty ? "Engine Number can't be empty" : null,
@@ -629,45 +646,51 @@ class _car_detailsState extends State<car_details> {
                 ),
               ),
             actions: <Widget>[
-              FlatButton(
-                color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                child: Text(
-                  "   Update   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
-                ),
-                onPressed: () {
-                   if (validateAndSave()) {
-                  Navigator.pop(context, true);
-                  Navigator.pop(context, true);
-                  Navigator.push(
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(20.0)),
+                  child: Text(
+                    "Update",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                     if (validateAndSave()) {
+                    Navigator.pop(context, true);
+                    Navigator.pop(context, true);
+                    Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  car_details(email: widget.email)));
-                  crudobj.updateData(selectedDoc, {
-                                      'Engine Number': this._model,
-                                  },
-                                  "car_detail"
-                                );
-                }
-                },
-              ),
-              Padding(padding: EdgeInsets.only(left:15.0)),
-              FlatButton(
-                color: Colors.lightBlue[50],
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    new BorderRadius.circular(20.0)),
-                child: Text(
-                  "   Cancel   ",
-                  style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                builder: (BuildContext context) =>
+                    car_details(email: widget.email)));
+                    crudobj.updateData(selectedDoc, {
+                                        'Engine Number': this._model,
+                                    },
+                                    "car_detail"
+                                  );
+                  }
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
+              ),
+              
+              Padding(
+                padding: const EdgeInsets.only(left:15.0,right: 20.0),
+                child: FlatButton(
+                  color: Colors.lightBlue[50],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(20.0)),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                ),
               )
             ],
           );

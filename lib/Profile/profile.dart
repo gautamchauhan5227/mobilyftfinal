@@ -15,6 +15,7 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> {
+  bool size=false;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   String _email;
@@ -181,7 +182,7 @@ class _profileState extends State<profile> {
                                 new Text(
                                   'Personal Information',
                                   style: TextStyle(
-                                      fontSize: 25.0,
+                                      fontSize:(size)?20:20,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ],
@@ -203,7 +204,7 @@ class _profileState extends State<profile> {
                         new Text(
                           'Name',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -229,7 +230,7 @@ class _profileState extends State<profile> {
                         child: Text(
                       "${pro.documents[i].data["name"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize:(size)?20:20, fontFamily: 'sans-serif-light'),
                     )),
                   ],
                 )),
@@ -247,7 +248,7 @@ class _profileState extends State<profile> {
                         new Text(
                           'Email ID',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -273,7 +274,7 @@ class _profileState extends State<profile> {
                         child: Text(
                       "${pro.documents[i].data["email"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize:(size)?20:20, fontFamily: 'sans-serif-light'),
                     )),
                   ],
                 )),
@@ -291,7 +292,7 @@ class _profileState extends State<profile> {
                         new Text(
                           'Mobile',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                             fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -317,7 +318,7 @@ class _profileState extends State<profile> {
                         child: Text(
                       "${pro.documents[i].data["phone"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize:(size)?20:20, fontFamily: 'sans-serif-light'),
                     )),
                   ],
                 )),
@@ -334,7 +335,7 @@ class _profileState extends State<profile> {
                         new Text(
                           'Pin Code',
                           style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.w700),
+                              fontSize:(size)?20:20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -360,7 +361,7 @@ class _profileState extends State<profile> {
                         child: Text(
                       "${pro.documents[i].data["pincode"]}",
                       style: TextStyle(
-                          fontSize: 20.0, fontFamily: 'sans-serif-light'),
+                          fontSize:(size)?20:20, fontFamily: 'sans-serif-light'),
                     )
                   ),
                 ],

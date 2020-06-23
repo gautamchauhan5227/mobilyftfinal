@@ -13,6 +13,7 @@ class Ride_Page extends StatefulWidget {
   _Ride_PageState createState() => _Ride_PageState();
 }
 class _Ride_PageState extends State<Ride_Page> {
+  bool size=false;
   final formKey = GlobalKey<FormState>();
   QuerySnapshot car;
   CRUD1 crudobj = new CRUD1();
@@ -73,7 +74,7 @@ class _Ride_PageState extends State<Ride_Page> {
               child: Text(
                 "Add Car Details First!!",
                 style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey[700],
                   fontWeight: FontWeight.bold,
                 ),
@@ -88,7 +89,7 @@ class _Ride_PageState extends State<Ride_Page> {
                   child: ListView(children: <Widget>[
                     TextFormField(
                       style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize:(size)?20:20,
                       fontWeight: FontWeight.w300
                       ),
                      // controller: TextEditingController(),
@@ -99,7 +100,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       decoration: InputDecoration(
                         labelText: 'Car Number',
                         labelStyle:
-                        TextStyle(color: Colors.grey[900],  fontSize: 25.0,fontWeight: FontWeight.w400),
+                        TextStyle(color: Colors.grey[900],fontSize:(size)?20:20,fontWeight: FontWeight.w400),
                         hintText: 'GJ 05 AA 1111'
                       ),
                       validator: (value) =>
@@ -111,7 +112,7 @@ class _Ride_PageState extends State<Ride_Page> {
 
                     TextFormField(
                       style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize:(size)?20:20,
                       fontWeight: FontWeight.w300
                       ),
                      // controller: TextEditingController(),
@@ -122,7 +123,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       decoration: InputDecoration(
                         labelText: 'License Number',
                         labelStyle:
-                        TextStyle(color: Colors.grey[900],  fontSize: 25.0,fontWeight: FontWeight.w400),
+                        TextStyle(color: Colors.grey[900],fontSize:(size)?20:20,fontWeight: FontWeight.w400),
                         hintText: 'GJ05 00223331111'
                       ),
                       validator: (value) =>
@@ -134,7 +135,7 @@ class _Ride_PageState extends State<Ride_Page> {
 
                     TextFormField(
                       style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize:(size)?20:20,
                       fontWeight: FontWeight.w300
                       ),
                       //controller: TextEditingController(),
@@ -148,7 +149,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       decoration: InputDecoration(
                         labelText: 'Chassis Number',
                         labelStyle:
-                        TextStyle(color: Colors.grey[900],  fontSize: 25.0,fontWeight: FontWeight.w400),
+                        TextStyle(color: Colors.grey[900], fontSize:(size)?20:20,fontWeight: FontWeight.w400),
                         hintText: 'MA7878JK76GG88OOO'
                       ),
                       validator: (value) =>
@@ -160,7 +161,7 @@ class _Ride_PageState extends State<Ride_Page> {
 
                     TextFormField(
                       style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize:(size)?20:20,
                       fontWeight: FontWeight.w300
                       ),
                      // controller: TextEditingController(),
@@ -174,7 +175,7 @@ class _Ride_PageState extends State<Ride_Page> {
                       decoration: InputDecoration(
                         labelText: 'Engine Number',
                         labelStyle:
-                        TextStyle(color: Colors.grey[900],  fontSize: 25.0,fontWeight: FontWeight.w400),
+                        TextStyle(color: Colors.grey[900],  fontSize:(size)?20:20,fontWeight: FontWeight.w400),
                         hintText: 'GJ3934KK2345'
                       ),
                       validator: (value) =>
@@ -262,7 +263,7 @@ class _Ride_PageState extends State<Ride_Page> {
                 child: Center(
                   child: Text('Add Ride',
                     style: TextStyle(
-                      fontSize: 50.0,
+                      fontSize:(size)?30:30,
                       fontWeight: FontWeight.w600
                     )
                   ),
@@ -298,7 +299,7 @@ class _Ride_PageState extends State<Ride_Page> {
                 child: Center(
                   child: Text('Search Ride',
                     style: TextStyle(
-                      fontSize: 50.0,
+                      fontSize:(size)?30:30,
                       fontWeight: FontWeight.w600
                     )
                   ),

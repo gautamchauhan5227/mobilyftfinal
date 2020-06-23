@@ -13,6 +13,7 @@ class request_page extends StatefulWidget {
   _request_pageState createState() => _request_pageState();
 }
 class _request_pageState extends State<request_page> {
+  bool size=false;
   CRUD1 crudobj = new CRUD1();
   int l = 0;
   int flag =0;
@@ -51,9 +52,6 @@ var randomizer = new Random();
       'Time':time,
       'Seat':seat,
       };
-    //   crudobj.history(hdata, context).then((result) {}).catchError((e) {
-    //   print(e);
-    // });
     crudobj.adddata(hdata, context,"history").then((result) {}).catchError((e) {
       print(e);
       }
@@ -139,7 +137,7 @@ var randomizer = new Random();
                       ,style: TextStyle(fontSize: 28.0 ,),),
                   subtitle: Text(
                       "${req.documents[i].data["PickUp"]}\tto\t${req.documents[i].data["Destination"]}\nSeat : ${req.documents[i].data["Seat"]}",
-                      style: TextStyle(fontSize: 17.0),),
+                      style: TextStyle(fontSize:(size)?15:15,),),
                   onTap: () {
                     showDialog<void>(
                       context: context,
@@ -152,7 +150,7 @@ var randomizer = new Random();
                               style: TextStyle(
                                 fontFamily: 'helvetica_neue_light',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25.0,
+                                fontSize:(size)?20:20,
                               ),
                             ),
                           ),
@@ -174,7 +172,7 @@ var randomizer = new Random();
                                             child: Text(
                                               namereq,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -196,7 +194,7 @@ var randomizer = new Random();
                                             child: Text(
                                               "${req.documents[i].data["Emailreq"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -220,7 +218,7 @@ var randomizer = new Random();
                                     "$phonereq",
                                      textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      fontSize:22.0,
+                                      fontSize:(size)?20:20,
                                       fontWeight: FontWeight.w300
                                     ),
                                   ),                                     
@@ -237,7 +235,7 @@ var randomizer = new Random();
                       FlatButton(
                         child: Text(
                           "Give Your Response",
-                          style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                          style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                         ),
                       onPressed: () {
                         showDialog<void>(
@@ -249,7 +247,7 @@ var randomizer = new Random();
                               child: Text(
                                 "You Want To Share Ride With ""$namereq""\t""?""\t""Yes/No",
                                 style: TextStyle(
-                                  fontSize:20.0,
+                                  fontSize:(size)?20:20,
                                   fontWeight: FontWeight.w300
                                 ),
                               ),
@@ -258,7 +256,7 @@ var randomizer = new Random();
                             FlatButton(
                               child: Text(
                                 "Yes",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                               ),
                               onPressed: (){
                                 submit(i);
@@ -268,7 +266,7 @@ var randomizer = new Random();
                              FlatButton(
                               child: Text(
                                 "No",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                               ),
                               onPressed: (){
                                 crudobj.deleteData(req.documents[i].documentID,"ride request");
@@ -332,7 +330,7 @@ var randomizer = new Random();
                         child: Text(
                           "No data!!",
                           style: TextStyle(
-                            fontSize: 20.0
+                            fontSize:(size)?20:20,
                           ),
                         ),
                       )

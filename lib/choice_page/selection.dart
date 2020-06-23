@@ -7,13 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:mobilyft/Car_Insurance/Car_Insurance_CompanyList.dart';
-import 'package:mobilyft/Car_Rent/Car_Rent_HomePage/car_rent_homepage.dart';
+import 'package:mobilyft/Car_Rent/Car_Rent_Add_Search/car_rent_add_search.dart';
 import 'package:mobilyft/Car_Sell/car_sell_home.dart';
 import 'package:mobilyft/Crud_File/crud1.dart';
 import 'package:mobilyft/Login_Page/loginpage.dart';
 import 'package:mobilyft/Profile/profile.dart';
 import 'package:mobilyft/Ride_Share/HomePage/car_share_home_page.dart';
+import 'package:mobilyft/Ride_Share/maps/map.dart';
+import 'package:mobilyft/Ride_Share/maps/polyLine.dart';
+import 'package:mobilyft/map/polyLine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class section_page extends StatefulWidget {
   section_page({Key key, this.email}) : super(key: key);
@@ -30,7 +34,7 @@ class _section_pageState extends State<section_page> {
   String user;
  Uint8List imagef;
   StorageReference photoref = FirebaseStorage.instance.ref().child("profile");
-
+  bool size=false;
  @override
   void initState() {
     int MAX_SIZE = 7 * 1024 * 1024;
@@ -70,6 +74,7 @@ class _section_pageState extends State<section_page> {
   }
   @override
   Widget build(BuildContext context) {
+    
     return  WillPopScope(
       onWillPop: manage_back_button,
     
@@ -176,7 +181,7 @@ class _section_pageState extends State<section_page> {
                     "Welcome To MobiLyft",
                     style: TextStyle(
                       fontFamily:"Merriweather",
-                      fontSize: 30.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w800,
                       color: Colors.black
                       ),
@@ -209,13 +214,14 @@ class _section_pageState extends State<section_page> {
                                     builder: (BuildContext context) =>
                                               Home_page(email: widget.email),                                             
                                     )
-                                  );                              
+                                  );             
                                 },
                                 child: Text(
                                   'Ride Share',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 30,
+                                    fontSize: (size)?24:24,
                                     color: Colors.white
                                   )
                                 )
@@ -242,15 +248,16 @@ class _section_pageState extends State<section_page> {
                                 onPressed: (){
                                   Navigator.push(context, MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                              rent_homepage(email: widget.email),                                             
+                                              rent_addsearch(email: widget.email),                                             
                                     )
                                   );
                                 },
                                 child: Text(
                                   'Car Rent',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 30,
+                                    fontSize: (size)?24:24,
                                     color: Colors.white
                                   )
                                 )
@@ -292,9 +299,10 @@ class _section_pageState extends State<section_page> {
                                 },
                                 child: Text(
                                   'Car Service',
+                                  
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 30,
+                                    fontSize: (size)?24:24,
                                     color: Colors.white
                                   ),
                                   textAlign: TextAlign.center,
@@ -328,9 +336,10 @@ class _section_pageState extends State<section_page> {
                                 },
                                 child: Text(
                                   'Car sell',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 30,
+                                    fontSize: (size)?24:24,
                                     color: Colors.white
                                   )
                                 )
@@ -374,7 +383,7 @@ class _section_pageState extends State<section_page> {
                                   'Car Insurance',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 30,
+                                    fontSize: (size)?24:24,
                                     color: Colors.white
                                   ),
                                   textAlign: TextAlign.center,
@@ -400,17 +409,18 @@ class _section_pageState extends State<section_page> {
                               child: RaisedButton(
                                 color: Colors.transparent,
                                 onPressed: (){
-                                  // Navigator.push(context, MaterialPageRoute(
-                                  //   builder: (BuildContext context) =>
-                                  //             sell_home(email: widget.email),                                             
-                                  //   )
-                                  // );
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                              poly(),                                             
+                                    )
+                                  );
                                 },
                                 child: Text(
                                   'About',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 30,
+                                    fontSize: (size)?24:24,
                                     color: Colors.white
                                   )
                                 )

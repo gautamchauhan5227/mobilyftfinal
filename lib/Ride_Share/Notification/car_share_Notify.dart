@@ -11,6 +11,7 @@ class notify extends StatefulWidget {
   _notifyState createState() => _notifyState();
 }
 class _notifyState extends State<notify> {
+  bool size=false;
   CRUD1 crudobj = new CRUD1();
   QuerySnapshot ride;
   String _src, _dest, _seat;
@@ -70,9 +71,9 @@ class _notifyState extends State<notify> {
                     ),
                     title: Text(
                         "${ride.documents[i].data["notice"]}",
-                        style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w400),),
+                        style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w400),),
                     subtitle: Text("${ride.documents[i].data["detail"]}",
-                    style: TextStyle(fontSize:15.0,fontWeight:FontWeight.w300),),
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight:FontWeight.w300),),
                     onLongPress: (){
                       showDialog<void>(
                       context: context,
@@ -84,7 +85,7 @@ class _notifyState extends State<notify> {
                                 child: Text(
                                   "You Want To Delete ?",
                                   style: TextStyle(
-                                    fontSize:25,
+                                    fontSize:(size)?20:20,
                                     fontWeight:FontWeight.w400),
                                     )
                                   ),
@@ -93,7 +94,7 @@ class _notifyState extends State<notify> {
                             FlatButton(
                               child: Text(
                                 "Yes",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                crudobj.deleteData(ride.documents[i].documentID,"notify");
@@ -111,7 +112,7 @@ class _notifyState extends State<notify> {
                             FlatButton(
                               child: Text(
                                 "No",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                Navigator.pop(context, true);

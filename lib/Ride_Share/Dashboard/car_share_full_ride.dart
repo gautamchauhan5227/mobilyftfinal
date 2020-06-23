@@ -9,6 +9,7 @@ class fullride extends StatefulWidget {
 }
 
 class _fullrideState extends State<fullride> {
+  bool size=false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +32,7 @@ class _fullrideState extends State<fullride> {
                 style: TextStyle(
                   color:Colors.black,
                   fontWeight:FontWeight.w400,
-                  fontSize: 30.0
+                  fontSize:(size)?24:24,
                   ),
                ),
           ),
@@ -80,7 +81,7 @@ class _fullrideState extends State<fullride> {
                 child: Center(
                   child: Text('Current Ride',
                     style: TextStyle(
-                      fontSize: 45.0,
+                      fontSize:(size)?30:30,
                       fontWeight: FontWeight.w500
                     )
                   ),
@@ -121,7 +122,7 @@ class _fullrideState extends State<fullride> {
                 child: Center(
                   child: Text('Ride Histroy',
                     style: TextStyle(
-                      fontSize: 45.0,
+                      fontSize:(size)?30:30,
                       fontWeight: FontWeight.w500
                     )
                   ),

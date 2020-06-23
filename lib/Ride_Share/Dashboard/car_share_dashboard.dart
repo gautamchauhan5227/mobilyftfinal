@@ -9,8 +9,10 @@ class Dashboard extends StatefulWidget {
   _DashboardState createState() => _DashboardState();
 }
 class _DashboardState extends State<Dashboard> {
+  bool size=false;
   @override
   Widget build(BuildContext context) {
+    final _font=(size)?24:24;
     return Scaffold(
         backgroundColor: Colors.white,
         body: ListView(
@@ -49,7 +51,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Center(
                   child: Text('Ride Details',
                     style: TextStyle(
-                      fontSize: 45.0,
+                      fontSize: (size)?30:30,
                       fontWeight: FontWeight.w500
                     )
                   ),
@@ -90,7 +92,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Center(
                   child: Text('Vehicle Details',
                     style: TextStyle(
-                      fontSize: 45.0,
+                      fontSize: (size)?30:30,
                       fontWeight: FontWeight.w500
                     )
                   ),
@@ -130,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Center(
                   child: Text('Ride Status',
                     style: TextStyle(
-                      fontSize: 45.0,
+                      fontSize: (size)?30:30,
                       fontWeight: FontWeight.w500
                     )
                   ),

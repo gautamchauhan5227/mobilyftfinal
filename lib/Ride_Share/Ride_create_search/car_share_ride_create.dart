@@ -24,6 +24,7 @@ class _CreateState extends State<Create> {
   DateTime now = DateTime.now();
   DateTime ti;//=null;
   String _time = "Not Set";
+  bool size=false;
   String formattedDate = DateFormat.yMMMMd("en_US").format(DateTime.now());
   Future<bool> alert(BuildContext context) async {
       return showDialog(
@@ -35,7 +36,7 @@ class _CreateState extends State<Create> {
               child: Text(
                 "Select Time First!!",
                 style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize:(size)?20:20,
                   color: Colors.grey[700],
                   fontWeight: FontWeight.bold,
                 ),
@@ -112,7 +113,7 @@ class _CreateState extends State<Create> {
                         text:TextSpan(
                           text:'Ride',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize:(size)?30:30,
                             fontWeight: FontWeight.w800,
                             color: Colors.black
                           ),
@@ -121,7 +122,7 @@ class _CreateState extends State<Create> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: Colors.blue,
-                                fontSize: 40
+                                fontSize:(size)?30:30,
                               )
                             )
                           ]
@@ -138,7 +139,7 @@ class _CreateState extends State<Create> {
                     child: SimpleAutocompleteFormField<Places>(
                       suggestionsHeight: 80.0,
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize:(size)?20:20,
                         fontWeight: FontWeight.w300
                       ),
                       decoration: InputDecoration(
@@ -155,7 +156,7 @@ class _CreateState extends State<Create> {
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.grey[900], 
-                          fontSize: 20.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),            
                       ),
@@ -167,6 +168,7 @@ class _CreateState extends State<Create> {
                           children: [
                             Text(place.name,
                               style: TextStyle(
+                                fontSize:(size)?20:20,
                                 fontWeight: FontWeight.bold
                               )
                             ),
@@ -192,7 +194,7 @@ class _CreateState extends State<Create> {
                     child: SimpleAutocompleteFormField<Places>(
                       suggestionsHeight: 80.0,
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize:(size)?20:20,
                         fontWeight: FontWeight.w300
                       ),
                       decoration: InputDecoration(
@@ -209,7 +211,7 @@ class _CreateState extends State<Create> {
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.grey[900], 
-                          fontSize: 20.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),            
                       ),
@@ -221,6 +223,7 @@ class _CreateState extends State<Create> {
                           children: [
                             Text(place.name,
                               style: TextStyle(
+                                fontSize:(size)?20:20,
                                 fontWeight: FontWeight.bold
                               )
                             ),
@@ -247,7 +250,7 @@ class _CreateState extends State<Create> {
                     child: SimpleAutocompleteFormField<Seat>(
                       suggestionsHeight: 80.0,
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize:(size)?20:20,
                         fontWeight: FontWeight.w300
                       ),
                       decoration: InputDecoration(  
@@ -264,7 +267,7 @@ class _CreateState extends State<Create> {
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(
                           color: Colors.grey[900], 
-                          fontSize: 20.0,
+                          fontSize:(size)?20:20,
                           fontWeight: FontWeight.w400
                         ),            
                       ),
@@ -314,7 +317,7 @@ class _CreateState extends State<Create> {
                               ),
                               Text("\t""Time",
                                 style: TextStyle(
-                                  fontSize: 30.0,
+                                  fontSize:(size)?20:20,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black45
                                 )
@@ -394,7 +397,7 @@ class _CreateState extends State<Create> {
                       text: 'Add',
                       gradientColors: [secondColor, firstColor],
                       background: null,
-                      fontSize: 30,
+                      fontSize:(size)?20:20,
                       onPressed: () {
                         if (validateAndSave()) {
                           if(ti == null){

@@ -13,6 +13,7 @@ class msg_ride_response extends StatefulWidget {
   _msg_ride_responseState createState() => _msg_ride_responseState();
 }
 class _msg_ride_responseState extends State<msg_ride_response> {  
+  bool size=false;
   var firstColor = Color(0xff5b86e5), secondColor = Color(0xff36d1dc);
   CRUD1 crudobj = new CRUD1();
   int l = 0;
@@ -101,7 +102,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                     "\n"
                     "RideCode:- ${respo.documents[i].data["Otp"]}",
 
-                    style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w300),
+                    style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                     ),
                     subtitle:Padding(
                              padding: const EdgeInsets.only(top:25.0,bottom:15.0,right: 50.0),
@@ -119,7 +120,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                                 Padding(padding: EdgeInsets.only(top:15.0),
                                                 child: Text("Ride Code",
                                                 style:TextStyle(
-                                                  fontSize: 35.0,
+                                                  fontSize:(size)?24:24,
                                                   fontWeight:FontWeight.w400
                                                 )
                                               ),
@@ -127,12 +128,12 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                   Divider(),
                                   Padding(padding: EdgeInsets.only(top:10.0),
                                    child: Text("Make Payment!! ",
-                                   style: TextStyle(fontSize:50.0,fontWeight:FontWeight.w700),),
+                                   style: TextStyle(fontSize:(size)?30:30,fontWeight:FontWeight.w700),),
                                   ),
                                   
                                   Padding(padding: EdgeInsets.only(top:10.0),
                                   child: Text(" ",
-                                  style: TextStyle(fontSize:15.0,fontWeight:FontWeight.w300),)
+                                  style: TextStyle(fontSize:(size)?20:20,fontWeight:FontWeight.w300),)
                                   ),
                                   Padding(padding: EdgeInsets.only(top:20.0),
                                   child:NiceButton(
@@ -173,7 +174,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                               style: TextStyle(
                                 fontFamily: 'helvetica_neue_light',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 30.0,
+                                fontSize:(size)?20:20,
                               ),
                             ),
                           ),
@@ -196,7 +197,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                             child: Text(
                                               namereq,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -218,7 +219,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                             child: Text(
                                               requester,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -242,7 +243,7 @@ class _msg_ride_responseState extends State<msg_ride_response> {
                                     "$phonereq",
                                      textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      fontSize:25.0,
+                                      fontSize:(size)?20:20,
                                       fontWeight: FontWeight.w300
                                       ),
                                       )

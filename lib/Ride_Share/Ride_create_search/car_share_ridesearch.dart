@@ -12,6 +12,7 @@ class ridesearch extends StatefulWidget {
   ridesearchState createState() => ridesearchState();
 }
 class ridesearchState extends State<ridesearch> {
+  bool size=false;
    GlobalKey<AutoCompleteTextFieldState<String>> keyComp = new GlobalKey();
   String currentText = "";
   CRUD1 crudobj = new CRUD1();
@@ -97,7 +98,7 @@ void submit(int i) async {
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 30.0),            
                   ),
                 style: TextStyle(
-                  fontSize: 24.0,
+                  fontSize:(size)?20:20,
                   fontWeight: FontWeight.w600 
                 ),
                 controller: TextEditingController(),
@@ -151,10 +152,10 @@ void submit(int i) async {
                   ),
                   title: Text(
                       "${ride.documents[i].data["source"]}\tto\t${ride.documents[i].data["dest"]}",
-                      style: TextStyle(fontSize:30.0,fontWeight:FontWeight.w400),),
+                      style: TextStyle(fontSize:(size)?20:20,fontWeight:FontWeight.w400),),
                   subtitle: Text("Time : "
                       "${ride.documents[i].data["time"]}\nSeat : ${ride.documents[i].data["Seat"]}",
-                      style: TextStyle(fontSize:20.0,fontWeight:FontWeight.w300),),
+                      style: TextStyle(fontSize:(size)?18:18,fontWeight:FontWeight.w300),),
                   onTap: () {
                      emailcr = ride.documents[i].data["email"];
                     print(emailcr);
@@ -202,7 +203,7 @@ void submit(int i) async {
                                             child: Text(
                                               namecr,
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -225,7 +226,7 @@ void submit(int i) async {
                                             child: Text(
                                               "${carnum}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -250,7 +251,7 @@ void submit(int i) async {
                                             child: Text(
                                               "${ride.documents[i].data["source"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -274,7 +275,7 @@ void submit(int i) async {
                                             child: Text(
                                               "${ride.documents[i].data["dest"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -298,7 +299,7 @@ void submit(int i) async {
                                             child: Text(
                                               "${ride.documents[i].data["time"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -321,7 +322,7 @@ void submit(int i) async {
                                               child: Text(
                                               "${ride.documents[i].data["Seat"]}",
                                               textAlign: TextAlign.start,
-                                              style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),
+                                              style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                                             ),
                                             flex: 1,
                                           )
@@ -334,8 +335,8 @@ void submit(int i) async {
                           actions: <Widget>[
                             FlatButton(
                               child: Text(
-                                "   Request   ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                "Request",
+                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                 submit(i);
@@ -344,8 +345,8 @@ void submit(int i) async {
                             Padding(padding:EdgeInsets.only(left:10.0) ),
                             FlatButton(
                               child: Text(
-                                "   Cancel   ",
-                                style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w300),
+                                "Cancel",
+                                style: TextStyle(fontSize:(size)?20:20,fontWeight: FontWeight.w300),
                               ),
                               onPressed: () {
                                 Navigator.pop(context, true);

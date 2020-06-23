@@ -39,11 +39,12 @@ class _Home_pageState extends State<Home_page> {
                 backgroundColor: Colors.white,
                 activeColor: Colors.blue,
                 color: Colors.lightBlue,
+                
                 items: [
-                  TabItem(icon: Icons.dashboard, title: 'Dashboard'),
+                  TabItem(icon: Icons.dashboard, title: 'Dash',),
                   TabItem(icon: Icons.person_add, title: 'Request'),
                   TabItem(icon: Icons.add, title: 'Add'),
-                  TabItem(icon: Icons.notifications, title: 'Notification'),
+                  TabItem(icon: Icons.notifications, title: 'Notify'),
                   TabItem(icon: Icons.message, title: 'Message'),
                 ],
                 initialActiveIndex: 2,
